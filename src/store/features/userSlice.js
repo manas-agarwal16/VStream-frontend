@@ -84,21 +84,25 @@ const userSlice = createSlice({
       .addCase(watchHistory.fulfilled, (state, action) => {
         state.loading = false;
         state.watchHistory = action.payload;
-      })
+      });
+      builder
       .addCase(userProfile.pending, (state) => {
         state.loading = true;
       })
       .addCase(userProfile.fulfilled, (state, action) => {
         state.loading = false;
         state.userProfileDetails = action.payload.userProfileDetails;
-      })
+      });
+      builder
       .addCase(likedVideos.pending, (state) => {
         state.loading = true;
       })
       .addCase(likedVideos.fulfilled, (state, action) => {
         state.loading = false;
         state.likedVideos = action.payload.data;
-      })
+      });
+
+      builder
       .addCase(toggleVideoLike.pending, (state) => {
         state.loading = true;
       })

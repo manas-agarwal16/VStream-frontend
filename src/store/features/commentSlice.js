@@ -83,9 +83,9 @@ const commentSlice = createSlice({
         state.videos = state.videos.filter(
           (video) => video._id != action.payload.data._id
         );
-      })
+      });
 
-      .addCase(editComment.pending, (state) => {
+      builder.addCase(editComment.pending, (state) => {
         state.loading = true;
       })
 
@@ -96,9 +96,9 @@ const commentSlice = createSlice({
             ? { ...comment, content: action.payload.data.content }
             : comment
         );
-      })
+      });
 
-      .addCase(getComments.pending, (state) => {
+      builder.addCase(getComments.pending, (state) => {
         state.loading = true;
       })
 

@@ -64,16 +64,36 @@ export const updateVideoDetails = createAsyncThunk(
   }
 );
 
-export const getVideos = createAsyncThunk(async (data) => {
-  try {
-    const res = await axiosInstance.get(`/get-videos?page=${data.page}`);
-    console.log("pagination videos : ", res);
-    return res.data;
-  } catch (error) {
-    toast.error(error?.response?.data?.error || "Error in fetching videos");
-    throw error;
+// export const getVideos = createAsyncThunk(async (data) => {
+//   console.log("getVideos");
+//   try {
+//     const res = await axiosInstance.get(`/get-videos?page=${data.page}`);
+//     console.log("pagination videos : ", res);
+//     return res.data;
+//   } catch (error) {
+//     console.log("error in get videos" , error);
+//     toast.error(error?.response?.data?.error || "Error in fetching videos");
+//     throw error;
+//   }
+// });
+
+export const getVideos = createAsyncThunk(
+  "video/getVideos", // Action type
+  async (data, { rejectWithValue }) => {
+    
+    // Payload creator function
+    try {
+      console.log("getVideos");
+      const res = await axiosInstance.get(`/videos/get-videos?page=${data.page}`);
+      console.log("paginated videos" , res.data);
+      
+      return res.data; // Return the response data (this will be the payload)
+    } catch (error) {
+      // Handle error and return a rejected value
+      return rejectWithValue(error?.response?.data || "Error fetching videos");
+    }
   }
-});
+);
 
 export const search = createAsyncThunk("search", async (data) => {
   try {
@@ -86,7 +106,7 @@ export const search = createAsyncThunk("search", async (data) => {
 });
 
 const initialState = {
-  loading: true,
+  loading: false,
   videoDetails: null,
   videos: [],
   page: 1,
@@ -102,29 +122,32 @@ const videoSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    // builder
+    // .addCase(uploadVideo.pending, (state) => {
+    //   state.loading = true;
+    // })
+
+    // .addCase(uploadVideo.fulfilled, (state, action) => {
+    //   state.loading = false;
+    //   state.videos = [...state.videos, action.payload.data.video];
+    // })
+
+    // .addCase(toggleVideoLike.pending, (state) => {
+    //   state.loading = true;
+    // })
+
+    // .addCase(toggleVideoLike.fulfilled, (state, action) => {
+    //   state.loading = false;
+    // })
     builder
-      // .addCase(uploadVideo.pending, (state) => {
-      //   state.loading = true;
-      // })
-
-      // .addCase(uploadVideo.fulfilled, (state, action) => {
-      //   state.loading = false;
-      //   state.videos = [...state.videos, action.payload.data.video];
-      // })
-
-      // .addCase(toggleVideoLike.pending, (state) => {
-      //   state.loading = true;
-      // })
-
-      // .addCase(toggleVideoLike.fulfilled, (state, action) => {
-      //   state.loading = false;
-      // })
-
       .addCase(getVideos.pending, (state) => {
         state.loading = true;
       })
 
       .addCase(getVideos.fulfilled, (state, action) => {
+
+        // console.log("action payload data videos : " , action.payload.data.videos);
+        
         state.loading = false;
         state.videos = [...state.videos, ...action.payload.data.videos];
         if (action.payload.data.videos.length < 8) {
@@ -134,7 +157,13 @@ const videoSlice = createSlice({
         }
         state.page += 1;
       })
-      
+      .addCase(getVideos.rejected, (state, action) => {
+        state.loading = false;
+        console.log("Error in rejected action:", action.error.message);
+        toast.error(action.error.message || "Failed to load videos");
+      });
+
+    builder
       .addCase(updateVideoDetails.pending, (state) => {
         state.loading = true;
       })
@@ -143,8 +172,9 @@ const videoSlice = createSlice({
         state.videos = state.videos.map((video) =>
           video._id === action.payload.data._id ? action.payload.data : video
         );
-      })
+      });
 
+    builder
       .addCase(deleteVideo.pending, (state) => {
         state.loading = true;
       })
@@ -153,8 +183,9 @@ const videoSlice = createSlice({
         state.videos = state.videos.filter(
           (video) => video._id != action.payload.data._id
         );
-      })
+      });
 
+    builder
       .addCase(watchVideo.pending, (state) => {
         state.loading = true;
       })

@@ -87,18 +87,6 @@ export const refreshAccessToken = createAsyncThunk("refreshAccessToken" , async 
     }
 })
 
-export const updateAvatar = createAsyncThunk("updateAvatar" , async (data) => {
-    const formData = new FormData();
-    formData.append("avatar" , data.avatar);
-    try {
-        const res = await axiosInstance.patch("/users/update-avatar" , formData);
-        toast.success("Avatar updated successfully");
-        return res;
-    } catch (error) {
-        toast.error(error?.data?.response?.error);
-    }
-});
-
 
 const initialState = {
     loading : true,
@@ -113,15 +101,15 @@ const authSlice = createSlice({
     },
     extraReducers : (builder) => {
 
-        builder.addCase(registerUser.pending, (state) => {
-            state.loading = true;
-        });
-        builder.addCase(registerUser.fulfilled, (state) => {
-            state.loading = false;
-        });
-        builder.addCase(registerUser.rejected, (state) => {
-            state.loading = false;
-        });
+        // builder.addCase(registerUser.pending, (state) => {
+        //     state.loading = true;
+        // });
+        // builder.addCase(registerUser.fulfilled, (state) => {
+        //     state.loading = false;
+        // });
+        // builder.addCase(registerUser.rejected, (state) => {
+        //     state.loading = false;
+        // });
 
         builder.addCase(loginUser.pending, (state) => {
             state.loading = true;
@@ -139,10 +127,6 @@ const authSlice = createSlice({
             state.loading = false;
             state.loginStatus = false;
             state.userData = null;
-        });
-
-        builder.addCase(updateAvatar.fulfilled, (state, action) => {
-            state.userData = { ...state.userData, avatar: action.payload.avatar };
         });
     }
 })

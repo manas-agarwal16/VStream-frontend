@@ -32,113 +32,6 @@ export const watchVideo = createAsyncThunk(async (data) => {
   }
 });
 
-export const toggleVideoLike = createAsyncThunk(async (data) => {
-  try {
-    const res = await axiosInstance.post(
-      `/videos/toggle-video-like/${data.video_id}`
-    );
-    return res.data;
-  } catch (error) {
-    toast.error(error?.data?.response?.error || "Error in toggling video like");
-    throw error;
-  }
-});
-
-export const getVideos = createAsyncThunk(async (data) => {
-  try {
-    const res = await axiosInstance.get(`/get-videos?page=${data.page}`);
-    console.log("pagination videos : ", res);
-    return res.data;
-  } catch (error) {
-    toast.error(error?.response?.data?.error || "Error in fetching videos");
-    throw error;
-  }
-});
-
-export const search = createAsyncThunk("search", async (data) => {
-  try {
-    const res = await axiosInstance.get(`/videos/search?search=${data.search}`);
-    return res.data;
-  } catch (error) {
-    toast.error(error?.response?.data?.error || "Error in fetching videos");
-    throw error;
-  }
-});
-
-export const comment = createAsyncThunk("comment", async (data) => {
-  try {
-    const res = await axiosInstance.post(`/videos/comment`, data);
-    toast.success("Your comment marked successfully");
-    return res.data;
-  } catch (error) {
-    toast.error(error?.response?.data?.error || "Error in savint your comment");
-    throw error;
-  }
-});
-
-export const editComment = createAsyncThunk("editComment", async (data) => {
-  try {
-    const res = await axiosInstance.patch(`/videos/edit-comment`, data);
-    return res.data;
-  } catch (error) {
-    toast.error(error?.response?.data?.error || "Error in editing comment");
-    throw error;
-  }
-});
-
-export const toggleCommentLike = createAsyncThunk(
-  "toggleCommentLike",
-  async (data) => {
-    try {
-      const res = await axiosInstance.post("/toggle-comment-like", data);
-      return res.data;
-    } catch (error) {
-      toast.error(
-        error?.response?.data?.error || "Error in toggling comment like"
-      );
-      throw error;
-    }
-  }
-);
-
-export const deleteComment = createAsyncThunk("deleteComment", async (data) => {
-  try {
-    const res = await axiosInstance.delete(
-      `/delete-comment/${data.comment_id}`
-    );
-    return res.data;
-  } catch (error) {
-    toast.error(error?.response?.data?.error || "Error in deleting comment");
-  }
-});
-
-export const getComments = createAsyncThunk("getComments", async (data) => {
-  try {
-    const res = await axiosInstance.get(`get-comments`, data); //receiving page in req.body if video_id is passed. parentComment me no pagination.
-    return res.data;
-  } catch (error) {
-    toast.error(error?.response?.data?.error || "Error fetching comments");
-  }
-});
-
-export const likedVideos = createAsyncThunk("liked-videos", async () => {
-  try {
-    const res = await axiosInstance.get("/liked-videos");
-    return res.data;
-  } catch (error) {
-    toast.error(error?.response?.data?.error || "Error fetching liked videos");
-  }
-});
-
-export const myVideos = createAsyncThunk("my-videos", async () => {
-  try {
-    const res = await axiosInstance.get("/my-videos");
-    return res.data;
-  } catch (error) {
-    toast.error(error?.response?.data?.error || "Error fetching my videos");
-  }
-});
-
 export const deleteVideo = createAsyncThunk("delelteVideo", async (data) => {
   try {
     const res = await axiosInstance.delete("/delete-video", data);
@@ -171,117 +64,108 @@ export const updateVideoDetails = createAsyncThunk(
   }
 );
 
+export const getVideos = createAsyncThunk(async (data) => {
+  try {
+    const res = await axiosInstance.get(`/get-videos?page=${data.page}`);
+    console.log("pagination videos : ", res);
+    return res.data;
+  } catch (error) {
+    toast.error(error?.response?.data?.error || "Error in fetching videos");
+    throw error;
+  }
+});
+
+export const search = createAsyncThunk("search", async (data) => {
+  try {
+    const res = await axiosInstance.get(`/videos/search?search=${data.search}`);
+    return res.data;
+  } catch (error) {
+    toast.error(error?.response?.data?.error || "Error in fetching videos");
+    throw error;
+  }
+});
+
 const initialState = {
-  video: {
-    loading: true,
-    videos: [],
-    page: 1,
-    hasMore: true,
-  },
-  comment: {
-    loading: true,
-    comments: [],
-    page: 1,
-    hasMore: true,
-  },
+  loading: true,
+  videoDetails: null,
+  videos: [],
+  page: 1,
+  hasMore: true,
 };
 
 const videoSlice = createSlice({
   name: "video",
   initialState,
-  reducers: {},
+  reducers: {
+    makeVideosEmpty: (state) => {
+      state.videos = [];
+    },
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(uploadVideo.pending, (state) => {
-        state.video.loading = true;
-      })
-      .addCase(uploadVideo.fulfilled, (state, action) => {
-        state.video.loading = false;
-        state.video.videos = [...state.video.videos, action.payload.data.video];
-      })
-      .addCase(toggleVideoLike.pending, (state) => {
-        state.video.loading = true;
-      })
-      .addCase(toggleVideoLike.fulfilled, (state, action) => {
-        state.video.loading = false;
-      })
+      // .addCase(uploadVideo.pending, (state) => {
+      //   state.loading = true;
+      // })
+
+      // .addCase(uploadVideo.fulfilled, (state, action) => {
+      //   state.loading = false;
+      //   state.videos = [...state.videos, action.payload.data.video];
+      // })
+
+      // .addCase(toggleVideoLike.pending, (state) => {
+      //   state.loading = true;
+      // })
+
+      // .addCase(toggleVideoLike.fulfilled, (state, action) => {
+      //   state.loading = false;
+      // })
+
       .addCase(getVideos.pending, (state) => {
-        state.video.loading = true;
+        state.loading = true;
       })
+
       .addCase(getVideos.fulfilled, (state, action) => {
-        state.video.loading = false;
-        state.video.videos = [
-          ...state.video.videos,
-          ...action.payload.data.videos,
-        ];
+        state.loading = false;
+        state.videos = [...state.videos, ...action.payload.data.videos];
         if (action.payload.data.videos.length < 8) {
-          state.video.hasMore = false;
+          state.hasMore = false;
         } else {
-          state.video.hasMore = true;
+          state.hasMore = true;
         }
-        state.video.page += 1;
+        state.page += 1;
       })
-      .addCase(deleteVideo.pending , (state) => {
-        state.video.loading = true;
+      
+      .addCase(updateVideoDetails.pending, (state) => {
+        state.loading = true;
       })
-      .addCase(deleteComment.fulfilled , (state , action) => {
-        state.video.loading = false;
-        state.video.videos = state.video.videos.filter(video => video._id != action.payload.data._id);
-      })
-      .addCase(updateVideoDetails.pending , (state) => {
-        state.video.loading = true;
-      })
-      .addCase(updateVideoDetails.fulfilled , (state , action) => {
-        state.video.loading = false;
-        state.video.videos = state.video.videos.map(video =>
-            video._id === action.payload.data._id ? action.payload.data : video
+      .addCase(updateVideoDetails.fulfilled, (state, action) => {
+        state.loading = false;
+        state.videos = state.videos.map((video) =>
+          video._id === action.payload.data._id ? action.payload.data : video
         );
       })
-      .addCase(comment.pending, (state, action) => {
-        state.comment.loading = true;
+
+      .addCase(deleteVideo.pending, (state) => {
+        state.loading = true;
       })
-      .addCase(comment.fulfilled, (state, action) => {
-        state.comment.loading = false;
-        state.comment.comments = [
-          ...state.comment.comments,
-          action.payload.data.comment,
-        ];
-      })
-      .addCase(editComment.pending, (state) => {
-        state.comment.loading = true;
-      })
-      .addCase(editComment.fulfilled, (state, action) => {
-        state.comment.loading = false;
-        state.comment.comments = state.comment.comments.map((comment) =>
-          comment._id === action.payload.data._id
-            ? { ...comment, content: action.payload.data.content }
-            : comment
+      .addCase(deleteVideo.fulfilled, (state, action) => {
+        state.loading = false;
+        state.videos = state.videos.filter(
+          (video) => video._id != action.payload.data._id
         );
       })
-      .addCase(deleteComment.pending, (state) => {
-        state.comment.loading = true;
+
+      .addCase(watchVideo.pending, (state) => {
+        state.loading = true;
       })
-      .addCase(deleteComment.fulfilled, (state, action) => {
-        state.comment.loading = false;
-        state.comment.comments = state.comment.comments.filter(
-          (comment) => comment._id !== action.payload.data._id
-        );
-      })
-      .addCase(getComments.pending , (state) => {
-        state.comment.loading = true;
-      })
-      .addCase(getComments.fulfilled , (state , action) => {
-        state.comment.loading = false;
-        state.comment.comments = [...state.comment.comments , ...action.payload.data.comments];
-        if(action.payload.data.comments.length < 8){
-            state.comment.hasMore = false;
-        }
-        else{
-            state.comment.hasMore = true;
-        }
-        state.comment.page += 1;
-      })
+
+      .addCase(watchVideo.fulfilled, (state, action) => {
+        state.loading = false;
+        state.videoDetails = action.payload.data;
+      });
   },
 });
+
+export const { makeVideosEmpty } = videoSlice.actions;
 
 export default videoSlice.reducer;

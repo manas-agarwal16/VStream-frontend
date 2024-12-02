@@ -21,16 +21,44 @@ export const uploadVideo = createAsyncThunk(async (data) => {
   }
 });
 
-export const watchVideo = createAsyncThunk(async (data) => {
-  //video_id
-  try {
-    const res = await axiosInstance.get(`/videos/watch-video/${data.video_id}`);
-    return res.data;
-  } catch (error) {
-    toast.error(error?.response?.data?.error || "Error in fetching video");
-    throw error;
+export const getVideos = createAsyncThunk(
+  "video/getVideos", // Action type
+  async (data, { rejectWithValue }) => {
+    // Payload creator function
+    try {
+      console.log("getVideos");
+      const res = await axiosInstance.get(
+        `/videos/get-videos?page=${data.page}`
+      );
+      console.log("paginated videos", res.data);
+
+      return res.data; // Return the response data (this will be the payload)
+    } catch (error) {
+      // Handle error and return a rejected value
+      return rejectWithValue(error?.response?.data || "Error fetching videos");
+    }
   }
-});
+);
+
+export const watchVideo = createAsyncThunk(
+  "watchVideo",
+  async (data, { rejectWithValue }) => {
+    //video_id
+
+    try {
+      console.log("here 10000");
+      const res = await axiosInstance.get(
+        `/videos/watch-video/${data.video_id}`
+      );
+      return res.data;
+    } catch (error) {
+      toast.error(error?.response?.data?.error || "Error in fetching video");
+      return rejectWithValue(
+        error?.response?.data || "Error in watching videos"
+      );
+    }
+  }
+);
 
 export const deleteVideo = createAsyncThunk("delelteVideo", async (data) => {
   try {
@@ -77,24 +105,6 @@ export const updateVideoDetails = createAsyncThunk(
 //   }
 // });
 
-export const getVideos = createAsyncThunk(
-  "video/getVideos", // Action type
-  async (data, { rejectWithValue }) => {
-    
-    // Payload creator function
-    try {
-      console.log("getVideos");
-      const res = await axiosInstance.get(`/videos/get-videos?page=${data.page}`);
-      console.log("paginated videos" , res.data);
-      
-      return res.data; // Return the response data (this will be the payload)
-    } catch (error) {
-      // Handle error and return a rejected value
-      return rejectWithValue(error?.response?.data || "Error fetching videos");
-    }
-  }
-);
-
 export const search = createAsyncThunk("search", async (data) => {
   try {
     const res = await axiosInstance.get(`/videos/search?search=${data.search}`);
@@ -120,42 +130,27 @@ const videoSlice = createSlice({
     makeVideosEmpty: (state) => {
       state.videos = [];
     },
+    incrementPage: (state) => {
+      state.page = state.page + 1;
+    },
   },
   extraReducers: (builder) => {
-    // builder
-    // .addCase(uploadVideo.pending, (state) => {
-    //   state.loading = true;
-    // })
-
-    // .addCase(uploadVideo.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   state.videos = [...state.videos, action.payload.data.video];
-    // })
-
-    // .addCase(toggleVideoLike.pending, (state) => {
-    //   state.loading = true;
-    // })
-
-    // .addCase(toggleVideoLike.fulfilled, (state, action) => {
-    //   state.loading = false;
-    // })
     builder
       .addCase(getVideos.pending, (state) => {
         state.loading = true;
       })
 
       .addCase(getVideos.fulfilled, (state, action) => {
-
         // console.log("action payload data videos : " , action.payload.data.videos);
-        
+
         state.loading = false;
         state.videos = [...state.videos, ...action.payload.data.videos];
-        if (action.payload.data.videos.length < 8) {
+        if (action.payload.data.videos.length < 6) {
           state.hasMore = false;
         } else {
           state.hasMore = true;
         }
-        state.page += 1;
+        // state.page += 1;
       })
       .addCase(getVideos.rejected, (state, action) => {
         state.loading = false;
@@ -191,12 +186,19 @@ const videoSlice = createSlice({
       })
 
       .addCase(watchVideo.fulfilled, (state, action) => {
+        console.log("videoSlice");
+
         state.loading = false;
         state.videoDetails = action.payload.data;
+      })
+      .addCase(watchVideo.rejected, (state) => {
+        state.loading = false;
+        console.log("Error in rejected action:", action.error.message);
+        toast.error(action.error.message || "Failed to load videos");
       });
   },
 });
 
-export const { makeVideosEmpty } = videoSlice.actions;
+export const { makeVideosEmpty, incrementPage } = videoSlice.actions;
 
 export default videoSlice.reducer;

@@ -72,6 +72,9 @@ const commentSlice = createSlice({
     makeCommentsEmpty: (state) => {
       state.comments = [];
     },
+    incrementPage : (state) => {
+      state.page = state.page + 1;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -110,7 +113,7 @@ const commentSlice = createSlice({
         } else {
           state.hasMore = true;
         }
-        state.page += 1;
+        // state.page += 1;
       });
   },
 });

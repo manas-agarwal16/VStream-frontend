@@ -1,19 +1,33 @@
-import { StrictMode } from "react";
+import { Children, StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
-import { BrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {Video , Home} from "./pages"
 // import './styles/tailwind.css';
-// const router = {
-//   path : "/",
-//   element : <App/>
-// }
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "",
+        element: <Home />,
+      },
+      {
+        path: "watch-video/:video_id",
+        element: <Video />,
+      },
+    ],
+  },
+]);
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
-    <BrowserRouter>
+    <RouterProvider router={router}>
       <App />
-    </BrowserRouter>
+    </RouterProvider>
   </Provider>
 );

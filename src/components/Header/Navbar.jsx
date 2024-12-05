@@ -12,6 +12,9 @@ const Navbar = () => {
   // const location = useLocation();
   const { loginStatus } = useSelector((state) => state.auth);
 
+  // console.log("loginStatus : " , loginStatus);
+  
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const {
@@ -22,7 +25,7 @@ const Navbar = () => {
 
   const searchVideos = async (data) => {
     console.log("search query ", data.search);
-    // navigate(`/search?${data.search.trim()}`);
+    navigate(`/search?${data.search.trim()}`);
   };
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
@@ -142,7 +145,7 @@ const Navbar = () => {
           ></div>
         )}
       </nav>
-      <div className="pt-16"></div>
+      <div className="pt-20"></div>
     </>
   );
 };

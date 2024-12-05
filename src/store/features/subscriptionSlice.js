@@ -3,8 +3,13 @@ import { axiosInstance } from "../../helper/axiosInstance";
 import toast from "react-hot-toast";
 
 export const toggleSubscribe = createAsyncThunk("toggleSubscribe" , async (data) => {
+
+    console.log("toggleSubscribe data : " , data);
+    
     try {
         const res = await axiosInstance.post(`/subscription/toggle-subscribe`,data);
+        console.log("res.data : " , res.data);
+        
         toast.success(`you toggled ut subscription successfully`);
         return res.data;
     } catch (error) {
@@ -22,7 +27,7 @@ export const subscriptionChannels = createAsyncThunk("subscriptionChannels" , as
 })
 
 const initialState = {
-    loading : true,
+    loading : false,
     channels : [], 
 }
 

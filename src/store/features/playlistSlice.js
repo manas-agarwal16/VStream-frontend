@@ -91,7 +91,7 @@ export const renamePlaylist = createAsyncThunk(
 );
 
 const initialState = {
-  loading: true,
+  loading: false,
   playlists: [],
   curPlaylist: null,
 };

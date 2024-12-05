@@ -10,7 +10,7 @@ function Input({
     const id = useId();
     return (
         <>
-        <div className='w-full' >
+        <div className='w-full flex flex-col justify-center items-center' >
             {label ? (<label htmlFor={id} className={`inline-block font-semibold ${labelClass}`}>{label}</label>) : null}
             <input ref={ref} id={id} type={type} className={`${className} w-full rounded-lg  text-gray-800 p-2`} {...props} />
         </div>

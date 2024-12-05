@@ -2,29 +2,32 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 import { axiosInstance } from "../../helper/axiosInstance";
 
-export const uploadVideo = createAsyncThunk(async (data) => {
-  const formData = new FormData();
-  // title, description, videoTag
-  formData.append("title", data.title);
-  formData.append("description", data.description);
-  formData.append("videoTag", data.videoTag);
-  formData.append("videoFile", data.videoFile);
-  formData.append("thumbnail", data.thumbnail);
-  try {
-    const res = await axiosInstance.post("/videos/upload-video", formData);
-    toast.success("Video Uploaded Successfully!!!");
-    console.log("video uploaded successfully: ", res.data);
-    return res.data;
-  } catch (error) {
-    toast.error(error?.response?.data?.error || "Error in uploading video");
-    throw error;
+export const uploadVideo = createAsyncThunk(
+  async (data, { rejectWithValue }) => {
+    const formData = new FormData();
+    // title, description, videoTag
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("videoTag", data.videoTag);
+    formData.append("videoFile", data.videoFile);
+    formData.append("thumbnail", data.thumbnail);
+    try {
+      const res = await axiosInstance.post("/videos/upload-video", formData);
+      toast.success("Video Uploaded Successfully!!!");
+      // console.log("video uploaded successfully: ", res.data);
+      return res.data;
+    } catch (error) {
+      toast.error(error?.response?.data?.error || "Error in uploading video");
+      return rejectWithValue(
+        error?.response?.data || "Error in uploading video"
+      );
+    }
   }
-});
+);
 
 export const getVideos = createAsyncThunk(
   "video/getVideos", // Action type
   async (data, { rejectWithValue }) => {
-    // Payload creator function
     try {
       console.log("getVideos");
       const res = await axiosInstance.get(
@@ -35,6 +38,7 @@ export const getVideos = createAsyncThunk(
       return res.data; // Return the response data (this will be the payload)
     } catch (error) {
       // Handle error and return a rejected value
+      toast.error(error?.response?.data?.error || "Error in fetching video");
       return rejectWithValue(error?.response?.data || "Error fetching videos");
     }
   }
@@ -46,7 +50,7 @@ export const watchVideo = createAsyncThunk(
     //video_id
 
     try {
-      console.log("here 10000");
+      // console.log("here 10000");
       const res = await axiosInstance.get(
         `/videos/watch-video/${data.video_id}`
       );
@@ -60,18 +64,24 @@ export const watchVideo = createAsyncThunk(
   }
 );
 
-export const deleteVideo = createAsyncThunk("delelteVideo", async (data) => {
-  try {
-    const res = await axiosInstance.delete("/delete-video", data);
-    return res.data;
-  } catch (error) {
-    toast.error(error?.response?.data?.error || "Error in deleting video");
+export const deleteVideo = createAsyncThunk(
+  "delelteVideo",
+  async (data, { rejectWithValue }) => {
+    try {
+      const res = await axiosInstance.delete("/delete-video", data);
+      return res.data;
+    } catch (error) {
+      toast.error(error?.response?.data?.error || "Error in deleting video");
+      return rejectWithValue(
+        error?.response?.data || "Error in deleting videos"
+      );
+    }
   }
-});
+);
 
 export const updateVideoDetails = createAsyncThunk(
   "updateVideoDetails",
-  async (data) => {
+  async (data, { rejectWithValue }) => {
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("desciption", data.description);
@@ -88,36 +98,53 @@ export const updateVideoDetails = createAsyncThunk(
       toast.error(
         error?.response?.data?.error || "Error in updating video details"
       );
+      return rejectWithValue(
+        error?.response?.data || "Error in watching videos"
+      );
     }
   }
 );
 
-// export const getVideos = createAsyncThunk(async (data) => {
-//   console.log("getVideos");
-//   try {
-//     const res = await axiosInstance.get(`/get-videos?page=${data.page}`);
-//     console.log("pagination videos : ", res);
-//     return res.data;
-//   } catch (error) {
-//     console.log("error in get videos" , error);
-//     toast.error(error?.response?.data?.error || "Error in fetching videos");
-//     throw error;
-//   }
-// });
+export const toggleVideoLike = createAsyncThunk(
+  "toggleVideoLike",
+  async (data, { rejectWithValue }) => {
+    console.log("toggleVideo video_id : ", data.video_id);
+    try {
+      const res = await axiosInstance.post(`/videos/toggle-video-like`, data);
+      // console.log("res.data : ", res.data);
 
-export const search = createAsyncThunk("search", async (data) => {
-  try {
-    const res = await axiosInstance.get(`/videos/search?search=${data.search}`);
-    return res.data;
-  } catch (error) {
-    toast.error(error?.response?.data?.error || "Error in fetching videos");
-    throw error;
+      return res.data;
+    } catch (error) {
+      toast.error(
+        error?.data?.response?.error || "Error in toggling video like"
+      );
+      return rejectWithValue(
+        error?.response?.data || "error in toggle video likes"
+      );
+    }
   }
-});
+);
+
+export const search = createAsyncThunk(
+  "search",
+  async (data, { rejectWithValue }) => {
+    try {
+      const res = await axiosInstance.get(
+        `/videos/search?search=${data.search}`
+      );
+      return res.data;
+    } catch (error) {
+      toast.error(error?.response?.data?.error || "Error in searching videos");
+      return rejectWithValue(
+        error?.response?.data || "Error in searching videos"
+      );
+    }
+  }
+);
 
 const initialState = {
   loading: false,
-  videoDetails: null,
+  videoDetails: {},
   videos: [],
   page: 1,
   hasMore: true,
@@ -130,6 +157,9 @@ const videoSlice = createSlice({
     makeVideosEmpty: (state) => {
       state.videos = [];
     },
+    makeVideoDetailsEmpty: (state) => {
+      state.videoDetails = {};
+    },
     incrementPage: (state) => {
       state.page = state.page + 1;
     },
@@ -141,7 +171,9 @@ const videoSlice = createSlice({
       })
 
       .addCase(getVideos.fulfilled, (state, action) => {
-        // console.log("action payload data videos : " , action.payload.data.videos);
+        console.log("length : " , action.payload.data.videos.length);
+        
+        console.log("action payload data videos : " , action.payload.data.videos);
 
         state.loading = false;
         state.videos = [...state.videos, ...action.payload.data.videos];
@@ -154,7 +186,7 @@ const videoSlice = createSlice({
       })
       .addCase(getVideos.rejected, (state, action) => {
         state.loading = false;
-        console.log("Error in rejected action:", action.error.message);
+        // console.log("Error in rejected action:", action.error.message);
         toast.error(action.error.message || "Failed to load videos");
       });
 
@@ -186,12 +218,12 @@ const videoSlice = createSlice({
       })
 
       .addCase(watchVideo.fulfilled, (state, action) => {
-        console.log("videoSlice");
+        // console.log("videoSlice");
 
         state.loading = false;
         state.videoDetails = action.payload.data;
       })
-      .addCase(watchVideo.rejected, (state) => {
+      .addCase(watchVideo.rejected, (state, action) => {
         state.loading = false;
         console.log("Error in rejected action:", action.error.message);
         toast.error(action.error.message || "Failed to load videos");
@@ -199,6 +231,7 @@ const videoSlice = createSlice({
   },
 });
 
-export const { makeVideosEmpty, incrementPage } = videoSlice.actions;
+export const { makeVideosEmpty, makeVideoDetailsEmpty, incrementPage } =
+  videoSlice.actions;
 
 export default videoSlice.reducer;

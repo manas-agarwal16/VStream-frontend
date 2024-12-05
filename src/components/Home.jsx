@@ -16,7 +16,7 @@ const Home = () => {
 
   // Load videos on mount and subsequent scrolls
   useEffect(() => {
-    if (hasMore && !loading) {
+    if (hasMore && !loading && page) {
       dispatch(getVideos({ page }));
     }
   } , []);
@@ -29,8 +29,10 @@ const Home = () => {
       hasMore &&
       !loading
     ) {
+      dispatch(getVideos({ page : page + 1 }));
       dispatch(incrementPage());
-      dispatch(getVideos({ page }));
+      // console.log("after increment page : " , page);
+      
     }
   };
 
@@ -42,11 +44,11 @@ const Home = () => {
   return (
     <>
       {/* <aside> */}
-      <div className="md:ml-[180px] grid grid-cols-1 bg-[#1B1B1F] sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full min-h-screen p-4 border-2 border-black mt-1 text-gray-500">
+      <div className="md:ml-[180px] grid grid-cols-1 bg-[#1B1B1F] sm:grid-cols-2 gap-4  min-h-screen object-contain p-4 border-2 border-black mt-1 text-gray-500">
         {videos.map((video, index) => (
           <div
             key={index}
-            className="aspect-[6/5] w-full bg-[#24242a] rounded-lg"
+            className="w-full mx-2 h-72 bg-[#24242a] rounded-lg"
           >
             {" "}
             {/* Fixed height with larger width */}

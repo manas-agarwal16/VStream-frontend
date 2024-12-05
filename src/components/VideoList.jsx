@@ -14,22 +14,20 @@ const Video = ({
   video_id,
 }) => {
   //   ownerDetails = ownerDetails[0];
-  console.log("avatar : ", avatar);
+  // console.log("avatar : ", avatar);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(watchVideo({ video_id }));
     navigate(`/watch-video/${video_id}`);
   };
 
   return (
     <div
       onClick={handleClick}
-      className="flex flex-col text-white w-full h-full hover:cursor-pointer"
+      className="flex flex-col truncate object-contain text-white w-full h-full hover:cursor-pointer"
     >
       <img
-        className="w-full h-44 object-cover rounded-lg"
+        className="w-full h-44 object-cover rounded-lg rounded-b-none"
         src={thumbnail}
         alt="thumbail"
       />

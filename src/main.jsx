@@ -4,7 +4,7 @@ import App from "./App.jsx";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import {Video , Home} from "./pages"
+import { Video, Home, Login } from "./pages";
 // import './styles/tailwind.css';
 
 const router = createBrowserRouter([
@@ -15,6 +15,10 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Home />,
+      },
+      {
+        path: "login",
+        element: <Login />,
       },
       {
         path: "watch-video/:video_id",

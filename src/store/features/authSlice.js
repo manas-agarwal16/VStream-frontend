@@ -1,34 +1,38 @@
-import {
-  createSlice,
-  createAsyncThunk,
-} from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../helper/axiosInstance";
 import toast from "react-hot-toast";
 
+export const registerUser = createAsyncThunk(
+  "register",
+  async (data, { rejectWithValue }) => {
 
-export const registerUser = createAsyncThunk("register", async (data , {rejectWithValue}) => {
-  const formData = new FormData();
-  formData.append("avatar", data.avatar);
-  formData.append("username", data.username);
-  formData.append("password", data.password);
-  formData.append("fullName", data.fullName);
-  formData.append("email", data.email);
+    const formData = new FormData();
+    formData.append("avatar", data.avatar[0]);
+    formData.append("username", data.username);
+    formData.append("password", data.password);
+    formData.append("fullName", data.fullName);
+    formData.append("email", data.email);
 
-  try {
-    const res = await axiosInstance.post("/users/register", formData);
-    console.log("register backend res : ", res.data);
-    toast.success(res.data.message);
-    return true;
-  } catch (error) {
-    toast.error(error?.response?.data?.message);
-    throw error;
+    console.log("form data : ", formData);
+    
+
+    try {
+      const res = await axiosInstance.post("/users/register", formData);
+      console.log("register backend res : ", res.data);
+      toast.success(res.data.message);
+      return true;
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+      throw error;
+    }
   }
-});
+);
 
 export const verifyOTP = createAsyncThunk("verify-otp", async (data) => {
   try {
     const res = await axiosInstance.post("/users/verify-otp", data);
     toast.success(res.data.message);
+    return res.data;
   } catch (error) {
     toast.error(error?.response?.data?.error);
   }
@@ -123,10 +127,15 @@ const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-
-    builder.addCase(registerUser.rejected , (state , action) => {
-      console.log("in rejection : " , action.error);
+    builder.addCase(registerUser.pending , (state) => {
+      state.loading = true;
+    });
+    builder.addCase(registerUser.fulfilled , (state) => {
+      state.loading = false;
     })
+    builder.addCase(registerUser.rejected, (state, action) => {
+      console.log("in rejection : ", action.error);
+    });
 
     builder.addCase(loginUser.pending, (state) => {
       state.loading = true;

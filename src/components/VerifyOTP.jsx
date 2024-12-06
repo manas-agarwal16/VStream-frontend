@@ -4,9 +4,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { loginUser, resendOTP, verifyOTP } from "../store/features/authSlice";
 import { useForm } from "react-hook-form";
 import { Logo, Button, Input } from "./index";
+import toast from "react-hot-toast";
 
 const VerifyOTP = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const { email } = useParams();
   console.log("email : ", email);
 
@@ -22,12 +23,18 @@ const VerifyOTP = () => {
     const res = await dispatch(verifyOTP({ email, OTP: data.OTP }));
     console.log("verify OTP : ", res);
 
-    if (res.payload.success === true) {
+    if (res.payload.data.success === true) {
       dispatch(
-        loginUser({ email: res.payload.email, password: res.payload.password })
+        loginUser({
+          email: res.payload.data.email,
+          password: res.payload.data.password,
+        })
       );
+      navigate('/');
     } else {
-      
+      toast.error("Wrong OTP.Please try again");
+      reset();
+      dispatch(resendOTP({ email }));
     }
   };
 

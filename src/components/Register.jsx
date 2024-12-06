@@ -15,7 +15,7 @@ const Register = () => {
   } = useForm();
 
   const handleRegister = async (data) => {
-    // console.log("register data : ", data);
+    console.log("register data : ", data);
     data.email = data.email.toLowerCase();
     data.username = data.username.toLowerCase();
     data.fullName = data.fullName.toLowerCase();

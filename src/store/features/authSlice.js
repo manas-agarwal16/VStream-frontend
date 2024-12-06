@@ -1,7 +1,6 @@
 import {
   createSlice,
   createAsyncThunk,
-  isRejectedWithValue,
 } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../helper/axiosInstance";
 import toast from "react-hot-toast";
@@ -51,7 +50,7 @@ export const loginUser = createAsyncThunk("login", async (data) => {
   try {
     const res = await axiosInstance.post("/users/login", data);
     // console.log("login response: ", res.data);
-    toast.success("Login successfully");
+    toast.success("Loged in successfully");
     return res.data;
   } catch (error) {
     console.log("error in login : ", error);

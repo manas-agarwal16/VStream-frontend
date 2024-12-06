@@ -1,24 +1,34 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-import { resendOTP, verifyOTP } from "../store/features/authSlice";
+import { useNavigate, useParams } from "react-router-dom";
+import { loginUser, resendOTP, verifyOTP } from "../store/features/authSlice";
 import { useForm } from "react-hook-form";
-import {Logo , Button , Input} from "./index";
+import { Logo, Button, Input } from "./index";
 
 const VerifyOTP = () => {
   const { register, handleSubmit } = useForm();
   const { email } = useParams();
-  console.log("email : " , email);
-  
+  console.log("email : ", email);
+
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleResendOTP = () => {
     dispatch(resendOTP({ email }));
   };
 
-  const verify = (data) => {
+  const verify = async (data) => {
     console.log("data : ", data);
-    dispatch(verifyOTP({ email, OTP: data.OTP }));
+    const res = await dispatch(verifyOTP({ email, OTP: data.OTP }));
+    console.log("verify OTP : ", res);
+
+    if (res.payload.success === true) {
+      dispatch(
+        loginUser({ email: res.payload.email, password: res.payload.password })
+      );
+    } else {
+      
+    }
   };
 
   return (

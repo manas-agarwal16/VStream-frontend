@@ -4,6 +4,7 @@ import {
   getVideos,
   makeVideosEmpty,
   incrementPage,
+  makeVideoDetailsEmpty,
 } from "../store/features/videoSlice"; // Adjust path as
 import { VideoList } from "./index";
 
@@ -21,7 +22,10 @@ const Home = () => {
   // Load videos on mount and subsequent scrolls
   useEffect(() => {
     dispatch(getVideos({ page: 1 }));
-    return () => dispatch(makeVideosEmpty());
+    return () => {
+      dispatch(makeVideosEmpty());
+      dispatch(makeVideoDetailsEmpty());
+    };
   }, []);
 
   // Infinite scroll handler

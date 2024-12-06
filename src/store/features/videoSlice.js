@@ -156,6 +156,7 @@ const videoSlice = createSlice({
   reducers: {
     makeVideosEmpty: (state) => {
       state.videos = [];
+      state.page = 1;
     },
     makeVideoDetailsEmpty: (state) => {
       state.videoDetails = {};

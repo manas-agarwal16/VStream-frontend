@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getVideos, makeVideosEmpty , incrementPage } from "../store/features/videoSlice"; // Adjust path as
+import {
+  getVideos,
+  makeVideosEmpty,
+  incrementPage,
+} from "../store/features/videoSlice"; // Adjust path as
 import { VideoList } from "./index";
 
 const Home = () => {
@@ -16,10 +20,9 @@ const Home = () => {
 
   // Load videos on mount and subsequent scrolls
   useEffect(() => {
-    if (hasMore && !loading && page) {
-      dispatch(getVideos({ page }));
-    }
-  } , []);
+    dispatch(getVideos({ page: 1 }));
+    return () => dispatch(makeVideosEmpty());
+  }, []);
 
   // Infinite scroll handler
   const handleScroll = () => {
@@ -29,10 +32,9 @@ const Home = () => {
       hasMore &&
       !loading
     ) {
-      dispatch(getVideos({ page : page + 1 }));
+      dispatch(getVideos({ page: page + 1 }));
       dispatch(incrementPage());
       // console.log("after increment page : " , page);
-      
     }
   };
 
@@ -46,10 +48,7 @@ const Home = () => {
       {/* <aside> */}
       <div className="md:ml-[180px] grid grid-cols-1 bg-[#1B1B1F] sm:grid-cols-2 gap-4  min-h-screen object-contain p-4 border-2 border-black mt-1 text-gray-500">
         {videos.map((video, index) => (
-          <div
-            key={index}
-            className="w-full mx-2 h-72 bg-[#24242a] rounded-lg"
-          >
+          <div key={index} className="w-full mx-2 h-72 bg-[#24242a] rounded-lg">
             {" "}
             {/* Fixed height with larger width */}
             <VideoList

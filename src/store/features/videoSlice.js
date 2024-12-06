@@ -159,6 +159,7 @@ const videoSlice = createSlice({
     },
     makeVideoDetailsEmpty: (state) => {
       state.videoDetails = {};
+      state.page = 1;
     },
     incrementPage: (state) => {
       state.page = state.page + 1;

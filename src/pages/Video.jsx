@@ -35,7 +35,6 @@ const Video = () => {
   useEffect(() => {
     if (video_id) {
       dispatch(watchVideo({ video_id }));
-      // dispatch(getComments())
     }
     return () => dispatch(makeVideoDetailsEmpty());
   }, [video_id]);

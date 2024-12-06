@@ -26,29 +26,6 @@ const VideoDescription = ({
   // const [localLikes, setlocalLikes] = useState(likes);
   const [localSubscribers, setlocalSubscribers] = useState(subscribers);
 
-  // console.log("isSubscribed : ", isSubscribed);
-  // console.log("likes : ", localLikes);
-  // console.log("subscribers : ", localSubscribers);
-
-  // console.log("video_id in description : ", video_id);
-
-  // const [localLikesCount, setLocalLikesCount] = useState(likes);
-
-  // const handleLikeToggle = () => {
-  //   console.log("handleLikeToggle");
-  //   if (video_id) {
-  //     dispatch(toggleVideoLike({ video_id }));
-  //   }
-
-  //   if (localIsLiked) {
-  //     setLocalLikesCount((prev) => prev - 1);
-  //   } else {
-  //     setLocalLikesCount((prev) => prev + 1);
-  //   }
-
-  //   setLocalIsLiked((prev) => !prev);
-  // };
-
   const handleSubscribe = () => {
     dispatch(toggleSubscribe({ username }));
 

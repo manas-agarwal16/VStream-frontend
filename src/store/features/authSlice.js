@@ -5,9 +5,9 @@ import {
 } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../helper/axiosInstance";
 import toast from "react-hot-toast";
-import { act } from "react";
 
-export const registerUser = createAsyncThunk("register", async (data) => {
+
+export const registerUser = createAsyncThunk("register", async (data , {rejectWithValue}) => {
   const formData = new FormData();
   formData.append("avatar", data.avatar);
   formData.append("username", data.username);
@@ -15,15 +15,32 @@ export const registerUser = createAsyncThunk("register", async (data) => {
   formData.append("fullName", data.fullName);
   formData.append("email", data.email);
 
-  console.log("formData : ", formData);
-
   try {
     const res = await axiosInstance.post("/users/register", formData);
-    console.log("register backend res : ", res);
-    toast.success("Registered successfully!!!");
+    console.log("register backend res : ", res.data);
+    toast.success(res.data.message);
+    return true;
+  } catch (error) {
+    toast.error(error?.response?.data?.message);
+    throw error;
+  }
+});
+
+export const verifyOTP = createAsyncThunk("verify-otp", async (data) => {
+  try {
+    const res = await axiosInstance.post("/users/verify-otp", data);
+    toast.success(res.data.message);
+  } catch (error) {
+    toast.error(error?.response?.data?.error);
+  }
+});
+
+export const resendOTP = createAsyncThunk("resendOTP", async (data) => {
+  try {
+    const res = await axiosInstance.post("/users/resend-otp", data);
+    toast.success(res.data.message);
     return res.data;
   } catch (error) {
-    console.log("Error in registering user : ", error);
     toast.error(error?.response?.data?.error);
   }
 });
@@ -75,7 +92,7 @@ export const changePassword = createAsyncThunk(
     // const {oldPassword , newPassword} = data;
     try {
       const res = await axiosInstance.patch("/users/change-password", data);
-      //   console.log("password-changed : ", res);      
+      //   console.log("password-changed : ", res);
       toast.success("Password changes successfully");
       return res.data;
     } catch (error) {
@@ -83,24 +100,6 @@ export const changePassword = createAsyncThunk(
     }
   }
 );
-
-export const verifyOTP = createAsyncThunk("verify-otp", async (data) => {
-  try {
-    const res = await axiosInstance.post("/users/verify-otp", data);
-    toast.success("OTP verifies successfully");
-  } catch (error) {
-    toast.error(error?.response?.data?.error);
-  }
-});
-
-export const resendOTP = createAsyncThunk("resendOTP", async (data) => {
-  try {
-    const res = await axiosInstance.post("/users/resend-otp", data);
-    return res.data;
-  } catch (error) {
-    toast.error(error?.response?.data?.error);
-  }
-});
 
 export const refreshAccessToken = createAsyncThunk(
   "refreshAccessToken",
@@ -125,6 +124,11 @@ const authSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+
+    builder.addCase(registerUser.rejected , (state , action) => {
+      console.log("in rejection : " , action.error);
+    })
+
     builder.addCase(loginUser.pending, (state) => {
       state.loading = true;
     });

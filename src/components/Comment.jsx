@@ -42,13 +42,18 @@ const Comment = ({ video_id }) => {
   // console.log("comments : ", comments);
 
   const makeComment = (data) => {
+    if (!loginStatus) {
+      navigate("/login");
+    }
     dispatch(comment({ content: data.comment, video_id: video_id }));
     reset();
   };
 
   const handleDelete = (comment_id) => {
     console.log("comment_id : ", comment_id);
-
+    if (!loginStatus) {
+      navigate("/login");
+    }
     dispatch(deleteComment({ comment_id }));
   };
 

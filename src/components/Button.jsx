@@ -12,7 +12,7 @@ const Button = ({
   return (
     <button
       type={type}
-      className={`px-4 py-2 text-white rounded-lg transition-transform duration-200 ease-in-out hover:scale-105 ${className} ${textColor} ${bgColor}`}
+      className={`px-4 py-2 rounded-lg transition-transform duration-200 ease-in-out hover:scale-105 ${className} ${textColor} ${bgColor}`}
       {...props}
     >
       {children || text}

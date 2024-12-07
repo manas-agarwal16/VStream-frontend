@@ -12,6 +12,7 @@ import {
 } from "../store/features/videoSlice";
 import { getComments, makeCommentsEmpty } from "../store/features/commentSlice";
 import { useDispatch, useSelector } from "react-redux";
+import sidebarBackGround from "../assets/sidebarBackGround.jpg";
 const Video = () => {
   const dispatch = useDispatch();
   const { video_id } = useParams();
@@ -40,16 +41,23 @@ const Video = () => {
   }, [video_id]);
 
   useEffect(() => {
-    if(video_id){
-      dispatch(getComments({video_id}));
+    if (video_id) {
+      dispatch(getComments({ video_id }));
     }
     return () => dispatch(makeCommentsEmpty());
-  },[video_id]);
+  }, [video_id]);
 
   return loading ? (
     <h1> loading </h1>
   ) : (
-    <div>
+    <div
+      style={{
+        backgroundImage: `url(${sidebarBackGround})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        // backdropFilter: "blur(5px)",
+      }}
+    >
       <Navbar />
       <div className="flex lg:w-2/3 w-full lg:mx-auto flex-col items-center justify-center">
         <VideoComp src={videoFile} poster={avatar} />

@@ -78,7 +78,7 @@ const Comment = ({ video_id }) => {
         >
           <Input
             {...register("comment", { required: true })}
-            className="bg-[#1b1b1f] focus:outline-none focus:ring-0 w-[80%] border-b-2 border-gray-600 mr-3 rounded-none placeholder:font-normal caret-white text-white font-medium"
+            className="bg-transparent focus:outline-none focus:ring-0 w-[80%] border-b-2 border-gray-600 mr-3 rounded-none placeholder:font-normal caret-white text-white font-normal"
             placeholder="Add a comment"
           />
           <Button
@@ -135,7 +135,7 @@ const Comment = ({ video_id }) => {
                     type="text"
                     // ref={inputRef}
                     readOnly
-                    className={`pointer-events-auto bg-[#1B1B1F] text-white scrollbar-hidden scrollable overflow-auto h-auto p-0 resize-none focus:outline-none focus:ring-0`}
+                    className={`pointer-events-auto bg-transparent text-white scrollbar-hidden scrollable overflow-auto h-auto p-0 resize-none focus:outline-none focus:ring-0`}
                   />
                   <div className="flex justify-start items-center">
                     <span

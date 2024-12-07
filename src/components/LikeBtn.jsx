@@ -46,11 +46,11 @@ function LikeBtn({ isLiked, likesCount = 0, comment_id, video_id, size }) {
 
   return (
     <>
-      <div className="flex items-center gap-1">
+      <div className="flex items-center  gap-1">
         <BiSolidLike
           size={size}
           onClick={handleLikeToggle}
-          className={`cursor-pointer ${localIsLiked ? "text-purple-500" : ""}`}
+          className={`cursor-pointer ${localIsLiked ? "text-blue-400" : ""}`}
         />
         <span className="text-xs mr-3">{localLikesCount}</span>
       </div>

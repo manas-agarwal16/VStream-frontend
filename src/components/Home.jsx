@@ -50,11 +50,12 @@ const Home = () => {
   return (
     <>
       {/* <aside> */}
-      <div className="md:ml-[180px] grid grid-cols-1 bg-[#1B1B1F] sm:grid-cols-2 gap-4  min-h-screen object-contain p-4 border-2 border-black mt-1 text-gray-500">
+      <div className="lg:ml-[220px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 bg-[#070707] min-h-screen p-6 text-gray-300">
         {videos.map((video, index) => (
-          <div key={index} className="w-full mx-2 h-72 bg-[#24242a] rounded-lg">
-            {" "}
-            {/* Fixed height with larger width */}
+          <div
+            key={index}
+            className="w-full h-72 bg-[#202026] rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-lg"
+          >
             <VideoList
               videoFile={video.videoFile}
               avatar={video.ownerDetails[0].avatar}
@@ -66,12 +67,18 @@ const Home = () => {
             />
           </div>
         ))}
+
         {loading && (
-          // <div className="flex justify-center">
+          <div className="flex justify-center items-center col-span-full">
             <Spinner width={8} />
-          // </div>
+          </div>
         )}
-        {!hasMore && <p>No more videos to load</p>}
+
+        {!hasMore && (
+          <p className="text-center col-span-full border-[1px] border-gray-600 w-full mt-6">
+            {/* No more videos to load */}
+          </p>
+        )}
       </div>
 
       {/* </aside> */}

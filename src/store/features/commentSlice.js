@@ -122,6 +122,7 @@ const commentSlice = createSlice({
         state.comments = state.comments.filter(
           (comment) => comment._id != action.payload.data._id
         );
+        state.totalComments -= 1;
       });
 
     builder

@@ -5,10 +5,50 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { SlMenu, CiSearch, IoCloseCircleOutline } from "../icons"; // Hamburger Icon
 import { logoutUser } from "../../store/features/authSlice";
+import { useNavigate } from "react-router-dom";
+import sidebarBackGround from "../../assets/sidebarBackGround.jpg";
+
+import {
+  MdHome,
+  BiHistory,
+  HiOutlineVideoCamera,
+  BiLike,
+  HiOutlineUser,
+  HiOutlineBookOpen,
+} from "../icons";
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { loginStatus } = useSelector((state) => state.auth);
+
+  const sideComp = [
+    {
+      text: "Home",
+      to: "/",
+      children: <MdHome size={20} />,
+    },
+    {
+      text: "History",
+      to: "/history",
+      children: <BiHistory size={20} />,
+    },
+    {
+      text: "Liked Videos",
+      to: "/liked-videos",
+      children: <BiLike size={20} />,
+    },
+    {
+      text: "Subscriptions",
+      to: "/subscriptions",
+      children: <HiOutlineUser size={20} />,
+    },
+    {
+      text: "Playlists",
+      to: "/playlists",
+      children: <HiOutlineBookOpen size={20} />,
+    },
+  ];
 
   // console.log("loginStatus : " , loginStatus);
 
@@ -46,33 +86,38 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="flex fixed justify-between items-center w-full px-3 bg-[#161618] text-white font-semibold z-50 h-60px">
+      <nav className="flex fixed justify-between items-center w-full px-4 bg-[#070707] text-white font-semibold z-50 h-16">
+        {/* kmkjkjm */}
         {/* Logo for small screens for bigger screens in sidebar */}
-        <Logo height="60px" width="70px" className="mx-2 mt-2 md:ml-10 " />
+        <Logo height="50px" width="50px" className="ml-4 lg:ml-10" />
 
         {/* Search form */}
         <form
-          onSubmit={handleSubmit(searchVideos)}
-          className="flex justify-between items-center w-[50%] relative md:left-8"
+          onSubmit={handleSubmit(searchVideos())}
+          className="flex justify-between lg:justify-start items-center w-2/3 "
         >
-          <Input
-            {...register("search", { required: true })}
-            placeholder="search"
-            className="bg-gray-700 text-white  md:rounded-r-none focus:outline-none font-normal hover:border-[1px] hover:border-[#1c62b9]"
-          />
-          <Button
-            type="submit"
-            bgColor="bg-pink-300 bg-gradient-to-br from-pink-300 via-pink-400 to-blue-300 shadow-lg rounded-r-full rounded-l-lg"
-            textColor="text-white"
-            className="hidden md:block"
-          >
-            <CiSearch className="text-white" size={24} />
-          </Button>
+          <div className="flex justify-start items-center w-full relative left-6 md:left-10 lg:left-18">
+            <div className="w-full mx-2 lg:w-2/3">
+              <Input
+                {...register("search", { required: true })}
+                placeholder="Search..."
+                className="bg-gray-800 text-white rounded-full px-4 py-2  w-full  focus:outline-none focus:ring-2 focus:ring-blue-500 hover:ring hover:ring-blue-400 transition"
+              />
+            </div>
+            <Button
+              type="submit"
+              bgColor="bg-pink-500 hover:bg-pink-600 transition shadow-lg"
+              textColor="text-white"
+              className="hidden md:flex items-center justify-center px-3 py-2 ml-2 rounded-full"
+            >
+              <CiSearch className="text-white" size={24} />
+            </Button>
+          </div>
         </form>
 
         {/* Navigation items for larger screens */}
-        <ul className="hidden md:flex justify-between items-center mx-3">
-          {navItems.map((item) =>
+        {/* <ul className="hidden lg:flex justify-between items-center mx-3"> */}
+          {/* {navItems.map((item) =>
             item.status ? (
               <li key={item.text}>
                 <Link
@@ -87,12 +132,12 @@ const Navbar = () => {
                 </Link>
               </li>
             ) : null
-          )}
-          {loginStatus && <Button text="logout" onClick={handleLogout} />}
-        </ul>
+          )} */}
+          {/* {loginStatus && <Button text="logout" onClick={handleLogout} />} */}
+        {/* </ul> */}
 
         {/* Hamburger icon for small screens */}
-        <div className="md:hidden">
+        <div className="lg:hidden ml-4">
           <Button
             onClick={toggleSidebar}
             className="text-white"
@@ -104,7 +149,14 @@ const Navbar = () => {
 
         {/* Sidebar for small screens */}
         {isSidebarOpen && (
-          <div className="fixed top-0 right-0 w-2/5 h-full bg-black bg-opacity-80 text-white z-20 p-5">
+          <div
+            className="fixed top-0 right-0 w-auto h-full bg-black text-white z-20 p-5 flex flex-col"
+            style={{
+              backgroundImage: `url(${sidebarBackGround})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
             <button
               className="absolute top-4 right-4"
               onClick={toggleSidebar}
@@ -112,26 +164,52 @@ const Navbar = () => {
             >
               <IoCloseCircleOutline className="text-white" size={30} />
             </button>
-            <ul className="my-10">
-              {navItems.map((item) =>
-                item.status ? (
-                  <li key={item.text} className="my-2">
-                    <Link
-                      to={item.to}
-                      className={`block font-semibold px-3 py-2 rounded-lg transition ${
-                        location.pathname === item.to
-                          ? "text-pink-300"
-                          : "text-gray-400 hover:text-blue-600"
-                      }`}
-                      onClick={toggleSidebar}
-                    >
-                      {item.text}
-                    </Link>
-                  </li>
-                ) : null
-              )}
-              {loginStatus && <Button text="logout" onClick={handleLogout} />}
-            </ul>
+
+            <div className="flex flex-col space-y-3 w-full flex-grow mt-12">
+              {sideComp.map((comp) => (
+                <Link
+                  to={comp.to}
+                  key={comp.text}
+                  className={`flex items-center w-full p-3 text-white rounded-lg transition duration-300 hover:bg-gray-800 hover:shadow-md ${
+                    location.pathname === comp.to
+                      ? "bg-gray-700 text-blue-400"
+                      : "text-gray-300"
+                  }`}
+                >
+                  {/* Icon */}
+                  <div className="mr-3 text-lg">{comp.children}</div>
+                  {/* Text */}
+                  <span className="font-medium">{comp.text}</span>
+                </Link>
+              ))}
+            </div>
+
+            {/* Logout Button */}
+            {loginStatus && (
+              <div className="w-full mt-auto">
+                <Button
+                  onClick={handleLogout}
+                  className="w-full text-center self-end px-4 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg transition shadow-md"
+                  text="Logout"
+                />
+              </div>
+            )}
+
+            {/* Login and Register Buttons when not logged in */}
+            {!loginStatus && (
+              <div className="w-full mt-auto">
+                <Button
+                  onClick={() => navigate("/login")}
+                  className="w-full text-center px-4 py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg transition shadow-md mt-14 mb-4"
+                  text="Login"
+                />
+                <Button
+                  onClick={() => navigate("/register")}
+                  className="w-full text-center px-4 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition shadow-md"
+                  text="Register"
+                />
+              </div>
+            )}
           </div>
         )}
 
@@ -143,7 +221,7 @@ const Navbar = () => {
           ></div>
         )}
       </nav>
-      <div className="pt-20"></div>
+      <div className="pt-[50px]"></div>
     </>
   );
 };

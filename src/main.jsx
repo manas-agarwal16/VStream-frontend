@@ -61,7 +61,7 @@ createRoot(document.getElementById("root")).render(
               boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)", // Subtle shadow
             },
           },
-          duration: 3000, // Slightly longer duration for better visibility
+          duration: 1500, // Slightly longer duration for better visibility
         }}
       />
     </Provider>

@@ -2,18 +2,15 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Logo, Input, Button } from "../index";
 import { useForm } from "react-hook-form";
-import { useNavigate, useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { SlMenu, CiSearch, IoCloseCircleOutline } from "../icons"; // Hamburger Icon
+import { logoutUser } from "../../store/features/authSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
-  // const location = useLocation();
   const { loginStatus } = useSelector((state) => state.auth);
 
   // console.log("loginStatus : " , loginStatus);
-  
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -41,12 +38,11 @@ const Navbar = () => {
       to: "/register",
       status: !loginStatus,
     },
-    {
-      text: "Logout",
-      to: "/logout",
-      status: loginStatus,
-    },
   ];
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  };
 
   return (
     <>
@@ -92,6 +88,7 @@ const Navbar = () => {
               </li>
             ) : null
           )}
+          {loginStatus && <Button text="logout" onClick={handleLogout} />}
         </ul>
 
         {/* Hamburger icon for small screens */}
@@ -133,6 +130,7 @@ const Navbar = () => {
                   </li>
                 ) : null
               )}
+              {loginStatus && <Button text="logout" onClick={handleLogout} />}
             </ul>
           </div>
         )}

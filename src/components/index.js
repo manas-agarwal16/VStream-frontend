@@ -12,6 +12,10 @@ import LikeBtn from "./LikeBtn";
 import VideoDescription from "./VideoDescription";
 import Register from "./Register";
 import VerifyOTP from "./VerifyOTP";
+import CenterSpinner from "./CenterSpinner";
+import Spinner from "./Spinner";
+
+
 
 export {
   Navbar,
@@ -28,4 +32,6 @@ export {
   VideoDescription,
   Register,
   VerifyOTP,
+  CenterSpinner,
+  Spinner
 };

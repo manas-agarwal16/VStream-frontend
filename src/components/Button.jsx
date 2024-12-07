@@ -3,10 +3,10 @@ import React from "react";
 const Button = ({
   text = "submit",
   type = "submit",
-  bgColor = "bg-pink-300 bg-gradient-to-br from-pink-300 via-pink-400 to-blue-300 shadow-lg",
+  bgColor = "bg-blue-600  hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500",
   textColor = "text-white",
   className = "",
-  children,  // Accept children (e.g., icon or text)
+  children, // Accept children (e.g., icon or text)
   ...props
 }) => {
   return (
@@ -19,6 +19,5 @@ const Button = ({
     </button>
   );
 };
-
 
 export default Button;

@@ -6,7 +6,7 @@ import {
   incrementPage,
   makeVideoDetailsEmpty,
 } from "../store/features/videoSlice"; // Adjust path as
-import { VideoList } from "./index";
+import { VideoList, Spinner } from "./index";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -66,7 +66,11 @@ const Home = () => {
             />
           </div>
         ))}
-        {loading && <p>Loading videos...</p>}
+        {loading && (
+          // <div className="flex justify-center">
+            <Spinner width={8} />
+          // </div>
+        )}
         {!hasMore && <p>No more videos to load</p>}
       </div>
 

@@ -61,9 +61,9 @@ export const myVideos = createAsyncThunk(
 
 export const userProfile = createAsyncThunk(
   "userProfile",
-  async (username, { rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
-      const res = await axiosInstance.get(`/users/user-profile/${username}`);
+      const res = await axiosInstance.get(`/users/user-profile/${data.username}`);
       // console.log("userProfile res : ", res);
       return res;
     } catch (error) {

@@ -3,7 +3,16 @@ import App from "./App.jsx";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Video, Home, Login, Register, VerifyOTP, History , LikedVideos } from "./pages";
+import {
+  Video,
+  Home,
+  Login,
+  Register,
+  VerifyOTP,
+  History,
+  LikedVideos,
+  Profile,
+} from "./pages";
 import { Toaster } from "react-hot-toast"; // Import the Toaster
 
 const router = createBrowserRouter([
@@ -36,9 +45,13 @@ const router = createBrowserRouter([
         element: <History />,
       },
       {
-        path : "liked-videos",
-        element : <LikedVideos/>
-      }
+        path: "liked-videos",
+        element: <LikedVideos />,
+      },
+      {
+        path: "user-profile/:username",
+        element: <Profile />,
+      },
     ],
   },
 ]);

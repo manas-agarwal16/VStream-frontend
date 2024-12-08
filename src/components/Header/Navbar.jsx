@@ -23,6 +23,10 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { loginStatus, userData } = useSelector((state) => state.auth);
 
+  const avatarImage =
+    userData?.avatar ||
+    "https://cdn.pixabay.com/photo/2016/09/28/02/14/user-1699635_1280.png";
+
   const sideComp = [
     {
       text: "Profile",
@@ -97,7 +101,7 @@ const Navbar = () => {
           onSubmit={handleSubmit(searchVideos())}
           className="flex justify-between lg:justify-start items-center w-2/3 "
         >
-          <div className="flex justify-start items-center w-full relative left-6 md:left-10 lg:left-0">
+          <div className="flex justify-start items-center w-full relative left-6 md:left-10 lg:left-40 mr-8">
             <div className="w-full mx-2 lg:w-2/3">
               <Input
                 {...register("search", { required: true })}
@@ -116,26 +120,12 @@ const Navbar = () => {
           </div>
         </form>
 
-        {/* Navigation items for larger screens */}
-        {/* <ul className="hidden lg:flex justify-between items-center mx-3"> */}
-        {/* {navItems.map((item) =>
-            item.status ? (
-              <li key={item.text}>
-                <Link
-                  to={item.to}
-                  className={`font-semibold px-3 py-2 rounded-lg transition ${
-                    location.pathname === item.to
-                      ? "bg-blue-600 text-white"
-                      : "text-gray-400 hover:text-blue-600"
-                  }`}
-                >
-                  {item.text}
-                </Link>
-              </li>
-            ) : null
-          )} */}
-        {/* {loginStatus && <Button text="logout" onClick={handleLogout} />} */}
-        {/* </ul> */}
+        <img
+          onClick={() => navigate(`/user-profile/${userData?.username || 'guest'}`)}
+          className="w-[50px] h-[50px] border-gray-500 border-2 rounded-full hidden lg:block cursor-pointer"
+          src={avatarImage}
+          alt="avatar"
+        />
 
         {/* Hamburger icon for small screens */}
         <div className="lg:hidden ml-4">

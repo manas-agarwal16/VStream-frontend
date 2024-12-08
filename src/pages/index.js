@@ -4,6 +4,7 @@ import Login from "./Login";
 import Register from "./Register";
 import VerifyOTP from "./VerifyOTP";
 import History from "./History";
+import Profile from "./Profile";
 import LikedVideos from "./LikedVideos";
 
-export {Video , Home , Login , Register , VerifyOTP , History , LikedVideos}
+export {Video , Home , Login , Register , VerifyOTP , History , LikedVideos , Profile}

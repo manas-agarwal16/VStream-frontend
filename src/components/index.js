@@ -16,7 +16,7 @@ import CenterSpinner from "./CenterSpinner";
 import Spinner from "./Spinner";
 import History from "./History";
 import LikedVideos from "./LikedVideos";
-
+import Profile from "./Profile";
 
 
 export {
@@ -37,5 +37,6 @@ export {
   CenterSpinner,
   Spinner,
   History,
-  LikedVideos
+  LikedVideos,
+  Profile
 };

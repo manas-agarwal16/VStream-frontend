@@ -7,7 +7,9 @@ export const likedVideos = createAsyncThunk(
   "liked-videos",
   async (_, { rejectWithValue }) => {
     try {
-      const res = await axiosInstance.get("/liked-videos");
+      const res = await axiosInstance.get("videos/liked-videos");
+      // console.log("res.data : " , res.data);
+      
       return res.data;
     } catch (error) {
       toast.error(
@@ -80,7 +82,7 @@ export const watchHistory = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const res = await axiosInstance.get("/users/watch-history");
-      return res;
+      return res.data;
     } catch (error) {
       toast.error(error?.data?.response?.error);
       return rejectWithValue(

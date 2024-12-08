@@ -1,13 +1,15 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input, Button, Logo, CenterSpinner } from "./index.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { loginUser } from "../store/features/authSlice.js";
 import { Link } from "react-router-dom";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  
 
   const { loading } = useSelector((state) => state.auth);
 
@@ -30,7 +32,7 @@ const Login = () => {
 
   return (
     <>
-      {loading && <CenterSpinner/>}
+      {loading && <CenterSpinner />}
       <div className="min-w-screen min-h-screen flex justify-center items-center bg-gray-900">
         <div className="w-full max-w-md bg-gray-800 rounded-lg shadow-lg p-8">
           <div className="flex items-center justify-center mb-6">

@@ -178,7 +178,6 @@ const authSlice = createSlice({
     });
     builder.addCase(getCurrentUser.fulfilled, (state, action) => {
       // console.log(".loginStatus : " , action.payload.data.loginStatus);
-
       state.loading = false;
       state.loginStatus = action.payload.data.loginStatus;
       state.userData = action.payload.data.userData;

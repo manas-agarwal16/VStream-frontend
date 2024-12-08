@@ -54,12 +54,6 @@ const Sidebar = () => {
       {/* <hr /> */}
       <aside
         className="hidden lg:flex flex-col justify-between items-start p-4 py-8 fixed left-0 w-[220px] h-[90vh] overflow-y-auto"
-        style={{
-          backgroundImage: `url(${sidebarBackGround})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          // backdropFilter: "blur(5px)",
-        }}
       >
         {/* <Logo width="50px" height="50px"/> */}
         <div className="flex flex-col space-y-3 w-full">

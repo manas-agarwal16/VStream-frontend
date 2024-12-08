@@ -82,7 +82,9 @@ const VideoDescription = ({
               <Button
                 className="border-slate-500 hover:scale-105 transition-all text-black font-semibold px-5 py-2  rounded-3xl shadow-lg"
                 bgColor="bg-white"
-                textColor={`${localIsSubscribed ? "text-blue-500" : "text-slate-900"}`}
+                textColor={`${
+                  localIsSubscribed ? "text-blue-500" : "text-slate-900"
+                }`}
               >
                 {localIsSubscribed ? "Subscribed" : "Subscribe"}
               </Button>
@@ -97,21 +99,25 @@ const VideoDescription = ({
       {/* Video Description */}
       <div className="relative">
         <h1 className="font-bold tracking-wide text-lg">Description</h1>
-        <p
-          className={`text-sm bg-[#090909] rounded-lg p-4 outline-none max-h-64 overflow-auto text-slate-200 ${
-            isDescriptionExpanded ? "h-auto" : "h-32 overflow-ellipsis"
-          }`}
-        >
-          {description}
-        </p>
-        {!isDescriptionExpanded && { description }.length > 150 && (
-          <button
-            className="absolute bottom-4 right-4 text-sm text-blue-500 bg-transparent"
-            onClick={toggleDescription}
+        <div className="relative w-full bg-[#090909] p-3 pb-10">
+          {" "}
+          {/* Add padding-bottom */}
+          <p
+            className={`text-sm text-gray-300 ${
+              isDescriptionExpanded ? "h-auto break-words" : "line-clamp-3"
+            }`}
           >
-            Show more
-          </button>
-        )}
+            {description}
+          </p>
+          {description?.length > 100 && (
+            <button
+              className="absolute bottom-2 right-4 text-sm text-blue-500 bg-transparent"
+              onClick={toggleDescription}
+            >
+              {isDescriptionExpanded ? "Show less" : "Show more"}
+            </button>
+          )}
+        </div>
       </div>
     </section>
   );

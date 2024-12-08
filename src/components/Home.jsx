@@ -51,9 +51,9 @@ const Home = () => {
     <>
       {/* <aside> */}
       <div className="lg:ml-[220px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 bg-[#070707] min-h-screen p-6 text-gray-300">
-        {videos.map((video, index) => (
+        {videos.map((video) => (
           <div
-            key={index}
+            key={video._id}
             className="w-full h-72 bg-[#202026] rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-lg"
           >
             <VideoList

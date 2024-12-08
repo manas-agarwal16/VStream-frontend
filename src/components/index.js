@@ -14,6 +14,8 @@ import Register from "./Register";
 import VerifyOTP from "./VerifyOTP";
 import CenterSpinner from "./CenterSpinner";
 import Spinner from "./Spinner";
+import History from "./History";
+import LikedVideos from "./LikedVideos";
 
 
 
@@ -33,5 +35,7 @@ export {
   Register,
   VerifyOTP,
   CenterSpinner,
-  Spinner
+  Spinner,
+  History,
+  LikedVideos
 };

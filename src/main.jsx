@@ -3,7 +3,7 @@ import App from "./App.jsx";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Video, Home, Login, Register, VerifyOTP } from "./pages";
+import { Video, Home, Login, Register, VerifyOTP, History , LikedVideos } from "./pages";
 import { Toaster } from "react-hot-toast"; // Import the Toaster
 
 const router = createBrowserRouter([
@@ -31,38 +31,46 @@ const router = createBrowserRouter([
         path: "verify-otp/:email",
         element: <VerifyOTP />,
       },
+      {
+        path: "history",
+        element: <History />,
+      },
+      {
+        path : "liked-videos",
+        element : <LikedVideos/>
+      }
     ],
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
-    <Provider store={store}>
-      <RouterProvider router={router}>
-        <App />
-      </RouterProvider>
-      {/* Add the Toaster here */}
-      <Toaster
-        position="top-right"
-        reverseOrder={true}
-        toastOptions={{
-          error: {
-            style: {
-              borderRadius: "4px",
-              backgroundColor: "#2c2c2c", // Dark background
-              color: "#ff6b6b", // Professional error red
-              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)", // Subtle shadow
-            },
+  <Provider store={store}>
+    <RouterProvider router={router}>
+      <App />
+    </RouterProvider>
+    {/* Add the Toaster here */}
+    <Toaster
+      position="top-right"
+      reverseOrder={true}
+      toastOptions={{
+        error: {
+          style: {
+            borderRadius: "4px",
+            backgroundColor: "#2c2c2c", // Dark background
+            color: "#ff6b6b", // Professional error red
+            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)", // Subtle shadow
           },
-          success: {
-            style: {
-              borderRadius: "4px",
-              backgroundColor: "#2c2c2c", // Dark background
-              color: "#4caf50", // Professional success green
-              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)", // Subtle shadow
-            },
+        },
+        success: {
+          style: {
+            borderRadius: "4px",
+            backgroundColor: "#2c2c2c", // Dark background
+            color: "#4caf50", // Professional success green
+            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)", // Subtle shadow
           },
-          duration: 1500, // Slightly longer duration for better visibility
-        }}
-      />
-    </Provider>
+        },
+        duration: 1500, // Slightly longer duration for better visibility
+      }}
+    />
+  </Provider>
 );

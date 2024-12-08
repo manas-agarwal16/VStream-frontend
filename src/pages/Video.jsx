@@ -4,6 +4,7 @@ import {
   Navbar,
   Comment as CommentComp,
   VideoDescription,
+  Sidebar,
 } from "../components";
 import { useParams } from "react-router-dom";
 import {
@@ -51,15 +52,17 @@ const Video = () => {
     <h1> loading </h1>
   ) : (
     <div
-      style={{
-        backgroundImage: `url(${sidebarBackGround})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        // backdropFilter: "blur(5px)",
-      }}
+      // style={{
+      //   backgroundImage: `url(${sidebarBackGround})`,
+      //   backgroundSize: "cover",
+      //   backgroundPosition: "center",
+      //   // backdropFilter: "blur(5px)",
+      // }}
+      className="bg-transparent"
     >
       <Navbar />
-      <div className="flex lg:w-2/3 w-full lg:mx-auto flex-col items-center justify-center">
+      <Sidebar />
+      <div className="flex lg:w-2/3 w-full lg:mx-[230px] flex-col items-center justify-center">
         <VideoComp src={videoFile} poster={avatar} />
         <VideoDescription
           title={title}

@@ -7,6 +7,7 @@ import { SlMenu, CiSearch, IoCloseCircleOutline } from "../icons"; // Hamburger 
 import { logoutUser } from "../../store/features/authSlice";
 import { useNavigate } from "react-router-dom";
 import sidebarBackGround from "../../assets/sidebarBackGround.jpg";
+import { FaUserCircle } from "react-icons/fa";
 
 import {
   MdHome,
@@ -20,13 +21,13 @@ import {
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loginStatus } = useSelector((state) => state.auth);
+  const { loginStatus, userData } = useSelector((state) => state.auth);
 
   const sideComp = [
     {
-      text: "Home",
-      to: "/",
-      children: <MdHome size={20} />,
+      text: "Profile",
+      to: `/user-profile/${userData?.username}`,
+      children: <FaUserCircle size={20} />,
     },
     {
       text: "History",
@@ -61,8 +62,8 @@ const Navbar = () => {
   } = useForm();
 
   const searchVideos = async (data) => {
-    console.log("search query ", data.search);
-    navigate(`/search?${data.search.trim()}`);
+    // console.log("search query ", data.search);
+    // navigate(`/search?${data.search.trim()}`);
   };
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
@@ -96,7 +97,7 @@ const Navbar = () => {
           onSubmit={handleSubmit(searchVideos())}
           className="flex justify-between lg:justify-start items-center w-2/3 "
         >
-          <div className="flex justify-start items-center w-full relative left-6 md:left-10 lg:left-18">
+          <div className="flex justify-start items-center w-full relative left-6 md:left-10 lg:left-0">
             <div className="w-full mx-2 lg:w-2/3">
               <Input
                 {...register("search", { required: true })}
@@ -117,7 +118,7 @@ const Navbar = () => {
 
         {/* Navigation items for larger screens */}
         {/* <ul className="hidden lg:flex justify-between items-center mx-3"> */}
-          {/* {navItems.map((item) =>
+        {/* {navItems.map((item) =>
             item.status ? (
               <li key={item.text}>
                 <Link
@@ -133,7 +134,7 @@ const Navbar = () => {
               </li>
             ) : null
           )} */}
-          {/* {loginStatus && <Button text="logout" onClick={handleLogout} />} */}
+        {/* {loginStatus && <Button text="logout" onClick={handleLogout} />} */}
         {/* </ul> */}
 
         {/* Hamburger icon for small screens */}

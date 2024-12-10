@@ -22,20 +22,6 @@ export const likedVideos = createAsyncThunk(
   }
 );
 
-export const myVideos = createAsyncThunk(
-  "my-videos",
-  async (_, { rejectWithValue }) => {
-    try {
-      const res = await axiosInstance.get("/my-videos");
-      return res.data;
-    } catch (error) {
-      toast.error(error?.response?.data?.error || "Error fetching my videos");
-      return rejectWithValue(
-        error?.response?.data || "error in fetching my videos"
-      );
-    }
-  }
-);
 
 // export const toggleVideoLike = createAsyncThunk(
 //   "toggleVideoLike",

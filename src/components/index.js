@@ -17,7 +17,9 @@ import Spinner from "./Spinner";
 import History from "./History";
 import LikedVideos from "./LikedVideos";
 import Profile from "./Profile";
-
+import Subscription from "./Subscription";
+import Search from "./Search";
+import AllVideos from "./AllVideos";
 
 export {
   Navbar,
@@ -38,5 +40,8 @@ export {
   Spinner,
   History,
   LikedVideos,
-  Profile
+  Profile,
+  Subscription,
+  Search,
+  AllVideos,
 };

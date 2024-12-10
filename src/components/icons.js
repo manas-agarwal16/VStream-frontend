@@ -22,6 +22,7 @@ import { FaRegEye, FaRegHeart } from "react-icons/fa";
 import { MdOutlineCloudUpload } from "react-icons/md";
 import { HiOutlineUser } from "react-icons/hi2";
 import { HiOutlineBookOpen } from "react-icons/hi2";
+import { FaVideo } from "react-icons/fa";
 
 export {
     IoCloseCircleOutline,
@@ -40,6 +41,7 @@ export {
     HiOutlineDotsVertical,
     TiTick,
     ImBin,
+    FaVideo,
     GrEdit,
     MdOutlineSlowMotionVideo,
     RxAvatar,

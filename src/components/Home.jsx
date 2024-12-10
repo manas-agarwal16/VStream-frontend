@@ -5,21 +5,16 @@ import {
   makeVideosEmpty,
   incrementPage,
   makeVideoDetailsEmpty,
-} from "../store/features/videoSlice"; // Adjust path as
+} from "../store/features/videoSlice";
 import { VideoList, Spinner } from "./index";
 
 const Home = () => {
   const dispatch = useDispatch();
 
-  // Extract necessary states
   const { videos, loading, page, hasMore } = useSelector(
     (state) => state.video
   );
-  console.log("videos : ", videos);
-  console.log("page : ", page);
-  console.log("hasMore : ", hasMore);
 
-  // Load videos on mount and subsequent scrolls
   useEffect(() => {
     dispatch(getVideos({ page: 1 }));
     return () => {
@@ -28,7 +23,6 @@ const Home = () => {
     };
   }, []);
 
-  // Infinite scroll handler
   const handleScroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop >=

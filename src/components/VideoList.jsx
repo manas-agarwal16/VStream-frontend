@@ -41,7 +41,8 @@ const Video = ({
           />
           <div>{username}</div>
         </span>
-        <div className="font-semibold px-3">{title}</div>
+        <span className="inline-block pl-3">{views} views</span>
+        <div className="font-semibold px-3 overflow-hidden">{title}</div>
       </div>
     </div>
   );

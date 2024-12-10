@@ -6,5 +6,20 @@ import VerifyOTP from "./VerifyOTP";
 import History from "./History";
 import Profile from "./Profile";
 import LikedVideos from "./LikedVideos";
+import Subscription from "./Subscription";
+import Search from "./Search";
+import AllVideos from "./AllVideos";
 
-export {Video , Home , Login , Register , VerifyOTP , History , LikedVideos , Profile}
+export {
+  AllVideos,
+  Video,
+  Home,
+  Login,
+  Register,
+  VerifyOTP,
+  History,
+  LikedVideos,
+  Profile,
+  Subscription,
+  Search,
+};

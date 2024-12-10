@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Button, VideoList, Spinner } from "./index";
 import { watchHistory } from "../store/features/userSlice";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const History = () => {
   const { loginStatus, userData, loading } = useSelector((state) => state.auth);
@@ -50,39 +51,45 @@ const History = () => {
       <div className="text-4xl lg:ml-[220px] p-6 text-white font-bold">
         Watch History
       </div>
-      <div className="lg:ml-[220px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 bg-[#070707] min-h-screen p-6 text-gray-300">
-        {videos?.map((video) => {
-
-          return (
-            <div
-              key={video?._id}
-              className="w-full h-72 bg-[#202026] rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-lg"
-            >
-              <VideoList
-                videoFile={video.videoFile}
-                avatar={video.avatar}
-                username={video.username}
-                views={video.views}
-                thumbnail={video.thumbnail}
-                title={video.title}
-                video_id={video._id}
-              />
+      {videos.length > 0 && (
+        <div className="lg:ml-[220px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 bg-[#070707] min-h-screen p-6 text-gray-300">
+          {videos?.map((video) => {
+            return (
+              <div
+                key={video?._id}
+                className="w-full h-72 bg-[#202026] rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-lg"
+              >
+                <VideoList
+                  videoFile={video.videoFile}
+                  avatar={video.avatar}
+                  username={video.username}
+                  views={video.views}
+                  thumbnail={video.thumbnail}
+                  title={video.title}
+                  video_id={video._id}
+                />
+              </div>
+            );
+          })}
+          {loading && (
+            <div className="flex justify-center items-center col-span-full">
+              <Spinner width={8} />
             </div>
-          );
-        })}
-        {videos.length === 0 && (
-          <p className="flex justify-center items-center h-[60vh] text-white text-xl font-semibold p-10 px-20 text-center w-[75vw] mx-auto">
+          )}
+        </div>
+      )}
+      {videos.length === 0 && (
+        <div className="flex p-10 px-20 flex-col justify-center items-center w-full h-[65vh] lg:ml-[220px] lg:w-[77vw] xl:w-[81vw] 2xl:w-[85vw]  mx-auto">
+          <p className="flex justify-center items-center text-white text-xl font-semibold  text-center">
             It looks like you haven't watched any videos yet. Once you start
             watching, your watch history will appear here. Feel free to explore
             our content and start watching to track your progress!
           </p>
-        )}
-        {loading && (
-          <div className="flex justify-center items-center col-span-full">
-            <Spinner width={8} />
-          </div>
-        )}
-      </div>
+          <Link to={"/"} className="text-blue-500 underline mx-4">
+            Home
+          </Link>
+        </div>
+      )}
     </>
   );
 };

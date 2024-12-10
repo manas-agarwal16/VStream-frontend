@@ -93,7 +93,12 @@ const Comment = ({ video_id }) => {
               <li key={comment._id} className="flex flex-col my-3 w-full">
                 {/* avatar */}
                 <div className="flex justify-between items-center">
-                  <div className="flex justify-start items-start mr-2 my-1">
+                  <div
+                    onClick={() =>
+                      navigate(`/user-profile/${comment.username}`)
+                    }
+                    className="flex cursor-pointer justify-start items-start mr-2 my-1"
+                  >
                     <img
                       src={comment.avatar}
                       alt="avatar"

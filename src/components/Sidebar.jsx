@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../store/features/authSlice";
 
 const Sidebar = () => {
-  const { loginStatus } = useSelector((state) => state.auth);
+  const { loginStatus , userData } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const sideComp = [
@@ -35,7 +35,7 @@ const Sidebar = () => {
     },
     {
       text: "Subscriptions",
-      to: "/subscriptions",
+      to: `/subscriptions/${userData._id || "guest"}`,
       children: <HiOutlineUser size={20} />,
     },
     {
@@ -52,9 +52,7 @@ const Sidebar = () => {
   return (
     <>
       {/* <hr /> */}
-      <aside
-        className="hidden lg:flex flex-col justify-between items-start p-4 py-8 fixed left-0 w-[220px] h-[90vh] overflow-y-auto"
-      >
+      <aside className="hidden lg:flex flex-col justify-between items-start p-4 py-8 fixed left-0 w-[220px] h-[90vh] overflow-y-auto">
         {/* <Logo width="50px" height="50px"/> */}
         <div className="flex flex-col space-y-3 w-full">
           {sideComp.map((comp) => (

@@ -9,8 +9,6 @@ export const toggleSubscribe = createAsyncThunk("toggleSubscribe" , async (data)
     try {
         const res = await axiosInstance.post(`/subscription/toggle-subscribe`,data);
         console.log("res.data : " , res.data);
-        
-        toast.success(`you toggled ut subscription successfully`);
         return res.data;
     } catch (error) {
         toast.error(error?.response?.data?.error || "Error in toggling subscription");
@@ -19,7 +17,7 @@ export const toggleSubscribe = createAsyncThunk("toggleSubscribe" , async (data)
 
 export const subscriptionChannels = createAsyncThunk("subscriptionChannels" , async (data) => {
     try {
-        const res = axiosInstance.get(`subscription/subscription-channels`);
+        const res = await axiosInstance.get(`subscription/subscription-channels`);
         return res.data;
     } catch (error) {
         toast.error(error?.response?.data?.error || "Error in fetching subscription channels");

@@ -55,6 +55,7 @@ const Login = () => {
                 {...register("email", { required: true })}
                 id="username"
                 type="text"
+                autoFocus
                 placeholder="email or username"
                 className="w-full px-4 py-3 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />

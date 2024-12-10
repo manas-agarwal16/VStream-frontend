@@ -16,12 +16,15 @@ import {
   BiLike,
   HiOutlineUser,
   HiOutlineBookOpen,
+  FaVideo,
 } from "../icons";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loginStatus, userData } = useSelector((state) => state.auth);
+
+  const [searchBarVisible, setSearchBarVisible] = useState(false);
 
   const avatarImage =
     userData?.avatar ||
@@ -30,8 +33,13 @@ const Navbar = () => {
   const sideComp = [
     {
       text: "Profile",
-      to: `/user-profile/${userData?.username}`,
+      to: `/user-profile/${userData?.username || "guest"}`,
       children: <FaUserCircle size={20} />,
+    },
+    {
+      text: "Home",
+      to: "/",
+      children: <MdHome size={20} />,
     },
     {
       text: "History",
@@ -45,13 +53,18 @@ const Navbar = () => {
     },
     {
       text: "Subscriptions",
-      to: "/subscriptions",
+      to: `/subscriptions/${userData._id || "guest"}"`,
       children: <HiOutlineUser size={20} />,
     },
     {
       text: "Playlists",
       to: "/playlists",
       children: <HiOutlineBookOpen size={20} />,
+    },
+    {
+      text: "Upload Video",
+      to: `/upload-video/${userData.username || "guest"}`,
+      children: <FaVideo size={20} />,
     },
   ];
 
@@ -66,8 +79,8 @@ const Navbar = () => {
   } = useForm();
 
   const searchVideos = async (data) => {
-    // console.log("search query ", data.search);
-    // navigate(`/search?${data.search.trim()}`);
+    console.log("search query ", data.search);
+    navigate(`/search?search=${data.search.trim()}`);
   };
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
@@ -92,21 +105,20 @@ const Navbar = () => {
   return (
     <>
       <nav className="flex fixed justify-between items-center w-full px-4 bg-[#070707] text-white font-semibold z-50 h-16">
-        {/* kmkjkjm */}
-        {/* Logo for small screens for bigger screens in sidebar */}
+        {/* Logo */}
         <Logo height="50px" width="50px" className="ml-4 lg:ml-10" />
 
-        {/* Search form */}
+        {/* Search bar for larger screens */}
         <form
-          onSubmit={handleSubmit(searchVideos())}
-          className="flex justify-between lg:justify-start items-center w-2/3 "
+          onSubmit={handleSubmit(searchVideos)}
+          className="hidden lg:flex  justify-evenly items-center w-2/3"
         >
-          <div className="flex justify-start items-center w-full relative left-6 md:left-10 lg:left-40 mr-8">
-            <div className="w-full mx-2 lg:w-2/3">
+          <div className="flex justify-start items-center w-full lg:w-[70%] relative md:left-2 lg:left-32 mr-8">
+            <div className="w-full mx-2">
               <Input
                 {...register("search", { required: true })}
                 placeholder="Search..."
-                className="bg-gray-800 text-white rounded-full px-4 py-2  w-full  focus:outline-none focus:ring-2 focus:ring-blue-500 hover:ring hover:ring-blue-400 transition"
+                className="bg-gray-800 text-white rounded-full px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 hover:ring hover:ring-blue-400 transition"
               />
             </div>
             <Button
@@ -120,15 +132,68 @@ const Navbar = () => {
           </div>
         </form>
 
-        <img
-          onClick={() => navigate(`/user-profile/${userData?.username || 'guest'}`)}
-          className="w-[50px] h-[50px] border-gray-500 border-2 rounded-full hidden lg:block cursor-pointer"
-          src={avatarImage}
-          alt="avatar"
-        />
+        {/* Small screen search icon */}
+        <div className="lg:hidden flex items-center">
+          <CiSearch
+            size={24}
+            className="cursor-pointer text-white"
+            onClick={() => setSearchBarVisible((prev) => !prev)}
+          />
+        </div>
 
-        {/* Hamburger icon for small screens */}
-        <div className="lg:hidden ml-4">
+        {/* Collapsible Search Bar */}
+        {searchBarVisible && (
+          <div className="fixed top-16 left-0 w-full bg-[#070707] p-4 z-50">
+            <form
+              onSubmit={handleSubmit(searchVideos)}
+              className="flex justify-between items-center"
+            >
+              <Input
+                {...register("search", { required: true })}
+                placeholder="Search..."
+                autoFocus
+                className="bg-gray-800 text-white rounded-full px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 hover:ring hover:ring-blue-400 transition"
+              />
+              <Button
+                type="submit"
+                bgColor="bg-pink-500 hover:bg-pink-600 transition shadow-lg"
+                textColor="text-white"
+                className="ml-2 rounded-full px-4 py-2"
+              >
+                Search
+              </Button>
+            </form>
+          </div>
+        )}
+
+        {/* Other nav items */}
+        <div className="items-center hidden lg:flex justify-center gap-4 lg:gap-8">
+          <FaVideo
+            size={30}
+            className="cursor-pointer"
+            onClick={() =>
+              navigate(`/upload-video/${userData?.username || "guest"}`)
+            }
+          />
+          <img
+            onClick={() =>
+              navigate(`/user-profile/${userData?.username || "guest"}`)
+            }
+            className="w-[50px] h-[50px] border-gray-500 border-2 rounded-full  cursor-pointer"
+            src={avatarImage}
+            alt="avatar"
+          />
+        </div>
+
+        {/* Hamburger icon */}
+        <div className="lg:hidden ml-4 flex items-center justify-center gap-4">
+          {/* <FaVideo
+            size={30}
+            className="cursor-pointer"
+            onClick={() =>
+              navigate(`/upload-video/${userData?.username || "guest"}`)
+            }
+          /> */}
           <Button
             onClick={toggleSidebar}
             className="text-white"
@@ -138,7 +203,7 @@ const Navbar = () => {
           </Button>
         </div>
 
-        {/* Sidebar for small screens */}
+        {/* Sidebar and overlay (unchanged) */}
         {isSidebarOpen && (
           <div
             className="fixed top-0 right-0 w-auto h-full bg-black text-white z-20 p-5 flex flex-col"
@@ -212,7 +277,7 @@ const Navbar = () => {
           ></div>
         )}
       </nav>
-      <div className="pt-[50px]"></div>
+      <div className="pt-[70px]"></div>
     </>
   );
 };

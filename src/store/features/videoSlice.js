@@ -125,9 +125,11 @@ export const toggleVideoLike = createAsyncThunk(
   }
 );
 
-export const search = createAsyncThunk(
+export const searchVideosBackend = createAsyncThunk(
   "search",
   async (data, { rejectWithValue }) => {
+    console.log("searchVideosBackend data : ", data);
+
     try {
       const res = await axiosInstance.get(
         `/videos/search?search=${data.search}`
@@ -142,10 +144,29 @@ export const search = createAsyncThunk(
   }
 );
 
+export const allUserVideos = createAsyncThunk(
+  "allUserVideos",
+  async (data, { rejectWithValue }) => {
+    console.log("data.username : " , data.username);
+    
+    try {
+      const res = await axiosInstance.get(`/videos/all-user-videos/${data.username}`);
+      return res.data;
+    } catch (error) {
+      toast.error(error?.response?.data?.error || "Error fetching my videos");
+      return rejectWithValue(
+        error?.response?.data || "error in fetching my videos"
+      );
+    }
+  }
+);
+
 const initialState = {
   loading: false,
   videoDetails: {},
   videos: [],
+  searchVideos: [],
+  userVideos: [],
   page: 1,
   hasMore: true,
 };
@@ -168,14 +189,41 @@ const videoSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(allUserVideos.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(allUserVideos.fulfilled, (state, action) => {
+        state.loading = false;
+        state.userVideos = action.payload.data;
+      })
+      .addCase(allUserVideos.rejected, (state) => {
+        state.loading = false;
+      });
+
+    builder
+      .addCase(searchVideosBackend.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(searchVideosBackend.fulfilled, (state, action) => {
+        state.loading = false;
+        state.searchVideos = action.payload.data;
+      })
+      .addCase(searchVideosBackend.rejected, (state) => {
+        state.loading = false;
+      });
+
+    builder
       .addCase(getVideos.pending, (state) => {
         state.loading = true;
       })
 
       .addCase(getVideos.fulfilled, (state, action) => {
-        console.log("length : " , action.payload.data.videos.length);
-        
-        console.log("action payload data videos : " , action.payload.data.videos);
+        console.log("length : ", action.payload.data.videos.length);
+
+        console.log(
+          "action payload data videos : ",
+          action.payload.data.videos
+        );
 
         state.loading = false;
         state.videos = [...state.videos, ...action.payload.data.videos];

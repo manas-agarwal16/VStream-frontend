@@ -12,6 +12,9 @@ import {
   History,
   LikedVideos,
   Profile,
+  Subscription,
+  Search,
+  AllVideos,
 } from "./pages";
 import { Toaster } from "react-hot-toast"; // Import the Toaster
 
@@ -51,6 +54,18 @@ const router = createBrowserRouter([
       {
         path: "user-profile/:username",
         element: <Profile />,
+      },
+      {
+        path: "subscriptions/:_id",
+        element: <Subscription />,
+      },
+      {
+        path: "search/",
+        element: <Search />,
+      },
+      {
+        path: "all-videos/:username",
+        element: <AllVideos />,
       },
     ],
   },

@@ -21,9 +21,7 @@ const VideoDescription = ({
 }) => {
   const dispatch = useDispatch();
 
-  // const [localIsLiked, setlocalIsLiked] = useState(isLiked);
   const [localIsSubscribed, setlocalIsSubscribed] = useState(isSubscribed);
-  // const [localLikes, setlocalLikes] = useState(likes);
   const [localSubscribers, setlocalSubscribers] = useState(subscribers);
 
   const handleSubscribe = () => {
@@ -65,7 +63,7 @@ const VideoDescription = ({
           </div>
           {/* Channel Info Section */}
           <div className="flex gap-3 justify-between items-center">
-            <Link to={`/channel/${username}/videos`} className="flex gap-3">
+            <Link to={`/user-profile/${username}`} className="flex gap-3">
               <img
                 src={avatar}
                 className="w-12 h-12 rounded-full object-cover border-2 border-[#222222]"

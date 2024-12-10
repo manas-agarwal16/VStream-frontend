@@ -41,7 +41,7 @@ const VerifyOTP = () => {
 
   return (
     <>
-    {loading && <CenterSpinner/>}
+      {loading && <CenterSpinner />}
       <div>
         <div className="min-h-screen flex items-center justify-center bg-gray-900">
           <div className="w-full mx-4 max-w-md bg-gray-800 rounded-lg shadow-lg p-6">

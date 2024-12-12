@@ -70,14 +70,10 @@ export const deleteComment = createAsyncThunk("deleteComment", async (data) => {
 export const getComments = createAsyncThunk(
   "getComments",
   async (data, { rejectWithValue }) => {
-    // console.log("get Comments");
-
     try {
-      // console.log("data : ", data);
-      const params = { video_id: data.video_id, page: data.page };
-      const res = await axiosInstance.get(`/videos/get-comments`, { params }); //receiving page in req.body if video_id is passed. parentComment me no pagination.
-      // console.log("res.data", res.data);
-
+      const res = await axiosInstance.get(
+        `/videos/get-comments/${data.video_id}`
+      );
       return res.data;
     } catch (error) {
       toast.error(error?.response?.data?.error || "Error fetching comments");
@@ -151,7 +147,10 @@ const commentSlice = createSlice({
         //   action.payload.data
         // );
         state.totalComments = action.payload.data.totalComments;
-        state.comments = [...state.comments, ...action.payload.data.videoComments];
+        state.comments = [
+          ...state.comments,
+          ...action.payload.data.videoComments,
+        ];
         // state.page += 1;
       })
       .addCase(getComments.rejected, (state, action) => {

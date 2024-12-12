@@ -20,8 +20,13 @@ import Profile from "./Profile";
 import Subscription from "./Subscription";
 import Search from "./Search";
 import AllVideos from "./AllVideos";
+import MusicMode from "./MusicMode";
+import SearchSong from "./SearchSong";
+import SongCard from "./SongCard";
 
 export {
+  SongCard,
+  SearchSong,
   Navbar,
   Button,
   Input,
@@ -44,4 +49,5 @@ export {
   Subscription,
   Search,
   AllVideos,
+  MusicMode,
 };

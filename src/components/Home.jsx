@@ -32,7 +32,6 @@ const Home = () => {
     ) {
       dispatch(getVideos({ page: page + 1 }));
       dispatch(incrementPage());
-      // console.log("after increment page : " , page);
     }
   };
 

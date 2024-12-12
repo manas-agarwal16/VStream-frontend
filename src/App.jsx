@@ -1,8 +1,9 @@
-import {useEffect } from "react";
+import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from "./store/features/authSlice";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 function App() {
   const dispatch = useDispatch();
@@ -14,8 +15,14 @@ function App() {
     dispatch(getCurrentUser());
   }, [dispatch, navigate]);
 
+  const location = useLocation();
+
+  const backgroundColor = location.pathname.startsWith("/songs")
+    ? "bg-blue-950"
+    : "bg-[#070707]";
+
   return (
-    <div>
+    <div className={`min-h-screen ${backgroundColor}`}>
       <Outlet />
     </div>
   );

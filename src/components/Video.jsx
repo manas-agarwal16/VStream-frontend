@@ -9,7 +9,7 @@ function Video({ src, poster }) {
         autoPlay
         controls
         playsInline
-        className="h-2xl w-full block h-96 my-4 rounded-lg border-2 border-black object-cover mx-auto"
+        className="shadow-[0px_4px_10px_rgba(255,255,0,0.5)] h-2xl w-full block h-96 my-4 rounded-lg border-2 border-black object-cover mx-auto"
       ></video>
     </>
   );

@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Logo, Input, Button } from "../index";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { SlMenu, CiSearch, IoCloseCircleOutline } from "../icons"; // Hamburger Icon
 import { logoutUser } from "../../store/features/authSlice";
 import { useNavigate } from "react-router-dom";
 import sidebarBackGround from "../../assets/sidebarBackGround.jpg";
 import { FaUserCircle } from "react-icons/fa";
+import { FaMusic } from "react-icons/fa";
 
 import {
   MdHome,
@@ -56,21 +57,30 @@ const Navbar = () => {
       to: `/subscriptions/${userData._id || "guest"}"`,
       children: <HiOutlineUser size={20} />,
     },
-    {
-      text: "Playlists",
-      to: "/playlists",
-      children: <HiOutlineBookOpen size={20} />,
-    },
+    // {
+    //   text: "Playlists",
+    //   to: "/playlists",
+    //   children: <HiOutlineBookOpen size={20} />,
+    // },
     {
       text: "Upload Video",
       to: `/upload-video/${userData.username || "guest"}`,
       children: <FaVideo size={20} />,
+    },
+    {
+      text: "Music Mode",
+      to: "/songs",
+      onHover: "text-gray-800",
+      bgColor:
+        "bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white",
+      children: <FaMusic />,
     },
   ];
 
   // console.log("loginStatus : " , loginStatus);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const location = useLocation();
 
   const {
     register,
@@ -79,8 +89,12 @@ const Navbar = () => {
   } = useForm();
 
   const searchVideos = async (data) => {
-    console.log("search query ", data.search);
-    navigate(`/search?search=${data.search.trim()}`);
+    // console.log("search query ", data.search);
+    if (location.pathname.startsWith('/songs')) {
+      navigate(`/songs/search/${data.search.trim()}`);
+    } else {
+      navigate(`/search?search=${data.search.trim()}`);
+    }
   };
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
@@ -104,7 +118,13 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="flex fixed justify-between items-center w-full px-4 bg-[#070707] text-white font-semibold z-50 h-16">
+      <nav
+        className={`flex fixed justify-between items-center w-full px-4 ${
+          location.pathname.startsWith('/songs')
+            ? "bg-gradient-to-r from-blue-950 via-blue-900 to-blue-800  "
+            : "bg-[#070707] "
+        }text-white font-semibold z-50 h-16`}
+      >
         {/* Logo */}
         <Logo height="50px" width="50px" className="ml-4 lg:ml-10" />
 
@@ -117,8 +137,16 @@ const Navbar = () => {
             <div className="w-full mx-2">
               <Input
                 {...register("search", { required: true })}
-                placeholder="Search..."
-                className="bg-gray-800 text-white rounded-full px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 hover:ring hover:ring-blue-400 transition"
+                placeholder={`${
+                  location.pathname === "/songs"
+                    ? "What you want to listen..."
+                    : "Search..."
+                }`}
+                className={`${
+                  location.pathname === "/songs"
+                    ? "border-yellow-600 border-[3px] focus:outline-none bg-gray-400 font-normal text-white placeholder-gray-600"
+                    : "bg-gray-800 text-white rounded-full px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 hover:ring hover:ring-blue-400 transition"
+                }`}
               />
             </div>
             <Button
@@ -143,16 +171,27 @@ const Navbar = () => {
 
         {/* Collapsible Search Bar */}
         {searchBarVisible && (
-          <div className="fixed top-16 left-0 w-full bg-[#070707] p-4 z-50">
+          <div
+            className={`fixed top-16 left-0 w-full ${
+              location.pathname === "/songs" ? "bg-blue-950 " : "bg-[#070707] "
+            } p-4 z-50`}
+          >
             <form
               onSubmit={handleSubmit(searchVideos)}
               className="flex justify-between items-center"
             >
               <Input
                 {...register("search", { required: true })}
-                placeholder="Search..."
-                autoFocus
-                className="bg-gray-800 text-white rounded-full px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 hover:ring hover:ring-blue-400 transition"
+                placeholder={`${
+                  location.pathname === "/songs"
+                    ? "What you want to listen..."
+                    : "Search..."
+                }`}
+                className={`${
+                  location.pathname === "/songs"
+                    ? "border-yellow-600 border-[3px] focus:outline-none bg-gray-400 font-normal text-white placeholder-gray-600"
+                    : "bg-gray-800 text-white rounded-full px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 hover:ring hover:ring-blue-400 transition"
+                }`}
               />
               <Button
                 type="submit"
@@ -187,13 +226,6 @@ const Navbar = () => {
 
         {/* Hamburger icon */}
         <div className="lg:hidden ml-4 flex items-center justify-center gap-4">
-          {/* <FaVideo
-            size={30}
-            className="cursor-pointer"
-            onClick={() =>
-              navigate(`/upload-video/${userData?.username || "guest"}`)
-            }
-          /> */}
           <Button
             onClick={toggleSidebar}
             className="text-white"
@@ -226,11 +258,13 @@ const Navbar = () => {
                 <Link
                   to={comp.to}
                   key={comp.text}
-                  className={`flex items-center w-full p-3 text-white rounded-lg transition duration-300 hover:bg-gray-800 hover:shadow-md ${
+                  className={`flex items-center w-full p-3 text-white rounded-lg transition duration-300 hover:${
+                    comp.onHover || "bg-gray-800"
+                  } hover:shadow-md ${
                     location.pathname === comp.to
-                      ? "bg-gray-700 text-blue-400"
+                      ? `${comp.onHover || "bg-gray-700"} text-blue-400`
                       : "text-gray-300"
-                  }`}
+                  } ${comp.bgColor ? comp.bgColor : ""}`}
                 >
                   {/* Icon */}
                   <div className="mr-3 text-lg">{comp.children}</div>
@@ -277,7 +311,7 @@ const Navbar = () => {
           ></div>
         )}
       </nav>
-      <div className="pt-[70px]"></div>
+      <div className="pt-[64px]"></div>
     </>
   );
 };

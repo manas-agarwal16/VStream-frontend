@@ -2,7 +2,11 @@ import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import { Provider } from "react-redux";
 import store from "./store/store.js";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  useLocation,
+} from "react-router-dom";
 import {
   Video,
   Home,
@@ -15,6 +19,8 @@ import {
   Subscription,
   Search,
   AllVideos,
+  MusicMode,
+  SearchSong,
 } from "./pages";
 import { Toaster } from "react-hot-toast"; // Import the Toaster
 
@@ -66,6 +72,14 @@ const router = createBrowserRouter([
       {
         path: "all-videos/:username",
         element: <AllVideos />,
+      },
+      {
+        path: "songs",
+        element: <MusicMode />,
+      },
+      {
+        path: "songs/search/:search",
+        element: <SearchSong />,
       },
     ],
   },

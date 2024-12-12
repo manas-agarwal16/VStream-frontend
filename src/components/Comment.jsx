@@ -62,6 +62,8 @@ const Comment = ({ video_id }) => {
     if (!loginStatus) {
       navigate("/login");
     }
+    console.log("comment : " , comment);
+    
     dispatch(toggleCommentLike({ comment }));
   };
 

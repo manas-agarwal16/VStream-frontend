@@ -7,6 +7,7 @@ import {
   HiOutlineUser,
   HiOutlineBookOpen,
 } from "./icons";
+import { FaMusic } from "react-icons/fa";
 import sidebarBackGround from "../assets/sidebarBackGround.jpg";
 import { Logo, Button } from "./index";
 import { Link, useNavigate } from "react-router-dom";
@@ -14,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../store/features/authSlice";
 
 const Sidebar = () => {
-  const { loginStatus , userData } = useSelector((state) => state.auth);
+  const { loginStatus, userData } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const sideComp = [
@@ -38,10 +39,17 @@ const Sidebar = () => {
       to: `/subscriptions/${userData._id || "guest"}`,
       children: <HiOutlineUser size={20} />,
     },
+    // {
+    //   text: "Playlists",
+    //   to: "/playlists",
+    //   children: <HiOutlineBookOpen size={20} />,
+    // },
     {
-      text: "Playlists",
-      to: "/playlists",
-      children: <HiOutlineBookOpen size={20} />,
+      text: "Music Mode",
+      to: "/songs",
+      onHover: "text-gray-800",
+      bgColor: "bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white",
+      children: <FaMusic />,
     },
   ];
 
@@ -59,11 +67,13 @@ const Sidebar = () => {
             <Link
               to={comp.to}
               key={comp.text}
-              className={`flex items-center w-full p-3 text-white rounded-lg transition duration-300 hover:bg-gray-800 hover:shadow-md ${
+              className={`flex items-center w-full p-3 text-white rounded-lg transition duration-300 hover:${
+                comp.onHover || "bg-gray-800"
+              } hover:shadow-md ${
                 location.pathname === comp.to
-                  ? "bg-gray-700 text-blue-400"
+                  ? `${comp.onHover || "bg-gray-700"} text-blue-400`
                   : "text-gray-300"
-              }`}
+              } ${comp.bgColor ? comp.bgColor : ''}`}
             >
               {/* Icon */}
               <div className="mr-3 text-lg">{comp.children}</div>

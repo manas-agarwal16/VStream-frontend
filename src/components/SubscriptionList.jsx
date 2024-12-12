@@ -29,7 +29,7 @@ const SubscriptionList = ({
           <p className="font-semibold italic">@{username}</p>
         </div>
       </div>
-      <div className="flex flex-col font-semibold text-lg md:flex-row gap-4 justify-between items-center text-gray-200">
+      <div className="flex flex-col font-semibold text-lg md:flex-row gap-4 justify-between items-center text-gray-200 px-2">
         <span>Subscribers: <span className="text-white">{subscribers}</span></span>
         <span>Subscribing: <spann className="text-white">{subscribing}</spann></span>
       </div>

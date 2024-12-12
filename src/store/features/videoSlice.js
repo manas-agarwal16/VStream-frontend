@@ -178,6 +178,7 @@ const videoSlice = createSlice({
     makeVideosEmpty: (state) => {
       state.videos = [];
       state.page = 1;
+      state.hasMore = true;
     },
     makeVideoDetailsEmpty: (state) => {
       state.videoDetails = {};
@@ -218,12 +219,12 @@ const videoSlice = createSlice({
       })
 
       .addCase(getVideos.fulfilled, (state, action) => {
-        console.log("length : ", action.payload.data.videos.length);
+        // console.log("length : ", action.payload.data.videos.length);
 
-        console.log(
-          "action payload data videos : ",
-          action.payload.data.videos
-        );
+        // console.log(
+        //   "action payload data videos : ",
+        //   action.payload.data.videos
+        // );
 
         state.loading = false;
         state.videos = [...state.videos, ...action.payload.data.videos];

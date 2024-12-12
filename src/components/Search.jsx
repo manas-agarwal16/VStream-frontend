@@ -8,15 +8,15 @@ const Search = () => {
   const location = useLocation();
   const myParams = new URLSearchParams(location.search);
 
-  console.log("myParams : ", myParams);
+  // console.log("myParams : ", myParams);
 
   const search = myParams.get("search");
-  console.log("search : ", search);
+  // console.log("search : ", search);
 
   const { searchVideos, loading } = useSelector((state) => state.video);
   const dispatch = useDispatch();
 
-  console.log("searchVideos : ", searchVideos);
+  // console.log("searchVideos : ", searchVideos);
 
   useEffect(() => {
     dispatch(searchVideosBackend({ search }));
@@ -53,7 +53,7 @@ const Search = () => {
         <>
           <div className="w-full h-[90vh] lg:ml-[220px] lg:w-[77vw] xl:w-[81vw] 2xl:w-[84vw] flex justify-center items-center">
             <p className="text-center text-white text-xl md:text-2xl">
-              Sorry☹️, No results found for your search. Please try using
+              Sorry😟, No results found for your search. Please try using
               different keywords or check your spelling.
             </p>
           </div>

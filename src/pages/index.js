@@ -9,8 +9,12 @@ import LikedVideos from "./LikedVideos";
 import Subscription from "./Subscription";
 import Search from "./Search";
 import AllVideos from "./AllVideos";
+import MusicMode from "./MusicMode.jsx";
+import SearchSong from "./SearchSong.jsx";
 
 export {
+  SearchSong,
+  MusicMode,
   AllVideos,
   Video,
   Home,

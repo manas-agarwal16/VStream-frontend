@@ -83,7 +83,7 @@ export const getCurrentUser = createAsyncThunk(
     } catch (error) {
       // console.log("error : " , error);
 
-      toast.error(error?.response?.data?.message || "No current user");
+      // toast.error(error?.response?.data?.message || "No current user");
     }
   }
 );
@@ -108,7 +108,7 @@ export const refreshAccessToken = createAsyncThunk(
   async () => {
     try {
       const res = await axiosInstance.get("/users/refresh-access-token");
-      return res;
+      return res.data;a
     } catch (error) {
       console.log("error in refreshing access-token", error);
     }
@@ -177,10 +177,14 @@ const authSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(getCurrentUser.fulfilled, (state, action) => {
-      // console.log(".loginStatus : " , action.payload.data.loginStatus);
       state.loading = false;
-      state.loginStatus = action.payload.data.loginStatus;
-      state.userData = action.payload.data.userData;
+      if (action.payload) {
+        state.loginStatus = action.payload.data.loginStatus;
+        state.userData = action.payload.data.userData;
+      } else {
+        state.loginStatus = false;
+        state.userData = {};
+      }
     });
     builder.addCase(getCurrentUser.rejected, (state, action) => {
       //   console.log("in rejected : ", action.error);

@@ -35,18 +35,18 @@ const Video = () => {
   } = useSelector((state) => state.video.videoDetails);
 
   useEffect(() => {
-    if (video_id) {
-      dispatch(watchVideo({ video_id }));
-    }
-    return () => dispatch(makeVideoDetailsEmpty());
-  }, [video_id]);
+    console.log("1");
 
-  useEffect(() => {
     if (video_id) {
       dispatch(getComments({ video_id }));
+      dispatch(watchVideo({ video_id }));
     }
-    return () => dispatch(makeCommentsEmpty());
+    return () => {
+      dispatch(makeVideoDetailsEmpty());
+      dispatch(makeCommentsEmpty());
+    };
   }, [video_id]);
+
 
   return loading ? (
     <h1> loading </h1>
@@ -58,7 +58,7 @@ const Video = () => {
       //   backgroundPosition: "center",
       //   // backdropFilter: "blur(5px)",
       // }}
-      className="bg-transparent"
+      className="bg-[transparent]"
     >
       <Navbar />
       <Sidebar />

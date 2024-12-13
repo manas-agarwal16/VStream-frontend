@@ -25,6 +25,15 @@ const Comment = ({ video_id }) => {
   const { loginStatus, userData } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
+  // useEffect(() => {
+  //   console.log("2");
+    
+  //   if (video_id) {
+  //     dispatch(getComments({ video_id }));
+  //   }
+  //   return () => dispatch(makeCommentsEmpty());
+  // }, []);
+
   // console.log("login : ", loginStatus);
   // console.log("userDetails : ", userData);
 
@@ -62,8 +71,8 @@ const Comment = ({ video_id }) => {
     if (!loginStatus) {
       navigate("/login");
     }
-    console.log("comment : " , comment);
-    
+    console.log("comment : ", comment);
+
     dispatch(toggleCommentLike({ comment }));
   };
 

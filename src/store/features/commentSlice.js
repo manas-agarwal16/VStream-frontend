@@ -147,10 +147,7 @@ const commentSlice = createSlice({
         //   action.payload.data
         // );
         state.totalComments = action.payload.data.totalComments;
-        state.comments = [
-          ...state.comments,
-          ...action.payload.data.videoComments,
-        ];
+        state.comments = action.payload.data.videoComments;
         // state.page += 1;
       })
       .addCase(getComments.rejected, (state, action) => {

@@ -90,7 +90,7 @@ const Navbar = () => {
 
   const searchVideos = async (data) => {
     // console.log("search query ", data.search);
-    if (location.pathname.startsWith('/songs')) {
+    if (location.pathname.startsWith("/songs")) {
       navigate(`/songs/search/${data.search.trim()}`);
     } else {
       navigate(`/search?search=${data.search.trim()}`);
@@ -120,7 +120,7 @@ const Navbar = () => {
     <>
       <nav
         className={`flex fixed justify-between items-center w-full px-4 ${
-          location.pathname.startsWith('/songs')
+          location.pathname.startsWith("/songs")
             ? "bg-gradient-to-r from-blue-950 via-blue-900 to-blue-800  "
             : "bg-[#070707] "
         }text-white font-semibold z-50 h-16`}
@@ -138,12 +138,12 @@ const Navbar = () => {
               <Input
                 {...register("search", { required: true })}
                 placeholder={`${
-                  location.pathname === "/songs"
+                  location.pathname.startsWith("/songs")
                     ? "What you want to listen..."
                     : "Search..."
                 }`}
                 className={`${
-                  location.pathname === "/songs"
+                  location.pathname.startsWith("/songs")
                     ? "border-yellow-600 border-[3px] focus:outline-none bg-gray-400 font-normal text-white placeholder-gray-600"
                     : "bg-gray-800 text-white rounded-full px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 hover:ring hover:ring-blue-400 transition"
                 }`}
@@ -173,7 +173,9 @@ const Navbar = () => {
         {searchBarVisible && (
           <div
             className={`fixed top-16 left-0 w-full ${
-              location.pathname === "/songs" ? "bg-blue-950 " : "bg-[#070707] "
+              location.pathname.startsWith("/songs")
+                ? "bg-blue-950 "
+                : "bg-[#070707] "
             } p-4 z-50`}
           >
             <form
@@ -183,12 +185,12 @@ const Navbar = () => {
               <Input
                 {...register("search", { required: true })}
                 placeholder={`${
-                  location.pathname === "/songs"
+                  location.pathname.startsWith("/songs")
                     ? "What you want to listen..."
                     : "Search..."
                 }`}
                 className={`${
-                  location.pathname === "/songs"
+                  location.pathname.startsWith("/songs")
                     ? "border-yellow-600 border-[3px] focus:outline-none bg-gray-400 font-normal text-white placeholder-gray-600"
                     : "bg-gray-800 text-white rounded-full px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 hover:ring hover:ring-blue-400 transition"
                 }`}
@@ -238,12 +240,18 @@ const Navbar = () => {
         {/* Sidebar and overlay (unchanged) */}
         {isSidebarOpen && (
           <div
-            className="fixed top-0 right-0 w-auto h-full bg-black text-white z-20 p-5 flex flex-col"
-            style={{
-              backgroundImage: `url(${sidebarBackGround})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
+            className={`fixed top-0 right-0 w-auto h-full ${
+              location.pathname.startsWith("/songs")
+                ? "bg-blue-950"
+                : "bg-black"
+            } text-white z-20 p-5 flex flex-col`}
+            {...(!location.pathname.startsWith("/songs") && {
+              style: {
+                backgroundImage: `url(${sidebarBackGround})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              },
+            })}
           >
             <button
               className="absolute top-4 right-4"

@@ -5,6 +5,7 @@ import { subscriptionChannels } from "../store/features/subscriptionSlice";
 import SubscriptionList from "./SubscriptionList";
 import CenterSpinner from "./CenterSpinner";
 import { Link } from "react-router-dom";
+import Button from "./Button";
 
 const Subscription = (_id) => {
   console.log("subscriptions : ", _id);
@@ -26,12 +27,13 @@ const Subscription = (_id) => {
   ) : !loginStatus ? (
     <>
       <div className="text-4xl lg:ml-[220px] p-6 text-white font-bold">
-        Liked Videos
+        Subscriptions
       </div>
-      <div className="flex items-center jus w-full lg:w-[80vw] min-h-[70vh] border-red-400 border-2 text-center">
-        <p className="text-center">
+      <div className="lg:ml-[220px] flex flex-col items-center justify-center gap-2 w-full lg:w-[80vw] min-h-[70vh] text-center">
+        <p className="text-center text-white">
           "Please log in to your account to access and view your subscriptions."
         </p>
+        <Button text="Login" onClick={() => navigate("/login")} />
       </div>
     </>
   ) : (

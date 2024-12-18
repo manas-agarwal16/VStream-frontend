@@ -14,7 +14,7 @@ const Register = () => {
   let {
     register,
     handleSubmit,
-    a
+    formState: { errors },
   } = useForm();
 
   const handleRegister = async (data) => {

@@ -14,7 +14,9 @@ function VideoUploadPage() {
 
   const { username } = useParams();
   if (username === "guest") {
-    useNavigate("/login");
+    console.log("here in guest");
+    
+    navigate('/login')
   }
 
   const dispatch = useDispatch();

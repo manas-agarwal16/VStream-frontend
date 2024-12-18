@@ -1,22 +1,67 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 import { axiosInstance } from "../../helper/axiosInstance";
+import axios from "axios";
 
 export const uploadVideo = createAsyncThunk(
-  async (data, { rejectWithValue }) => {
-    const formData = new FormData();
-    // title, description, videoTag
-    formData.append("title", data.title);
-    formData.append("description", data.description);
-    formData.append("videoTag", data.videoTag);
-    formData.append("videoFile", data.videoFile);
-    formData.append("thumbnail", data.thumbnail);
+  "videos/upload", // Action type
+  async (videoData, { rejectWithValue }) => {
     try {
-      const res = await axiosInstance.post("/videos/upload-video", formData);
-      toast.success("Video Uploaded Successfully!!!");
-      // console.log("video uploaded successfully: ", res.data);
-      return res.data;
+
+      console.log("videoData : ", videoData);
+      
+
+      // Create FormData for video upload
+      const videoFormData = new FormData();
+      videoFormData.append("file", videoData.video[0]);
+      videoFormData.append(
+        "upload_preset",
+        import.meta.env.VITE_CLOUDINARY_PRESET_NAME
+      );
+
+      const videoResponse = await axios.post(
+        `https://api.cloudinary.com/v1_1/${
+          import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
+        }/video/upload`,
+        videoFormData
+      );
+
+      console.log("videoResponse" , videoResponse);
+      
+
+      const uploadedVideoUrl = videoResponse.data.secure_url;
+      console.log("uploadedVideoFile:", uploadedVideoUrl);
+
+      // Create FormData for thumbnail upload
+      const thumbnailFormData = new FormData();
+      thumbnailFormData.append("file", videoData.thumbnail[0]);
+      thumbnailFormData.append(
+        "upload_preset",
+        import.meta.env.VITE_CLOUDINARY_PRESET_NAME
+      );
+
+      const thumbnailResponse = await axios.post(
+        `https://api.cloudinary.com/v1_1/${
+          import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
+        }/image/upload`,
+        thumbnailFormData
+      );
+
+      const uploadedThumbnailUrl = thumbnailResponse.data.secure_url;
+      console.log("uploadedThumbnail:", uploadedThumbnailUrl);
+
+      // Sending the video and thumbnail URLs to your backend
+      const res = await axiosInstance.post("/videos/upload-video", {
+        videoFile: uploadedVideoUrl,
+        thumbnail: uploadedThumbnailUrl,
+        title: videoData.title,
+        description: videoData.description,
+      });
+
+      toast.success("Video Uploaded Successfully!!!" , {duration : 3000});
+      return res.data; // Return data to the fulfilled case
     } catch (error) {
+      console.error("Upload failed:", error);
       toast.error(error?.response?.data?.error || "Error in uploading video");
       return rejectWithValue(
         error?.response?.data || "Error in uploading video"
@@ -147,10 +192,12 @@ export const searchVideosBackend = createAsyncThunk(
 export const allUserVideos = createAsyncThunk(
   "allUserVideos",
   async (data, { rejectWithValue }) => {
-    console.log("data.username : " , data.username);
-    
+    console.log("data.username : ", data.username);
+
     try {
-      const res = await axiosInstance.get(`/videos/all-user-videos/${data.username}`);
+      const res = await axiosInstance.get(
+        `/videos/all-user-videos/${data.username}`
+      );
       return res.data;
     } catch (error) {
       toast.error(error?.response?.data?.error || "Error fetching my videos");
@@ -189,6 +236,21 @@ const videoSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder
+      .addCase(uploadVideo.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(uploadVideo.fulfilled, (state, action) => {
+        console.log("action payload data : ", action.payload.data);
+
+        state.loading = false;
+      })
+      .addCase(uploadVideo.rejected, (state, action) => {
+        console.log("Error in rejected action:", action.error.message);
+
+        state.loading = false;
+      });
+
     builder
       .addCase(allUserVideos.pending, (state) => {
         state.loading = true;

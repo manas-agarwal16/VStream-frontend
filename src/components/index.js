@@ -23,8 +23,12 @@ import AllVideos from "./AllVideos";
 import MusicMode from "./MusicMode";
 import SearchSong from "./SearchSong";
 import SongCard from "./SongCard";
+import Premium from "./Premium/Premium";
+import VideoUpload from "./Upload/VideoUpload";
 
 export {
+  VideoUpload,
+  Premium,
   SongCard,
   SearchSong,
   Navbar,

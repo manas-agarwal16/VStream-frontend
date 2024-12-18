@@ -123,7 +123,7 @@ const Navbar = () => {
           location.pathname.startsWith("/songs")
             ? "bg-gradient-to-r from-blue-950 via-blue-900 to-blue-800  "
             : "bg-[#070707] "
-        }text-white font-semibold z-50 h-16`}
+        }text-white font-semibold z-50 h-20`}
       >
         {/* Logo */}
         <Logo height="50px" width="50px" className="ml-4 lg:ml-10" />
@@ -145,7 +145,7 @@ const Navbar = () => {
                 className={`${
                   location.pathname.startsWith("/songs")
                     ? "border-yellow-600 border-[3px] focus:outline-none bg-gray-400 font-normal text-white placeholder-gray-600"
-                    : "bg-gray-800 text-white rounded-full px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 hover:ring hover:ring-blue-400 transition"
+                    : "bg-gray-800 text-white rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 hover:ring hover:ring-blue-400 transition"
                 }`}
               />
             </div>
@@ -153,7 +153,7 @@ const Navbar = () => {
               type="submit"
               bgColor="bg-pink-500 hover:bg-pink-600 transition shadow-lg"
               textColor="text-white"
-              className="hidden md:flex items-center justify-center px-3 py-2 ml-2 rounded-full"
+              className="hidden md:flex items-center justify-center px-3 py-2 ml-2 rounded-lg"
             >
               <CiSearch className="text-white" size={24} />
             </Button>

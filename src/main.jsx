@@ -21,6 +21,8 @@ import {
   AllVideos,
   MusicMode,
   SearchSong,
+  Premium,
+  VideoUpload,
 } from "./pages";
 import { Toaster } from "react-hot-toast"; // Import the Toaster
 
@@ -80,6 +82,14 @@ const router = createBrowserRouter([
       {
         path: "songs/search/:search",
         element: <SearchSong />,
+      },
+      {
+        path: "/premium",
+        element: <Premium />,
+      },
+      {
+        path: "/upload-video/:username",
+        element: <VideoUpload />,
       },
     ],
   },

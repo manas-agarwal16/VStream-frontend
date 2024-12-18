@@ -22,7 +22,6 @@ export const likedVideos = createAsyncThunk(
   }
 );
 
-
 // export const toggleVideoLike = createAsyncThunk(
 //   "toggleVideoLike",
 //   async (data, { rejectWithValue }) => {

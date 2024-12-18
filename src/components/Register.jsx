@@ -14,7 +14,7 @@ const Register = () => {
   let {
     register,
     handleSubmit,
-    formState: { errors },
+    a
   } = useForm();
 
   const handleRegister = async (data) => {
@@ -31,11 +31,19 @@ const Register = () => {
     }
   };
 
-  // return (
-  //   <div className="bg-gray-900 min-h-screen flex justify-center items-center">
-  //     <Spinner width={10} />
-  //   </div>
-  // );
+  const validateAvatar = (avatar) => {
+    console.log("avatar : ", avatar);
+
+    if (avatar[0]) {
+      if (avatar[0].size > 1048576) {
+        return "File size must be less than 1MB";
+      }
+      if (!avatar[0].type.includes("image")) {
+        return "File must be an image";
+      }
+    }
+    return true;
+  };
 
   return (
     <>
@@ -121,7 +129,7 @@ const Register = () => {
                     value: 20,
                     message: "Username must not exceed 20 characters",
                   },
-                  validate: (value) => 
+                  validate: (value) =>
                     !/\s/.test(value) || "Username cannot contain spaces",
                 })}
                 type="text"
@@ -173,12 +181,19 @@ const Register = () => {
                 Avatar (Optional)
               </label>
               <input
-                {...register("avatar")}
+                {...register("avatar", {
+                  validate: validateAvatar,
+                })}
                 type="file"
                 id="avatar"
                 accept="image/*"
                 className="w-full px-3 py-2 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
+              {errors.avatar && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.avatar.message}
+                </p>
+              )}
             </div>
 
             <div className="mb-5">

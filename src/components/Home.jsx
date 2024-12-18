@@ -43,7 +43,9 @@ const Home = () => {
   return (
     <>
       {/* <aside> */}
-      <div className="lg:ml-[220px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 bg-[#070707] min-h-screen p-6 text-gray-300">
+      <div
+        className="lg:ml-[220px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 bg-[#070707] min-h-screen p-6 text-gray-300"
+      >
         {videos.map((video) => (
           <div
             key={video._id}

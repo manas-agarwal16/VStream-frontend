@@ -11,8 +11,12 @@ import Search from "./Search";
 import AllVideos from "./AllVideos";
 import MusicMode from "./MusicMode.jsx";
 import SearchSong from "./SearchSong.jsx";
+import Premium from "./Premium.jsx";
+import VideoUpload from "./VideoUpload.jsx";
 
 export {
+  Premium,
+  VideoUpload,
   SearchSong,
   MusicMode,
   AllVideos,

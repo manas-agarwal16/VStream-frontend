@@ -6,6 +6,14 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        "gradient-start": "rgba(255, 148, 88, 1)",
+        "gradient-end": "rgba(252, 229, 172, 1)",
+      },
+      backgroundImage: {
+        "custom-gradient":
+          "linear-gradient(294.57deg, rgba(255, 148, 88, 1) 0%, rgba(252, 229, 172, 1) 100%)",
+      },
       animation: {
         spin: "spin 1s linear infinite", // Use Tailwind's default spin
         "spin-custom": "spin 1s linear infinite", // Custom spin animation

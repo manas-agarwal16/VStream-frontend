@@ -1,26 +1,40 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosInstance } from "../../helper/axiosInstance";
+import axios from "axios";
 import toast from "react-hot-toast";
 
 export const registerUser = createAsyncThunk(
   "register",
-  async (data, { rejectWithValue }) => {
-    const formData = new FormData();
-    formData.append("avatar", data.avatar[0]);
-    formData.append("username", data.username);
-    formData.append("password", data.password);
-    formData.append("fullName", data.fullName);
-    formData.append("email", data.email);
+  async (userData, { rejectWithValue }) => {
+    let avatarURL;
 
-    console.log("form data : ", formData);
+    const avatarAndPresetName = new FormData();
+    avatarAndPresetName.append("file", userData.avatar[0]);
+    avatarAndPresetName.append(
+      "upload_preset",
+      import.meta.env.VITE_CLOUDINARY_PRESET_NAME
+    );
+
+    let data = await axios.post(
+      `https://api.cloudinary.com/v1_1/${
+        import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
+      }/image/upload`,
+      avatarAndPresetName
+    );
+
+    data.username = userData.username;
+    data.email = userData.email;
+    data.password = userData.password;
+    data.fullName = userData.fullName;
+    data.avatar = data.secure_url;
 
     try {
-      const res = await axiosInstance.post("/users/register", formData);
-      console.log("register backend res : ", res.data);
-      // toast.success(res.data.message);
+      const res = await axiosInstance.post("/users/register", data);
+      console.log("Register backend response:", res.data);
+      toast.success(res.data.message);
       return true;
     } catch (error) {
-      toast.error(error?.response?.data?.message);
+      toast.error(error?.response?.data?.message || "Registration failed");
       throw error;
     }
   }
@@ -82,7 +96,6 @@ export const getCurrentUser = createAsyncThunk(
       return res.data;
     } catch (error) {
       // console.log("error : " , error);
-
       // toast.error(error?.response?.data?.message || "No current user");
     }
   }
@@ -108,7 +121,8 @@ export const refreshAccessToken = createAsyncThunk(
   async () => {
     try {
       const res = await axiosInstance.get("/users/refresh-access-token");
-      return res.data;a
+      return res.data;
+      a;
     } catch (error) {
       console.log("error in refreshing access-token", error);
     }

@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input, Button, Logo, CenterSpinner } from "./index.js";
-import { useNavigate , useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { loginUser } from "../store/features/authSlice.js";
 import { Link } from "react-router-dom";
@@ -9,7 +9,6 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  
 
   const { loading } = useSelector((state) => state.auth);
 
@@ -33,21 +32,29 @@ const Login = () => {
   return (
     <>
       {loading && <CenterSpinner />}
-      <div className="min-w-screen min-h-screen flex justify-center items-center bg-gray-900">
-        <div className="w-full max-w-md bg-gray-800 rounded-lg shadow-lg p-8">
-          <div className="flex items-center justify-center mb-6">
-            <Logo width="60px" height="60px" />
-            <h1 className="font-bold text-xl text-white m-4">LOGIN</h1>
+      <div
+        className="flex justify-center items-center min-h-screen mx-auto w-full px-4 pt-2 text-white"
+        style={{
+          backgroundImage:
+            "url('https://i.pinimg.com/736x/8b/05/f3/8b05f3ae6c5568f2673d5007a8751e6f.jpg')",
+          backgroundSize: "contain",
+          backgroundPosition: "center",
+          // backgroundRepeat: "no-repeat",
+        }}
+      >
+        <div className="bg-gray-900 p-8 border-2 border-black rounded-lg shadow-md text-white max-w-xl w-full">
+          <div className="flex items-center justify-center">
+            {/* <Logo width="55px" height="55px" /> */}
+            <h2 className="text-3xl font-bold mb-4 text-center text-blue-400">
+              Login
+            </h2>
           </div>
-          <form
-            onSubmit={handleSubmit(login)}
-            className="w-full h-full flex flex-col justify-evenly p-6"
-          >
+          <form onSubmit={handleSubmit(login)}>
             {/* Email Address */}
             <div className="mb-5">
               <label
                 htmlFor="username"
-                className="block text-sm font-medium text-gray-400 mb-2"
+                className="block text-sm font-semibold text-gray-300 mb-2"
               >
                 Email Address
               </label>
@@ -57,7 +64,7 @@ const Login = () => {
                 type="text"
                 autoFocus
                 placeholder="email or username"
-                className="w-full px-4 py-3 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-2  bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               {errors.username && (
                 <p className="text-red-500 text-sm mt-1">
@@ -70,7 +77,7 @@ const Login = () => {
             <div className="mb-5">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-400 mb-2"
+                className="block text-sm font-semibold text-gray-300 mb-2"
               >
                 Password
               </label>
@@ -79,7 +86,7 @@ const Login = () => {
                 id="password"
                 type="password"
                 placeholder="password"
-                className="w-full px-4 py-3 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-2  bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               {errors.password && (
                 <p className="text-red-500 text-sm mt-1">

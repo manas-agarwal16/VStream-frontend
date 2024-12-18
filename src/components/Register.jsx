@@ -48,20 +48,29 @@ const Register = () => {
   return (
     <>
       {loading && <CenterSpinner />}
-      <div className="min-h-screen flex items-center justify-center bg-gray-900">
-        <div className="w-full mx-4 mt-4 max-w-md bg-gray-800 rounded-lg shadow-lg p-4">
+      <div
+      className="flex justify-center items-center min-h-screen mx-auto w-full px-4 pt-2 text-white"
+      style={{
+        backgroundImage:
+          "url('https://i.pinimg.com/736x/8b/05/f3/8b05f3ae6c5568f2673d5007a8751e6f.jpg')",
+        backgroundSize: "contain",
+        backgroundPosition: "center",
+        // backgroundRepeat: "no-repeat",
+      }}
+    >
+        <div className="bg-gray-900 p-8 border-2 border-black rounded-lg shadow-md text-white max-w-xl w-full">
           <div className="flex items-center justify-center">
-            <Logo width="55px" height="55px" />
-            <h2 className="text-2xl font-bold text-white text-center mb-6 mx-4">
+            {/* <Logo width="55px" height="55px" /> */}
+            <h2 className="text-3xl font-bold mb-4 text-center text-blue-400">
               Register
             </h2>
           </div>
           <form onSubmit={handleSubmit(handleRegister)}>
             {/* Full Name */}
-            <div className="mb-4">
+            <div className="mb-5">
               <label
                 htmlFor="full-name"
-                className="block text-sm font-medium text-gray-400 mb-1"
+                className="block text-sm font-semibold text-gray-300 mb-2"
               >
                 Full Name
               </label>
@@ -73,7 +82,7 @@ const Register = () => {
                 type="text"
                 id="full-name"
                 placeholder="Enter your name"
-                className="w-full px-3 py-2 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               {errors.fullName && (
                 <p className="text-sm text-red-500 mt-1">
@@ -83,10 +92,10 @@ const Register = () => {
             </div>
 
             {/* Email */}
-            <div className="mb-4">
+            <div className="mb-5">
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-400 mb-1"
+                className="block text-sm font-semibold text-gray-300 mb-2"
               >
                 Email
               </label>
@@ -101,7 +110,7 @@ const Register = () => {
                 type="email"
                 id="email"
                 placeholder="Enter your email"
-                className="w-full px-3 py-2 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               {errors.email && (
                 <p className="text-sm text-red-500 mt-1">
@@ -111,10 +120,10 @@ const Register = () => {
             </div>
 
             {/* Username */}
-            <div className="mb-4">
+            <div className="mb-5">
               <label
                 htmlFor="username"
-                className="block text-sm font-medium text-gray-400 mb-1"
+                className="block text-sm font-semibold text-gray-300 mb-2"
               >
                 Username
               </label>
@@ -135,7 +144,7 @@ const Register = () => {
                 type="text"
                 id="username"
                 placeholder="Enter your email"
-                className="w-full px-3 py-2 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               {errors.username && (
                 <p className="text-red-500 text-sm mt-1">
@@ -145,10 +154,10 @@ const Register = () => {
             </div>
 
             {/* Password */}
-            <div className="mb-4">
+            <div className="mb-5">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-400 mb-1"
+                className="block text-sm font-semibold text-gray-300 mb-2"
               >
                 Password
               </label>
@@ -163,7 +172,7 @@ const Register = () => {
                 type="password"
                 id="password"
                 placeholder="Enter your password"
-                className="w-full px-3 py-2 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               {errors.password && (
                 <p className="text-red-500 text-sm mt-1">
@@ -173,21 +182,22 @@ const Register = () => {
             </div>
 
             {/* avatar */}
-            <div className="mb-4">
+            <div className="mb-5">
               <label
                 htmlFor="avatar"
-                className="block text-sm font-medium text-gray-400 mb-1"
+                className="block text-sm font-semibold text-gray-300 mb-2"
               >
                 Avatar (Optional)
               </label>
-              <input
+              <Input
                 {...register("avatar", {
                   validate: validateAvatar,
                 })}
                 type="file"
                 id="avatar"
+                textColor="text-[#8e8e8e]"
                 accept="image/*"
-                className="w-full px-3 py-2 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               {errors.avatar && (
                 <p className="text-red-500 text-sm mt-1">

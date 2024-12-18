@@ -212,9 +212,7 @@ const Navbar = () => {
           <FaVideo
             size={30}
             className="cursor-pointer"
-            onClick={() =>
-              navigate(`/upload-video/${userData?.username || "guest"}`)
-            }
+            onClick={() => navigate(`/upload-video`)}
           />
           <img
             onClick={() =>

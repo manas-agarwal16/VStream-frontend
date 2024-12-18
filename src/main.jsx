@@ -88,7 +88,7 @@ const router = createBrowserRouter([
         element: <Premium />,
       },
       {
-        path: "/upload-video/:username",
+        path: "/upload-video",
         element: <VideoUpload />,
       },
     ],

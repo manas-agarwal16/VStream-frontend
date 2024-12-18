@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Input, Button, CenterSpinner } from "../index";
 import { useNavigate, useParams } from "react-router-dom";
@@ -12,12 +12,9 @@ function VideoUploadPage() {
 
   const navigate = useNavigate();
 
-  const { username } = useParams();
-  if (username === "guest") {
-    console.log("here in guest");
-    
-    navigate('/login')
-  }
+  const { loginStatus, userData } = useSelector((state) => state.auth);
+
+  let username = userData?.username;
 
   const dispatch = useDispatch();
 
@@ -65,6 +62,10 @@ function VideoUploadPage() {
     }
   };
 
+  useEffect(() => {
+    if (!loginStatus) navigate("/login");
+  }, []);
+
   return (
     <div
       className="flex justify-center items-center min-h-screen mx-auto w-full px-4 pt-2 text-white"
@@ -83,7 +84,8 @@ function VideoUploadPage() {
           Upload Video
         </h2>
         <p className="mb-2 text-lg font-bold text-gray-400">
-          Channel : <span className="inline-block text-pink-200">{username}</span>
+          Channel :{" "}
+          <span className="inline-block text-pink-200">{username}</span>
         </p>
 
         <form onSubmit={handleSubmit(handleVideoUpload)}>

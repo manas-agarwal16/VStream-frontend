@@ -78,7 +78,7 @@ const VideoDescription = ({
             </Link>
             <div onClick={handleSubscribe}>
               <Button
-                className="border-slate-500 hover:scale-105 transition-all text-black font-semibold px-5 py-2  rounded-3xl shadow-lg"
+                className="border-slate-500 hover:scale-105 transition-all  font-semibold px-5 py-2  rounded-3xl shadow-lg"
                 bgColor="bg-white"
                 textColor={`${
                   localIsSubscribed ? "text-blue-500" : "text-slate-900"

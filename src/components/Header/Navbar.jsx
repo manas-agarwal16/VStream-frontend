@@ -64,7 +64,7 @@ const Navbar = () => {
     // },
     {
       text: "Upload Video",
-      to: `/upload-video/${userData.username || "guest"}`,
+      to: `/upload-video`,
       children: <FaVideo size={20} />,
     },
     {

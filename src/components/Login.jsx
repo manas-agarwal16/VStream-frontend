@@ -42,7 +42,7 @@ const Login = () => {
           // backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="bg-gray-900 p-8 border-2 border-black rounded-lg shadow-md text-white max-w-xl w-full">
+        <div className="bg-gray-900 p-8 border-2 border-black rounded-lg shadow-mdz text-white max-w-xl w-full">
           <div className="flex items-center justify-center">
             {/* <Logo width="55px" height="55px" /> */}
             <h2 className="text-3xl font-bold mb-4 text-center text-blue-400">
@@ -108,14 +108,20 @@ const Login = () => {
             </div>
 
             {/* Submit Button */}
-            <div className="flex justify-center items-center mt-6">
+            <div className="flex justify-between items-center mt-6">
               <Button
                 type="submit"
                 bgColor="bg-blue-600  hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                className="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full py-3 mr-10 md:mr-14 lg:mr-20 xl:mr-28  bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
               >
                 Login
               </Button>
+              <Link
+                to={"/"}
+                className="text-blue-500 w-72 underline text-end mt-1 block"
+              >
+                back to home
+              </Link>
             </div>
           </form>
         </div>

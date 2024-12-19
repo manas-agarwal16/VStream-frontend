@@ -40,7 +40,7 @@ const History = () => {
       <div className="flex justify-center lg:ml-[220px] items-center min-h-[60vh]">
         <div className="flex flex-col justify-center items-center">
           <p className="text-white text-2xl my-8">
-            Login to see your Watch History
+          Please log in to your account to access and view your watch history.
           </p>
           <Button text="Login" onClick={() => navigate("/login")} />
         </div>

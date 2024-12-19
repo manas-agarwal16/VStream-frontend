@@ -29,11 +29,13 @@ const Subscription = (_id) => {
       <div className="text-4xl lg:ml-[220px] p-6 text-white font-bold">
         Subscriptions
       </div>
-      <div className="lg:ml-[220px] flex flex-col items-center justify-center gap-2 w-full lg:w-[80vw] min-h-[70vh] text-center">
-        <p className="text-center text-white">
-          "Please log in to your account to access and view your subscriptions."
-        </p>
-        <Button text="Login" onClick={() => navigate("/login")} />
+      <div className="flex justify-center lg:ml-[220px] items-center min-h-[60vh]">
+        <div className="flex flex-col justify-center items-center">
+          <p className="text-white text-2xl my-8">
+            Please log in to your account to access and view your subscriptions.
+          </p>
+          <Button text="Login" onClick={() => navigate("/login")} />
+        </div>
       </div>
     </>
   ) : (

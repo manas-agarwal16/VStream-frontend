@@ -27,14 +27,14 @@ const LikedVideos = () => {
       <div className="text-4xl lg:ml-[220px] p-6 text-white font-bold">
         Liked Videos
       </div>
-      <div className="flex justify-center lg:ml-[220px] items-center min-h-[60vh]">
-        <div className="flex flex-col justify-center items-center">
-          <p className="text-white text-2xl my-8">
-            Login to see your Liked Videos
-          </p>
-          <Button text="Login" onClick={() => navigate("/login")} />
-        </div>
-      </div>
+       <div className="flex justify-center lg:ml-[220px] items-center min-h-[60vh]">
+              <div className="flex flex-col justify-center items-center">
+                <p className="text-white text-2xl my-8">
+                Please log in to your account to access and view your liked videos.
+                </p>
+                <Button text="Login" onClick={() => navigate("/login")} />
+              </div>
+            </div>
     </>
   ) : (
     <>

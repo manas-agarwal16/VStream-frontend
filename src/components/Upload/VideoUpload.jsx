@@ -85,7 +85,7 @@ function VideoUploadPage() {
         </h2>
         <p className="mb-2 text-lg font-bold text-gray-400">
           Channel :{" "}
-          <span className="inline-block text-pink-200">{username}</span>
+          <span className="inline-block italic text-pink-200">{username}</span>
         </p>
 
         <form onSubmit={handleSubmit(handleVideoUpload)}>

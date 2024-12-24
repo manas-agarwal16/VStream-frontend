@@ -18,7 +18,8 @@ import {
   HiOutlineUser,
   HiOutlineBookOpen,
   FaVideo,
-} from "../icons";
+} 
+from "../icons";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -98,19 +99,6 @@ const Navbar = () => {
   };
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
-
-  const navItems = [
-    {
-      text: "Login",
-      to: "/login",
-      status: !loginStatus,
-    },
-    {
-      text: "Register",
-      to: "/register",
-      status: !loginStatus,
-    },
-  ];
 
   const handleLogout = () => {
     dispatch(logoutUser());
@@ -209,6 +197,14 @@ const Navbar = () => {
 
         {/* Other nav items */}
         <div className="items-center hidden lg:flex justify-center gap-4 lg:gap-8">
+
+          <Button
+            onClick={() => navigate(`/premium`)}
+            className="border-2 text-yellow-200 font-semibold"
+            bgColor="bg-black hover:bg-gray-800"
+            text="Go Premium"
+            textColor="text-yellow-200"
+           />
           <FaVideo
             size={30}
             className="cursor-pointer"

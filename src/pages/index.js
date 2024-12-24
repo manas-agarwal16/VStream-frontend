@@ -13,8 +13,10 @@ import MusicMode from "./MusicMode.jsx";
 import SearchSong from "./SearchSong.jsx";
 import Premium from "./Premium.jsx";
 import VideoUpload from "./VideoUpload.jsx";
+import PremiumSuccess from "../components/Premium/PremiumSuccess.jsx";
 
 export {
+  PremiumSuccess,
   Premium,
   VideoUpload,
   SearchSong,

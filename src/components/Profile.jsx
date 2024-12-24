@@ -46,8 +46,6 @@ const Profile = () => {
 
   const [message, setMessage] = useState("");
 
-  // console.log("localSubscribers : ", localSubscribers);
-
   useEffect(() => {
     if (profile.isSubscribed !== undefined) {
       setLocalIsSubscribed(profile.isSubscribed);

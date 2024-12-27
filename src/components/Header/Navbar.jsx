@@ -139,9 +139,9 @@ const Navbar = () => {
             </div>
             <Button
               type="submit"
-              bgColor="bg-pink-500 hover:bg-pink-600 transition shadow-lg"
+              bgColor="bg-[#3883bc] hover:bg-[#3883bc] transition shadow-lg"
               textColor="text-white"
-              className="hidden md:flex items-center justify-center px-3 py-2 ml-2 rounded-lg"
+              className="hidden md:flex bg-[#3883bc] items-center justify-center px-3 py-2 ml-2 rounded-lg"
             >
               <CiSearch className="text-white" size={24} />
             </Button>
@@ -149,7 +149,7 @@ const Navbar = () => {
         </form>
 
         {/* Small screen search icon */}
-        <div className="lg:hidden flex items-center">
+        <div className="lg:hidden relative left-2 flex items-center">
           <CiSearch
             size={24}
             className="cursor-pointer text-white"
@@ -185,7 +185,7 @@ const Navbar = () => {
               />
               <Button
                 type="submit"
-                bgColor="bg-pink-500 hover:bg-pink-600 transition shadow-lg"
+                bgColor="bg-[#3883bc] hover:bg-[#3883bc] transition shadow-lg"
                 textColor="text-white"
                 className="ml-2 rounded-full px-4 py-2"
               >
@@ -234,19 +234,19 @@ const Navbar = () => {
         {/* Sidebar and overlay (unchanged) */}
         {isSidebarOpen && (
           <div
-            className={`fixed top-0 right-0 w-auto h-full ${
-              location.pathname.startsWith("/songs")
-                ? "bg-blue-950"
-                : "bg-black"
-            } text-white z-20 p-5 flex flex-col`}
-            {...(!location.pathname.startsWith("/songs") && {
-              style: {
-                backgroundImage: `url(${sidebarBackGround})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              },
-            })}
-          >
+          className={`fixed top-0 right-0 transition-transform duration-750 ease-in-out w-auto h-full ${
+            location.pathname.startsWith("/songs") ? "bg-blue-950" : "bg-black"
+          } text-white z-20 p-5 flex flex-col transform ${
+            isSidebarOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+          {...(!location.pathname.startsWith("/songs") && {
+            style: {
+              backgroundImage: `url(${sidebarBackGround})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            },
+          })}
+        >
             <button
               className="absolute top-4 right-4"
               onClick={toggleSidebar}

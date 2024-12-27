@@ -3,7 +3,7 @@ import React from "react";
 const Button = ({
   text = "submit",
   type = "submit",
-  bgColor = "bg-blue-600  hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500",
+  bgColor = "bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500",
   textColor = "text-white",
   className = "",
   children, // Accept children (e.g., icon or text)

@@ -27,7 +27,7 @@ function Input(
           ref={ref}
           id={id}
           type={type}
-          className={`${className} w-full rounded-lg  p-2 ${textColor}`}
+          className={`w-full rounded-lg  p-2 ${className} ${textColor}`}
           {...props}
         />
       </div>

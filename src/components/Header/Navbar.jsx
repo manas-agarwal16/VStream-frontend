@@ -18,8 +18,7 @@ import {
   HiOutlineUser,
   HiOutlineBookOpen,
   FaVideo,
-} 
-from "../icons";
+} from "../icons";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -71,9 +70,8 @@ const Navbar = () => {
     {
       text: "Music Mode",
       to: "/songs",
-      onHover: "text-gray-800",
-      bgColor:
-        "bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white",
+      onHover: "shadow-md hover:shadow-blue-500 hover:text-blue-400",
+      bgColor: "text-blue-400 shadow-sm shadow-blue-500 ",
       children: <FaMusic />,
     },
   ];
@@ -122,7 +120,7 @@ const Navbar = () => {
           className="hidden lg:flex  justify-evenly items-center w-2/3"
         >
           <div className="flex justify-start items-center w-full lg:w-[70%] relative md:left-2 lg:left-32 mr-8">
-            <div className="w-full mx-2">
+            <div className="w-[80%]">
               <Input
                 {...register("search", { required: true })}
                 placeholder={`${
@@ -132,8 +130,8 @@ const Navbar = () => {
                 }`}
                 className={`${
                   location.pathname.startsWith("/songs")
-                    ? "border-yellow-600 border-[3px] focus:outline-none bg-gray-400 font-normal text-white placeholder-gray-600"
-                    : "bg-gray-800 text-white rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 hover:ring hover:ring-blue-400 transition"
+                    ? "border-yellow-600 rounded-r-none border-[3px] focus:outline-none bg-gray-400 font-normal text-white placeholder-gray-600"
+                    : "bg-gray-800 text-white rounded-r-none px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 hover:ring hover:ring-blue-400 transition"
                 }`}
               />
             </div>
@@ -141,7 +139,7 @@ const Navbar = () => {
               type="submit"
               bgColor="bg-[#3883bc] hover:bg-[#3883bc] transition shadow-lg"
               textColor="text-white"
-              className="hidden md:flex bg-[#3883bc] items-center justify-center px-3 py-2 ml-2 rounded-lg"
+              className="hidden md:flex rounded-l-none bg-[#3883bc] items-center justify-center px-3 py-2 rounded-r-lg"
             >
               <CiSearch className="text-white" size={24} />
             </Button>
@@ -196,15 +194,14 @@ const Navbar = () => {
         )}
 
         {/* Other nav items */}
-        <div className="items-center hidden lg:flex justify-center gap-4 lg:gap-8">
-
-          <Button
+        <div className="items-center hidden lg:flex justify-center gap-6">
+          <button
             onClick={() => navigate(`/premium`)}
-            className="border-2 text-yellow-200 font-semibold"
-            bgColor="bg-black hover:bg-gray-800"
-            text="Go Premium"
-            textColor="text-yellow-200"
-           />
+            className="shadow-sm shadow-gray-50 py-2 rounded-xl hover:bg-slate-900 w-32 bg-slate-950 text-yellow-200 font-semibold mx-2"
+          >
+            {" "}
+            Go Premium
+          </button>
           <FaVideo
             size={30}
             className="cursor-pointer"
@@ -214,7 +211,7 @@ const Navbar = () => {
             onClick={() =>
               navigate(`/user-profile/${userData?.username || "guest"}`)
             }
-            className="w-[50px] h-[50px] border-gray-500 border-2 rounded-full  cursor-pointer"
+            className="w-[50px] h-[50px] border-gray-500 rounded-full  cursor-pointer"
             src={avatarImage}
             alt="avatar"
           />
@@ -234,19 +231,21 @@ const Navbar = () => {
         {/* Sidebar and overlay (unchanged) */}
         {isSidebarOpen && (
           <div
-          className={`fixed top-0 right-0 transition-transform duration-750 ease-in-out w-auto h-full ${
-            location.pathname.startsWith("/songs") ? "bg-blue-950" : "bg-black"
-          } text-white z-20 p-5 flex flex-col transform ${
-            isSidebarOpen ? "translate-x-0" : "translate-x-full"
-          }`}
-          {...(!location.pathname.startsWith("/songs") && {
-            style: {
-              backgroundImage: `url(${sidebarBackGround})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            },
-          })}
-        >
+            className={`fixed top-0 right-0 transition-transform duration-750 ease-in-out w-auto h-full ${
+              location.pathname.startsWith("/songs")
+                ? "bg-blue-950"
+                : "bg-black"
+            } text-white z-20 p-5 flex flex-col transform ${
+              isSidebarOpen ? "translate-x-0" : "translate-x-full"
+            }`}
+            {...(!location.pathname.startsWith("/songs") && {
+              style: {
+                backgroundImage: `url(${sidebarBackGround})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              },
+            })}
+          >
             <button
               className="absolute top-4 right-4"
               onClick={toggleSidebar}
@@ -260,13 +259,19 @@ const Navbar = () => {
                 <Link
                   to={comp.to}
                   key={comp.text}
-                  className={`flex items-center w-full p-3 text-white rounded-lg transition duration-300 hover:${
-                    comp.onHover || "bg-gray-800"
-                  } hover:shadow-md ${
+                  className={`flex items-center w-full p-3 text-blue-400 rounded-lg transition duration-300 
+                               ${
+                                 comp.bgColor
+                                   ? `${comp.bgColor} text-blue-400`
+                                   : "text-gray-300"
+                               }
+                              hover:${
+                                comp.onHover || "bg-slate-800"
+                              } hover:shadow-md ${
                     location.pathname === comp.to
-                      ? `${comp.onHover || "bg-gray-700"} text-blue-400`
-                      : "text-gray-300"
-                  } ${comp.bgColor ? comp.bgColor : ""}`}
+                      ? `${comp.onHover || "bg-slate-900"} text-blue-400`
+                      : " "
+                  }`}
                 >
                   {/* Icon */}
                   <div className="mr-3 text-lg">{comp.children}</div>

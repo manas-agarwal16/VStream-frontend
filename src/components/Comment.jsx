@@ -94,7 +94,7 @@ const Comment = ({ video_id }) => {
           />
           <Button
             text="Comment"
-            className="ml-3 bg-[#346aa7] font-semibold hover:bg-[#3a5e87]"
+            className="ml-3 bg-[#56a3df] font-semibold hover:bg-[#4a9cdc]"
             bgColor="bg-blue-500"
           />
         </form>

@@ -47,8 +47,8 @@ const Sidebar = () => {
     {
       text: "Music Mode",
       to: "/songs",
-      onHover: "text-gray-800",
-      bgColor: "bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 text-white",
+      onHover: "shadow-md hover:shadow-blue-500 hover:text-blue-400",
+      bgColor: "text-blue-400 shadow-sm shadow-blue-500 ",
       children: <FaMusic />,
     },
   ];
@@ -67,13 +67,17 @@ const Sidebar = () => {
             <Link
               to={comp.to}
               key={comp.text}
-              className={`flex items-center w-full p-3 text-white rounded-lg transition duration-300 hover:${
-                comp.onHover || "bg-gray-800"
-              } hover:shadow-md ${
+              className={`flex items-center w-full p-3 text-blue-400 rounded-lg transition duration-300 
+                 ${
+                   comp.bgColor
+                     ? `${comp.bgColor} text-blue-400`
+                     : "text-gray-300"
+                 }
+                hover:${comp.onHover || "bg-slate-800"} hover:shadow-md ${
                 location.pathname === comp.to
-                  ? `${comp.onHover || "bg-gray-700"} text-blue-400`
-                  : "text-gray-300"
-              } ${comp.bgColor ? comp.bgColor : ''}`}
+                  ? `${comp.onHover || "bg-slate-900"} text-blue-400`
+                  : " "
+              }`}
             >
               {/* Icon */}
               <div className="mr-3 text-lg">{comp.children}</div>
@@ -88,7 +92,7 @@ const Sidebar = () => {
           <div className="w-full">
             <Button
               onClick={handleLogout}
-              className="w-full text-center px-4 py-3 bg-red-600 hover:bg-red-700 text-white rounded-lg transition shadow-md"
+              className="w-full text-center px-4 py-3 bg-[#e03a3a] hover:bg-[#e03a3a]text-white rounded-lg transition shadow-md"
               text="Logout"
             />
           </div>
@@ -103,7 +107,7 @@ const Sidebar = () => {
               />
               <Button
                 onClick={() => navigate("/register")}
-                className="w-full text-center px-4 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition shadow-md"
+                className="w-full text-center px-4 py-3 bg-[#248bda] hover:bg-[#56a3df] text-white rounded-lg transition shadow-md"
                 text="Register"
               />
             </div>

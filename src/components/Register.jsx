@@ -78,6 +78,7 @@ const Register = () => {
                 {...register("fullName", {
                   required: "Full Name is required.",
                 })}
+                textColor="text-white"
                 autoFocus
                 type="text"
                 id="full-name"
@@ -109,6 +110,7 @@ const Register = () => {
                 })}
                 type="email"
                 id="email"
+                textColor="text-white"
                 placeholder="Enter your email"
                 className="w-full p-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
@@ -142,6 +144,7 @@ const Register = () => {
                     !/\s/.test(value) || "Username cannot contain spaces",
                 })}
                 type="text"
+                textColor="text-white"
                 id="username"
                 placeholder="Enter your email"
                 className="w-full p-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -171,6 +174,7 @@ const Register = () => {
                 })}
                 type="password"
                 id="password"
+                textColor="text-white"
                 placeholder="Enter your password"
                 className="w-full p-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
@@ -195,7 +199,7 @@ const Register = () => {
                 })}
                 type="file"
                 id="avatar"
-                textColor="text-[#8e8e8e]"
+                textColor="text-white"
                 accept="image/*"
                 className="w-full p-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />

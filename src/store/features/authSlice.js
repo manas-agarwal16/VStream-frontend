@@ -8,19 +8,24 @@ export const registerUser = createAsyncThunk(
   async (userData, { rejectWithValue }) => {
     let avatarURL;
 
-    const avatarAndPresetName = new FormData();
-    avatarAndPresetName.append("file", userData.avatar[0]);
-    avatarAndPresetName.append(
-      "upload_preset",
-      import.meta.env.VITE_CLOUDINARY_PRESET_NAME
-    );
+    let data = {};
+    console.log("userData.avatar[0] : ", userData.avatar[0]);
 
-    let data = await axios.post(
-      `https://api.cloudinary.com/v1_1/${
-        import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
-      }/image/upload`,
-      avatarAndPresetName
-    );
+    if (userData.avatar[0]) {
+      const avatarAndPresetName = new FormData();
+      avatarAndPresetName.append("file", userData.avatar[0]);
+      avatarAndPresetName.append(
+        "upload_preset",
+        import.meta.env.VITE_CLOUDINARY_PRESET_NAME
+      );
+
+      data = await axios.post(
+        `https://api.cloudinary.com/v1_1/${
+          import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
+        }/image/upload`,
+        avatarAndPresetName
+      );
+    }
 
     data.username = userData.username;
     data.email = userData.email;

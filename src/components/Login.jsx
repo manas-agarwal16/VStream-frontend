@@ -22,7 +22,6 @@ const Login = () => {
   const login = async (data) => {
     console.log(data);
     const res = await dispatch(loginUser(data));
-    console.log("in here barbie res : ", res);
     reset();
     if (res?.payload?.data) {
       navigate("/");
@@ -56,7 +55,7 @@ const Login = () => {
                 htmlFor="username"
                 className="block text-sm font-semibold text-gray-300 mb-2"
               >
-                Email Address
+                Email or Username
               </label>
               <input
                 {...register("email", { required: true })}

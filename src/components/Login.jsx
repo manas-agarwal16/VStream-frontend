@@ -22,6 +22,7 @@ const Login = () => {
   const login = async (data) => {
     console.log(data);
     const res = await dispatch(loginUser(data));
+    // console.log("in here barbie res : ", res);
     reset();
     if (res?.payload?.data) {
       navigate("/");
@@ -65,9 +66,9 @@ const Login = () => {
                 placeholder="email or username"
                 className="w-full p-2  bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              {errors.email && (
+              {errors.username && (
                 <p className="text-red-500 text-sm mt-1">
-                  {errors.email.message}
+                  {errors.username.message}
                 </p>
               )}
             </div>

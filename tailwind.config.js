@@ -15,8 +15,8 @@ module.exports = {
           "linear-gradient(294.57deg, rgba(255, 148, 88, 1) 0%, rgba(252, 229, 172, 1) 100%)",
       },
       animation: {
-        spin: "spin 0.2s linear infinite", // Use Tailwind's default spin
-        "spin-custom": "spin 0.2s linear infinite", // Custom spin animation
+        spin: "spin 0.2s linear infinite",
+        "spin-custom": "spin 0.2s linear infinite",
       },
       keyframes: {
         spin: {
@@ -30,9 +30,7 @@ module.exports = {
     function ({ addUtilities }) {
       addUtilities({
         ".scrollbar-hidden": {
-          /* Hide scrollbar for Webkit browsers */
           "&::-webkit-scrollbar": { display: "none" },
-          /* Hide scrollbar for IE, Edge, and Firefox */
           "-ms-overflow-style": "none",
           "scrollbar-width": "none",
         },

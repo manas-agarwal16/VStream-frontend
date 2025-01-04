@@ -39,7 +39,7 @@ const History = () => {
       </div>
       <div className="flex justify-center lg:ml-[220px] items-center min-h-[60vh]">
         <div className="flex flex-col justify-center items-center">
-          <p className="text-white text-2xl my-8">
+          <p className="text-white text-center text-2xl my-8 mx-auto p-4">
           Please log in to your account to access and view your watch history.
           </p>
           <Button text="Login" onClick={() => navigate("/login")} />
@@ -80,7 +80,7 @@ const History = () => {
       )}
       {videos.length === 0 && (
         <div className="flex p-10 px-20 flex-col justify-center items-center w-full h-[65vh] lg:ml-[220px] lg:w-[77vw] xl:w-[81vw] 2xl:w-[85vw]  mx-auto">
-          <p className="flex justify-center items-center text-white text-xl font-semibold  text-center">
+          <p className="flex justify-center p-4 items-center text-white text-xl font-semibold  text-center">
             It looks like you haven't watched any videos yet. Once you start
             watching, your watch history will appear here. Feel free to explore
             our content and start watching to track your progress!

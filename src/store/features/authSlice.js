@@ -36,7 +36,9 @@ export const registerUser = createAsyncThunk(
     try {
       const res = await axiosInstance.post("/users/register", data);
       console.log("Register backend response:", res.data);
-      toast.success(res.data.message);
+      toast.success(res.data.message, {
+        autoClose: 2500,
+      });
       return true;
     } catch (error) {
       toast.error(error?.response?.data?.message || "Registration failed");

@@ -13,10 +13,10 @@ function App() {
 
   const fetchCurrentUser = useCallback(async () => {
     const res = await dispatch(getCurrentUser());
-    console.log("get Current User response : ", res);
+    // console.log("get Current User response : ", res);
     if (!res.payload) {
       const refreshRes = await dispatch(refreshAccessToken());
-      console.log("res.payload of refreshAccessToken : ", refreshRes);
+      // console.log("res.payload of refreshAccessToken : ", refreshRes);
 
       if (refreshRes.payload) {
         dispatch(getCurrentUser());

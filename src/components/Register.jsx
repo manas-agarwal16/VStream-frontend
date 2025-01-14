@@ -35,8 +35,8 @@ const Register = () => {
     console.log("avatar : ", avatar);
 
     if (avatar[0]) {
-      if (avatar[0].size > 1048576) {
-        return "File size must be less than 1MB";
+      if (avatar[0].size > 2 * 1048576) {
+        return "File size must be less than 2MB";
       }
       if (!avatar[0].type.includes("image")) {
         return "File must be an image";

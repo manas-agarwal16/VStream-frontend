@@ -19,22 +19,35 @@ export const registerUser = createAsyncThunk(
         import.meta.env.VITE_CLOUDINARY_PRESET_NAME
       );
 
-      data = await axios.post(
-        `https://api.cloudinary.com/v1_1/${
-          import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
-        }/image/upload`,
-        avatarAndPresetName
+      try {
+        data = await axios.post(
+          `https://api.cloudinary.com/v1_1/${
+            import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
+          }/image/upload`,
+          avatarAndPresetName
+        );
+      } catch (error) {
+        console.log("error deploying avatar to cloudinary: ", error);
+      }
+      console.log(
+        "data after deploying avatar to cloudinary: ",
+        data?.data?.secure_url
       );
     }
 
-    data.username = userData.username;
-    data.email = userData.email;
-    data.password = userData.password;
-    data.fullName = userData.fullName;
-    data.avatar = data.secure_url;
+    const userDataTobackend = {
+      username: userData.username,
+      email: userData.email,
+      password: userData.password,
+      fullName: userData.fullName,
+      avatarURL: data?.data?.secure_url,
+    };
 
     try {
-      const res = await axiosInstance.post("/users/register", data);
+      const res = await axiosInstance.post(
+        "/users/register",
+        userDataTobackend
+      );
       console.log("Register backend response:", res.data);
       toast.success(res.data.message, {
         autoClose: 2500,

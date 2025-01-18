@@ -21,7 +21,6 @@ function Spinner({ width = 5 }) {
             fill="currentFill"
           />
         </svg>
-        <span className="sr-only">Loading...</span>
       </div>
     </>
   );

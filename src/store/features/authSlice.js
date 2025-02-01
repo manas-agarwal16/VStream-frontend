@@ -161,6 +161,16 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(verifyOTP.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(verifyOTP.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(verifyOTP.rejected, (state) => {
+        state.loading = false;
+      });
+    builder
       .addCase(resendOTP.pending, (state) => {
         state.loading = true;
       })

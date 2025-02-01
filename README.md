@@ -10,7 +10,7 @@
 **Backend Repository** : [https://github.com/manas-agarwal16/VStream-backend](https://github.com/manas-agarwal16/VStream-backend)
 
 ## Why VStream?
-VStream was created to simplify entertainment by bringing videos and music together in one seamless platform. Instead of switching between multiple apps, users can enjoy all their favorite content in one place, ensuring a smooth and uninterrupted experience. Whether for relaxation, inspiration, or discovery, VStream makes entertainment effortless and accessible.
+VStream is created to simplify entertainment by bringing videos and music together in one seamless platform. Instead of switching between multiple apps, users can enjoy all their favorite content in one place, ensuring a smooth and uninterrupted experience. Whether for relaxation, inspiration, or discovery, VStream makes entertainment effortless and accessible.
 
 ## Tech Stack
 <div style="display: flex; flex-wrap: wrap; gap: 20px;">

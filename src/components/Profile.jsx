@@ -47,11 +47,11 @@ const Profile = () => {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    if (profile.isSubscribed !== undefined) {
-      setLocalIsSubscribed(profile.isSubscribed);
-      setLocalSubscribers(profile.subscribers);
-      setLocalSubscribing(profile.subscribing);
-      if (username === userData.username) {
+    if (profile?.isSubscribed !== undefined) {
+      setLocalIsSubscribed(profile?.isSubscribed);
+      setLocalSubscribers(profile?.subscribers);
+      setLocalSubscribing(profile?.subscribing);
+      if (username === userData?.username) {
         setMessage(
           <>
             It seems like you haven't posted any videos yet. Once you upload

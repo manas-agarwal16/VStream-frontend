@@ -28,8 +28,8 @@ function VideoUploadPage() {
   const validateVideo = (video) => {
     console.log("video : ", video);
     if (video[0]) {
-      if (video[0].size > 15 * 1024 * 1024) {
-        return "File size must be less than 15MB";
+      if (video[0].size > 30 * 1024 * 1024) {
+        return "File size must be less than 30MB";
       }
       if (!video[0].type.includes("video")) {
         return "File must be a video";

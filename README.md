@@ -3,7 +3,9 @@
 ## About VStream
 ***VStream*** is a unified platform for watching videos and listening to music, delivering seamless entertainment in one place.
 </br>
+</br>
 **Website Link** : [https://v-stream-fun.vercel.app/](https://v-stream-fun.vercel.app/)
+</br>
 </br>
 **Backend Repository** : [https://github.com/manas-agarwal16/VStream-backend](https://github.com/manas-agarwal16/VStream-backend)
 
@@ -24,5 +26,5 @@ VStream was created to simplify entertainment by bringing videos and music toget
   <img src="https://www.svgrepo.com/show/331488/mongodb.svg" width="50" height="50" style="margin-right: 30px;" />
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 20px;">
- <pre>ReactJS    Redux-Toolkit    TailwindCSS    NodeJS    MongoDB</pre>
+ <pre>ReactJS    Redux-Toolkit    TailwindCSS    NodeJS      MongoDB</pre>
 </div>

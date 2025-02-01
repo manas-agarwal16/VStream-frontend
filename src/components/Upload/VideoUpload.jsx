@@ -41,8 +41,8 @@ function VideoUploadPage() {
   const validateThumbnail = (thumbnail) => {
     console.log("thumbnail : ", thumbnail);
     if (thumbnail[0]) {
-      if (thumbnail[0].size > 1 * 1024 * 1024) {
-        return "File size must be less than 1MB";
+      if (thumbnail[0].size > 2 * 1024 * 1024) {
+        return "File size must be less than 2MB";
       }
       if (!thumbnail[0].type.includes("image")) {
         return "File must be an image";

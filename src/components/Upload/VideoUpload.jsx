@@ -173,10 +173,6 @@ function VideoUploadPage() {
                   value: 3,
                   message: "Description must be at least 3 characters",
                 },
-                maxLength: {
-                  value: 500,
-                  message: "Description must be at most 500 characters",
-                },
                 required: "Description is required",
               })}
               placeholder="Enter a brief description of the video"

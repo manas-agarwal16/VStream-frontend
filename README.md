@@ -49,3 +49,22 @@ VStream is created to simplify entertainment by bringing videos and music togeth
   </tr>
 </table>
 </p>
+
+3. Your recently and most viewed videos
+<p align="center">
+<table>
+  <tr>
+    <td><img src="./src/assets/profile1SS.png" width="500" height="350" /></td>
+    <td><img src="./src/assets/profile2SS.png" width="500" height="350" /></td>
+  </tr>
+</table>
+</p>
+
+4. Go premium which allows you to download videos
+<p align="center">
+<table>
+  <tr>
+    <td><img src="./src/assets/premium.png" width="900" height="350" /></td>
+  </tr>
+</table>
+</p>

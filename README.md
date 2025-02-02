@@ -33,7 +33,15 @@ VStream is created to simplify entertainment by bringing videos and music togeth
 1. Video and Music Mode
 <table>
   <tr>
-    <td><img src="./src/assets/VHomeSS.png" /></td>
-    <td> <img src="./src/assets/musicModeSS.png /></td>
+    <td><img src="./src/assets/VHomeSS.png" width="500" height="500" /></td>
+    <td> <img src="./src/assets/musicModeSS.png width="500" height="500" /></td>
+  </tr>
+</table>
+
+2. Stores your video history and liked videos
+<table>
+  <tr>
+    <td><img src="./src/assets/watchHistorySS.png" width="500" height="500" /></td>
+    <td><img src="./src/assets/likedVideos.png" width="500" height="500" /></td>
   </tr>
 </table>

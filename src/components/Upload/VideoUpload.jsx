@@ -79,7 +79,7 @@ function VideoUploadPage() {
     >
       {loading && <CenterSpinner />}
 
-      <div className="bg-gray-900 p-8 border-2 border-black rounded-lg shadow-md text-white max-w-xl w-full">
+      <div className="bg-gray-900 px-8 pt-4 pb-2 border-2 border-black rounded-lg shadow-md text-white max-w-xl w-full">
         <h2 className="text-3xl font-bold mb-4 text-center text-blue-400">
           Upload Video
         </h2>
@@ -90,7 +90,7 @@ function VideoUploadPage() {
 
         <form onSubmit={handleSubmit(handleVideoUpload)}>
           {/* Video File */}
-          <div className="mb-5">
+          <div className="mb-3">
             <label className="block text-sm font-semibold text-gray-300 mb-2">
               Video File
             </label>
@@ -102,7 +102,7 @@ function VideoUploadPage() {
               type="file"
               accept="video/*"
               textColor="text-[#8e8e8e]"
-              className="w-full p-2  bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full text-sm px-2  bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {errors.video && (
               <p className="text-red-400 text-sm mt-2">
@@ -112,7 +112,7 @@ function VideoUploadPage() {
           </div>
 
           {/* Thumbnail */}
-          <div className="mb-5">
+          <div className="mb-3">
             <label className="block text-sm font-semibold text-gray-300 mb-2">
               Thumbnail
             </label>
@@ -124,7 +124,7 @@ function VideoUploadPage() {
               type="file"
               accept="image/*"
               textColor="text-[#8e8e8e]"
-              className="w-full p-2 text-[#8e8e8e] bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full text-sm px-2 text-[#8e8e8e] bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {errors.thumbnail && (
               <p className="text-red-400 text-sm mt-2">
@@ -134,7 +134,7 @@ function VideoUploadPage() {
           </div>
 
           {/* Title */}
-          <div className="mb-5">
+          <div className="mb-3">
             <label className="block text-sm font-semibold text-gray-300 mb-2">
               Title
             </label>
@@ -153,7 +153,7 @@ function VideoUploadPage() {
               type="text"
               textColor="text-gray-300"
               placeholder="Enter the video title"
-              className="w-full p-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full text-sm px-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {errors.title && (
               <p className="text-red-400 text-sm mt-2">
@@ -163,7 +163,7 @@ function VideoUploadPage() {
           </div>
 
           {/* Description */}
-          <div className="mb-5">
+          <div className="mb-3">
             <label className="block text-sm font-semibold text-gray-300 mb-2">
               Description
             </label>
@@ -176,7 +176,7 @@ function VideoUploadPage() {
                 required: "Description is required",
               })}
               placeholder="Enter a brief description of the video"
-              className="w-full text-gray-300 p-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full text-gray-300 text-sm px-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               rows="4"
             ></textarea>
             {errors.description && (

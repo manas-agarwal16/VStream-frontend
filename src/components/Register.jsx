@@ -58,16 +58,16 @@ const Register = () => {
           // backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="bg-gray-900 p-8 pb-4 border-2 border-black rounded-lg shadow-md text-white max-w-xl w-full">
+        <div className="bg-gray-900 px-8 pt-2 pb-4 border-2 border-black rounded-lg shadow-md text-white max-w-xl w-full">
           <div className="flex items-center justify-center">
             {/* <Logo width="55px" height="55px" /> */}
-            <h2 className="text-3xl font-bold mb-4 text-center text-blue-400">
+            <h2 className="text-3xl font-bold mb-3 text-center italic text-blue-400">
               Register
             </h2>
           </div>
           <form onSubmit={handleSubmit(handleRegister)}>
             {/* Full Name */}
-            <div className="mb-5">
+            <div className="mb-3">
               <label
                 htmlFor="full-name"
                 className="block text-sm font-semibold text-gray-300 mb-2"
@@ -83,7 +83,7 @@ const Register = () => {
                 type="text"
                 id="full-name"
                 placeholder="Enter your name"
-                className="w-full p-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-2 text-sm bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               {errors.fullName && (
                 <p className="text-sm text-red-500 mt-1">
@@ -93,7 +93,7 @@ const Register = () => {
             </div>
 
             {/* Email */}
-            <div className="mb-5">
+            <div className="mb-3">
               <label
                 htmlFor="email"
                 className="block text-sm font-semibold text-gray-300 mb-2"
@@ -112,7 +112,7 @@ const Register = () => {
                 id="email"
                 textColor="text-white"
                 placeholder="Enter your email"
-                className="w-full p-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full text-sm px-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               {errors.email && (
                 <p className="text-sm text-red-500 mt-1">
@@ -122,7 +122,7 @@ const Register = () => {
             </div>
 
             {/* Username */}
-            <div className="mb-5">
+            <div className="mb-3">
               <label
                 htmlFor="username"
                 className="block text-sm font-semibold text-gray-300 mb-2"
@@ -147,7 +147,7 @@ const Register = () => {
                 textColor="text-white"
                 id="username"
                 placeholder="Enter your email"
-                className="w-full p-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full text-sm px-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               {errors.username && (
                 <p className="text-red-500 text-sm mt-1">
@@ -157,7 +157,7 @@ const Register = () => {
             </div>
 
             {/* Password */}
-            <div className="mb-5">
+            <div className="mb-3">
               <label
                 htmlFor="password"
                 className="block text-sm font-semibold text-gray-300 mb-2"
@@ -176,7 +176,7 @@ const Register = () => {
                 id="password"
                 textColor="text-white"
                 placeholder="Enter your password"
-                className="w-full p-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full text-sm px-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               {errors.password && (
                 <p className="text-red-500 text-sm mt-1">
@@ -186,7 +186,7 @@ const Register = () => {
             </div>
 
             {/* avatar */}
-            <div className="mb-5">
+            <div className="mb-3">
               <label
                 htmlFor="avatar"
                 className="block text-sm font-semibold text-gray-300 mb-2"
@@ -201,7 +201,7 @@ const Register = () => {
                 id="avatar"
                 textColor="text-white"
                 accept="image/*"
-                className="w-full p-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full text-sm px-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               {errors.avatar && (
                 <p className="text-red-500 text-sm mt-1">
@@ -210,7 +210,7 @@ const Register = () => {
               )}
             </div>
 
-            <div className="mb-5">
+            <div className="mb-1">
               <p className="text-white">
                 Have an account?{" "}
                 <Link
@@ -223,11 +223,11 @@ const Register = () => {
             </div>
 
             {/* Submit Button */}
-            <div className="flex justify-between items-center mt-6">
+            <div className="flex justify-between items-center mt-3">
             <Button
               type="submit"
               bgColor="bg-blue-600  hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              className="w-full py-3 mr-10 md:mr-14 lg:mr-20 xl:mr-28  bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 px-8"
+              className="w-full py-2 mr-10 md:mr-14 lg:mr-20 xl:mr-28  bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 px-8"
             >
               Register
             </Button>

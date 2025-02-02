@@ -50,19 +50,6 @@ VStream is created to simplify entertainment by bringing videos and music togeth
 </table>
 </p>
 
-<p align="center">
-<table align="center">
-  <tr align="center">
-    <td align="center"><img src="./src/assets/VHomeSS.png" width="400" height="250" /></td>
-    <td align="center"> <img src="./src/assets/musicModeSS.png" width="400" height="250" /></td>
-  </tr>
-  <tr align="center">
-    <td align="center"><img src="./src/assets/watchHistorySS.png" width="400" height="250"  /></td>
-    <td align="center"><img src="./src/assets/likedVideos.png" width="400" height="250"  /></td>
-  </tr>
-</table>
-</p>
-
 3. Your recently and most viewed videos
 <p align="center">
 <table>
@@ -81,3 +68,31 @@ VStream is created to simplify entertainment by bringing videos and music togeth
   </tr>
 </table>
 </p>
+## Installation
+
+To run the application on your localhost, you need to have node installed on your machine. If you don't have it installed, you can follow the instructions [here](https://nodejs.org/en/download) to install it.
+
+1. Clone the repository  
+   </br>
+   ```sh
+   git clone https://github.com/manas-agarwal16/VStream-frontend.git
+   ```
+2. Navigate to the project directory:  
+   </br>
+   ```sh
+   cd Chess-backend
+   ```
+3. Install NPM packages  
+   </br>
+   ```sh
+   npm install
+   ```
+4. Run the Application  
+   </br>
+   ```js
+   npm start
+   ```
+
+## Contributing
+Contributions to VStream are welcome! If you encounter any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request.
+

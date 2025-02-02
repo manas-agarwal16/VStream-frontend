@@ -42,6 +42,6 @@ VStream is created to simplify entertainment by bringing videos and music togeth
 <table>
   <tr>
     <td><img src="./src/assets/watchHistorySS.png" /></td>
-    <td><img src="./src/assets/likedVideosSS.png" /></td>
+    <td><img src="./src/assets/likedVideos.png" /></td>
   </tr>
 </table>

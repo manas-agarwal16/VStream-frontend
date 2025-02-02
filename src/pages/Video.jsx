@@ -13,7 +13,6 @@ import {
 } from "../store/features/videoSlice";
 import { getComments, makeCommentsEmpty } from "../store/features/commentSlice";
 import { useDispatch, useSelector } from "react-redux";
-import sidebarBackGround from "../assets/sidebarBackGround.jpg";
 const Video = () => {
   const dispatch = useDispatch();
   const { video_id } = useParams();

@@ -8,7 +8,6 @@ import {
   HiOutlineBookOpen,
 } from "./icons";
 import { FaMusic } from "react-icons/fa";
-import sidebarBackGround from "../assets/sidebarBackGround.jpg";
 import { Logo, Button } from "./index";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";

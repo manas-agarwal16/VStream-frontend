@@ -7,7 +7,7 @@ import { SlMenu, CiSearch, IoCloseCircleOutline } from "../icons"; // Hamburger 
 import { logoutUser } from "../../store/features/authSlice";
 import { useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
-import { FaMusic } from "react-icons/fa";
+import { FaMusic } from "react-icons/fa"; 
 
 import {
   MdHome,

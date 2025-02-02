@@ -6,7 +6,6 @@ import { Link, useLocation } from "react-router-dom";
 import { SlMenu, CiSearch, IoCloseCircleOutline } from "../icons"; // Hamburger Icon
 import { logoutUser } from "../../store/features/authSlice";
 import { useNavigate } from "react-router-dom";
-import sidebarBackGround from "../../assets/sidebarBackGround.jpg";
 import { FaUserCircle } from "react-icons/fa";
 import { FaMusic } from "react-icons/fa";
 

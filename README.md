@@ -30,7 +30,7 @@ VStream is created to simplify entertainment by bringing videos and music togeth
 </div>
 
 ## Features
-1. Video and Music Mode
+1. **VStream** lets you vibe your way—switch between video and music anytime.
 <p align="center">
 <table>
   <tr align="center">
@@ -40,7 +40,7 @@ VStream is created to simplify entertainment by bringing videos and music togeth
 </table>
 </p>
 
-2. Stores your video history and liked videos
+2. **VStream** remembers what you love—store your watch history and liked videos effortlessly.
 <p align="center">
 <table>
   <tr align="center">
@@ -50,7 +50,7 @@ VStream is created to simplify entertainment by bringing videos and music togeth
 </table>
 </p>
 
-3. Your recently and most viewed videos
+3. **VStream** tracks your recent and top uploads
 <p align="center">
 <table>
   <tr align="center">
@@ -60,7 +60,7 @@ VStream is created to simplify entertainment by bringing videos and music togeth
 </table>
 </p>
 
-4. Go premium which allows you to download videos
+4. Go Premium on **VStream**: Unlock the ability to download your favorite videos!
 <p align="center">
 <table align="center">
   <tr align="center">
@@ -83,7 +83,7 @@ To run the application on your localhost, you need to have node installed on you
    ```sh
    cd VSream-frontend
    ```
-3. Install NPM packages  
+3. Install NPM packages and set up your environment variables
    </br>
    ```sh
    npm install

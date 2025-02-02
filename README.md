@@ -28,3 +28,12 @@ VStream is created to simplify entertainment by bringing videos and music togeth
 <div style="display: flex; flex-wrap: wrap; gap: 20px;">
  <pre>ReactJS    Redux-Toolkit    TailwindCSS    NodeJS     MongoDB</pre>
 </div>
+
+## Features
+1. Video and Music Mode
+<table>
+  <tr>
+    <td><img src="./src/assets/VHomeSS.png" /></td>
+    <td> <img src="./src/assets/musicModeSS.png /></td>
+  </tr>
+</table>

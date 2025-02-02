@@ -34,8 +34,8 @@ VStream is created to simplify entertainment by bringing videos and music togeth
 <p align="center">
 <table>
   <tr align="center">
-    <td align="center"><img src="./src/assets/VHomeSS.png" width="500" height="350" /></td>
-    <td align="center"> <img src="./src/assets/musicModeSS.png" width="500" height="350" /></td>
+    <td align="center"><img src="./src/assets/VHomeSS.png" width="500" /></td>
+    <td align="center"> <img src="./src/assets/musicModeSS.png" width="500" /></td>
   </tr>
 </table>
 </p>
@@ -44,8 +44,8 @@ VStream is created to simplify entertainment by bringing videos and music togeth
 <p align="center">
 <table>
   <tr align="center">
-    <td align="center"><img src="./src/assets/watchHistorySS.png" width="500" height="350" /></td>
-    <td align="center"><img src="./src/assets/likedVideos.png" width="500" height="350" /></td>
+    <td align="center"><img src="./src/assets/watchHistorySS.png" width="500" /></td>
+    <td align="center"><img src="./src/assets/likedVideos.png" width="500" /></td>
   </tr>
 </table>
 </p>
@@ -54,8 +54,8 @@ VStream is created to simplify entertainment by bringing videos and music togeth
 <p align="center">
 <table>
   <tr align="center">
-    <td align="center"><img src="./src/assets/profile1SS.png" width="500" height="350" /></td>
-    <td align="center"><img src="./src/assets/profile2SS.png" width="500" height="350" /></td>
+    <td align="center"><img src="./src/assets/profile1SS.png" width="500" /></td>
+    <td align="center"><img src="./src/assets/profile2SS.png" width="500" /></td>
   </tr>
 </table>
 </p>
@@ -64,7 +64,7 @@ VStream is created to simplify entertainment by bringing videos and music togeth
 <p align="center">
 <table align="center">
   <tr align="center">
-    <td align="center"><img src="./src/assets/premium.png" width="900" height="350" /></td>
+    <td align="center"><img src="./src/assets/premium.png" width="900" /></td>
   </tr>
 </table>
 </p>

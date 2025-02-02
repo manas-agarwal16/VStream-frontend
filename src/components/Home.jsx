@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getVideos,
@@ -7,6 +7,7 @@ import {
   makeVideoDetailsEmpty,
 } from "../store/features/videoSlice";
 import { VideoList, Spinner } from "./index";
+import { setFullScreen } from "../store/features/authSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -40,12 +41,33 @@ const Home = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [hasMore, loading]);
 
+  const { fullScreen } = useSelector((state) => state.auth);
+
+  const requestFullscreen = () => {
+    console.log("requestFullscreen");
+
+    const doc = document.documentElement;
+    if (doc.requestFullscreen) {
+      doc.requestFullscreen();
+    } else if (doc.mozRequestFullScreen) {
+      // Firefox
+      doc.mozRequestFullScreen();
+    } else if (doc.webkitRequestFullscreen) {
+      // Chrome, Safari, and Opera
+      doc.webkitRequestFullscreen();
+    } else if (doc.msRequestFullscreen) {
+      // IE/Edge
+      doc.msRequestFullscreen();
+    }
+    dispatch(setFullScreen(false));
+    window.removeEventListener("click", requestFullscreen);
+  };
+  if (fullScreen) window.addEventListener("click", requestFullscreen);
+
   return (
     <>
       {/* <aside> */}
-      <div
-        className="lg:ml-[220px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 bg-[#070707] min-h-screen p-6 text-gray-300"
-      >
+      <div className="lg:ml-[220px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 bg-[#070707] min-h-screen p-6 text-gray-300">
         {videos.map((video) => (
           <div
             key={video._id}

@@ -153,12 +153,17 @@ const initialState = {
   loading: false,
   loginStatus: false,
   userData: {},
+  fullScreen: true,
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    setFullScreen: (state, action) => {
+      state.fullScreen = false;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(verifyOTP.pending, (state) => {
@@ -240,3 +245,4 @@ const authSlice = createSlice({
 });
 
 export default authSlice.reducer;
+export const { setFullScreen } = authSlice.actions;

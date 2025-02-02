@@ -9,7 +9,7 @@ export const likedVideos = createAsyncThunk(
     try {
       const res = await axiosInstance.get("videos/liked-videos");
       // console.log("res.data : " , res.data);
-      
+
       return res.data;
     } catch (error) {
       toast.error(
@@ -44,23 +44,20 @@ export const likedVideos = createAsyncThunk(
 //   }
 // );
 
-export const userProfile = createAsyncThunk(
-  "userProfile",
-  async (data, { rejectWithValue }) => {
-    try {
-      const res = await axiosInstance.get(`/users/user-profile/${data.username}`);
-      // console.log("userProfile res : ", res);
-      return res;
-    } catch (error) {
-      toast.error(
-        error?.data?.response?.error || "error in fetching userprofile"
-      );
-      return rejectWithValue(
-        error?.response?.data || "error in fetching userprofile"
-      );
-    }
+export const userProfile = createAsyncThunk("userProfile", async (data) => {
+  try {
+    const res = await axiosInstance.get(`/users/user-profile/${data.username}`);
+    // console.log("userProfile res : ", res);
+    return res;
+  } catch (error) {
+    toast.error(
+      error?.data?.response?.error || "error in fetching userprofile"
+    );
+    // return rejectWithValue(
+    //   error?.response?.data || "error in fetching userprofile"
+    // );
   }
-);
+});
 
 export const watchHistory = createAsyncThunk(
   "watchHistory",
@@ -122,6 +119,9 @@ const userSlice = createSlice({
       .addCase(userProfile.fulfilled, (state, action) => {
         state.loading = false;
         state.userProfileDetails = action.payload.userProfileDetails;
+      })
+      .addCase(userProfile.rejected, (state) => {
+        state.loading = false;
       });
     builder
       .addCase(likedVideos.pending, (state) => {
@@ -131,8 +131,6 @@ const userSlice = createSlice({
         state.loading = false;
         state.likedVideos = action.payload.data;
       });
-
-    
   },
 });
 

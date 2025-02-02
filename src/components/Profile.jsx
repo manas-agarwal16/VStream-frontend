@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, VideoList } from "./index";
+import { Button, CenterSpinner, VideoList } from "./index";
 import { useNavigate, useParams } from "react-router-dom";
 import { userProfile } from "../store/features/userSlice";
 import { Link } from "react-router-dom";
 import { toggleSubscribe } from "../store/features/subscriptionSlice";
+import axios from "axios";
+import { axiosInstance } from "../helper/axiosInstance";
+import toast from "react-hot-toast";
+
 const Profile = () => {
   const { username } = useParams();
   const dispatch = useDispatch();
@@ -96,6 +100,63 @@ const Profile = () => {
     setLocalIsSubscribed((prev) => !prev);
   };
 
+  const [profileLoading, setProfileLoading] = useState(false);
+
+  const updateAvatar = async (e) => {
+    // console.log("e.target.files: ", e.target.files);
+
+    const avatar = e.target.files[0];
+    console.log("avatar: ", avatar);
+
+    const validImageTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/gif",
+      "image/webp",
+    ];
+
+    if (!validImageTypes.includes(avatar.type)) {
+      alert("Please select a valid image file (JPEG, PNG, GIF, WebP).");
+      return;
+    }
+
+    const avatarAndPresetName = new FormData();
+    avatarAndPresetName.append("file", avatar);
+    avatarAndPresetName.append(
+      "upload_preset",
+      import.meta.env.VITE_CLOUDINARY_PRESET_NAME
+    );
+    let data;
+    try {
+      setProfileLoading(true);
+      data = await axios.post(
+        `https://api.cloudinary.com/v1_1/${
+          import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
+        }/image/upload`,
+        avatarAndPresetName
+      );
+      console.log(
+        "data after deploying avatar to cloudinary: ",
+        data?.data?.secure_url
+      );
+
+      await axiosInstance.put(`/users/update-avatar/`, {
+        avatarURL: data?.data?.secure_url,
+        id: userData?._id,
+      });
+
+      setProfileLoading(false);
+      toast.success(
+        "Avatar updated successfully. Refresh the page to see changes.",
+        {
+          duration: 4000,
+        }
+      );
+    } catch (error) {
+      console.log("error deploying avatar to cloudinary: ", error);
+    }
+  };
+
   return !loginStatus || !username ? (
     <div className="min-h-[80vh] object-contain w-full lg:w-[75vw] lg:ml-[220px] flex items-center justify-center mt-8 flex-col">
       <p className="text-white text-2xl my-8">Login to see your profile</p>
@@ -103,10 +164,24 @@ const Profile = () => {
     </div>
   ) : (
     <>
+      {profileLoading && <CenterSpinner />}
       <div className="lg:ml-[230px] mt-8 text-white px-4 md:px-8">
         {/* Profile Section */}
         <div className="flex flex-col lg:flex-row justify-between items-center border-2 border-gray-500 border-opacity-5 p-4 bg-pink-50 bg-opacity-5 rounded-lg">
-          <div className="flex items-center gap-4 lg:gap-8">
+          <div className="relative flex items-center gap-4 lg:gap-8">
+            {userData?.username === username && (
+              <div className="absolute bottom-16 left-16 md:bottom-20 md:left-20 lg:bottom-36 lg:left-36">
+                <label htmlFor="avatar" className="cursor-pointer">
+                  &#9998;
+                </label>
+                <input
+                  onChange={updateAvatar}
+                  type="file"
+                  id="avatar"
+                  className="hidden"
+                />
+              </div>
+            )}
             <div>
               <img
                 src={profile?.avatar}

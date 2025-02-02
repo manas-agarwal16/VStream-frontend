@@ -30,6 +30,7 @@ const Video = () => {
     isSubscribed,
     subscribers,
     videoFile,
+    thumbnail,
     avatar,
     createdAt,
   } = useSelector((state) => state.video.videoDetails);
@@ -47,7 +48,6 @@ const Video = () => {
     };
   }, [video_id]);
 
-
   return loading ? (
     <h1> loading </h1>
   ) : (
@@ -63,7 +63,7 @@ const Video = () => {
       <Navbar />
       <Sidebar />
       <div className="flex lg:w-2/3 w-full lg:mx-[230px] flex-col items-center justify-center">
-        <VideoComp src={videoFile} poster={avatar} />
+        <VideoComp src={videoFile} poster={thumbnail} />
         <VideoDescription
           title={title}
           description={description}

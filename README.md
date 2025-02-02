@@ -68,6 +68,7 @@ VStream is created to simplify entertainment by bringing videos and music togeth
   </tr>
 </table>
 </p>
+
 ## Installation
 
 To run the application on your localhost, you need to have node installed on your machine. If you don't have it installed, you can follow the instructions [here](https://nodejs.org/en/download) to install it.

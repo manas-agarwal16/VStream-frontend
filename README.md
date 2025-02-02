@@ -33,9 +33,9 @@ VStream is created to simplify entertainment by bringing videos and music togeth
 1. Video and Music Mode
 <p align="center">
 <table>
-  <tr>
-    <td><img src="./src/assets/VHomeSS.png" width="500" height="350" /></td>
-    <td> <img src="./src/assets/musicModeSS.png" width="500" height="350" /></td>
+  <tr align="center">
+    <td align="center"><img src="./src/assets/VHomeSS.png" width="500" height="350" /></td>
+    <td align="center"> <img src="./src/assets/musicModeSS.png" width="500" height="350" /></td>
   </tr>
 </table>
 </p>
@@ -43,9 +43,9 @@ VStream is created to simplify entertainment by bringing videos and music togeth
 2. Stores your video history and liked videos
 <p align="center">
 <table>
-  <tr>
-    <td><img src="./src/assets/watchHistorySS.png" width="500" height="350" /></td>
-    <td><img src="./src/assets/likedVideos.png" width="500" height="350" /></td>
+  <tr align="center">
+    <td align="center"><img src="./src/assets/watchHistorySS.png" width="500" height="350" /></td>
+    <td align="center"><img src="./src/assets/likedVideos.png" width="500" height="350" /></td>
   </tr>
 </table>
 </p>
@@ -53,18 +53,18 @@ VStream is created to simplify entertainment by bringing videos and music togeth
 3. Your recently and most viewed videos
 <p align="center">
 <table>
-  <tr>
-    <td><img src="./src/assets/profile1SS.png" width="500" height="350" /></td>
-    <td><img src="./src/assets/profile2SS.png" width="500" height="350" /></td>
+  <tr align="center">
+    <td align="center"><img src="./src/assets/profile1SS.png" width="500" height="350" /></td>
+    <td align="center"><img src="./src/assets/profile2SS.png" width="500" height="350" /></td>
   </tr>
 </table>
 </p>
 
 4. Go premium which allows you to download videos
 <p align="center">
-<table>
-  <tr>
-    <td><img src="./src/assets/premium.png" width="900" height="350" /></td>
+<table align="center">
+  <tr align="center">
+    <td align="center"><img src="./src/assets/premium.png" width="900" height="350" /></td>
   </tr>
 </table>
 </p>

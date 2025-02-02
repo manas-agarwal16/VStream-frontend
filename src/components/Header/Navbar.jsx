@@ -238,13 +238,6 @@ const Navbar = () => {
             } text-white z-20 p-5 flex flex-col transform ${
               isSidebarOpen ? "translate-x-0" : "translate-x-full"
             }`}
-            {...(!location.pathname.startsWith("/songs") && {
-              style: {
-                backgroundImage: `url(${sidebarBackGround})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              },
-            })}
           >
             <button
               className="absolute top-4 right-4"

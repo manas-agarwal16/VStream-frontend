@@ -80,7 +80,7 @@ To run the application on your localhost, you need to have node installed on you
 2. Navigate to the project directory:  
    </br>
    ```sh
-   cd Chess-backend
+   cd VSream-frontend
    ```
 3. Install NPM packages  
    </br>

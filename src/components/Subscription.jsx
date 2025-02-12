@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { subscriptionChannels } from "../store/features/subscriptionSlice";
 import SubscriptionList from "./SubscriptionList";
 import CenterSpinner from "./CenterSpinner";

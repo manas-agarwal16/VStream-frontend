@@ -9,8 +9,6 @@ function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const { loginStatus, userData } = useSelector((state) => state.auth);
-
   const fetchCurrentUser = useCallback(async () => {
     const res = await dispatch(getCurrentUser());
     // console.log("get Current User response : ", res);

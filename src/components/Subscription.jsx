@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useNavigate } from "react-router-dom";
 import { subscriptionChannels } from "../store/features/subscriptionSlice";
 import SubscriptionList from "./SubscriptionList";
 import CenterSpinner from "./CenterSpinner";
@@ -8,11 +8,12 @@ import { Link } from "react-router-dom";
 import Button from "./Button";
 
 const Subscription = (_id) => {
-  console.log("subscriptions : ", _id);
+  // console.log("subscriptions : ", _id);
 
   const { loginStatus } = useSelector((state) => state.auth);
   const { loading, channels } = useSelector((state) => state.subscription);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(subscriptionChannels());

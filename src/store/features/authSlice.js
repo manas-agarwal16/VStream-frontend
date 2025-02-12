@@ -142,7 +142,6 @@ export const refreshAccessToken = createAsyncThunk(
     try {
       const res = await axiosInstance.get("/users/refresh-access-token");
       return res.data;
-      a;
     } catch (error) {
       console.log("error in refreshing access-token", error);
     }

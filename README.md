@@ -30,18 +30,70 @@ VStream is created to simplify entertainment by bringing videos and music togeth
 </div>
 
 ## Features
-1. Video and Music Mode
+1. **VStream** lets you vibe your way—switch between video and music anytime.
+<p align="center">
 <table>
-  <tr>
-    <td><img src="./src/assets/VHomeSS.png" width="500" height="500" /></td>
-    <td> <img src="./src/assets/musicModeSS.png width="500" height="500" /></td>
+  <tr align="center">
+    <td align="center"><img src="./src/assets/VHomeSS.png" width="500" /></td>
+    <td align="center"> <img src="./src/assets/musicModeSS.png" width="500" /></td>
   </tr>
 </table>
+</p>
 
-2. Stores your video history and liked videos
+2. **VStream** remembers what you love—store your watch history and liked videos effortlessly.
+<p align="center">
 <table>
-  <tr>
-    <td><img src="./src/assets/watchHistorySS.png" width="500" height="500" /></td>
-    <td><img src="./src/assets/likedVideos.png" width="500" height="500" /></td>
+  <tr align="center">
+    <td align="center"><img src="./src/assets/watchHistorySS.png" width="500" /></td>
+    <td align="center"><img src="./src/assets/likedVideos.png" width="500" /></td>
   </tr>
 </table>
+</p>
+
+3. **VStream** tracks your recent and top uploads
+<p align="center">
+<table>
+  <tr align="center">
+    <td align="center"><img src="./src/assets/profile1SS.png" width="500" /></td>
+    <td align="center"><img src="./src/assets/profile2SS.png" width="500" /></td>
+  </tr>
+</table>
+</p>
+
+4. Go Premium on **VStream**: Unlock the ability to download your favorite videos!
+<p align="center">
+<table align="center">
+  <tr align="center">
+    <td align="center"><img src="./src/assets/premium.png" width="900" /></td>
+  </tr>
+</table>
+</p>
+
+## Installation
+
+To run the application on your localhost, you need to have node installed on your machine. If you don't have it installed, you can follow the instructions [here](https://nodejs.org/en/download) to install it.
+
+1. Clone the repository  
+   </br>
+   ```sh
+   git clone https://github.com/manas-agarwal16/VStream-frontend.git
+   ```
+2. Navigate to the project directory:  
+   </br>
+   ```sh
+   cd VStream-frontend
+   ```
+3. Install NPM packages and set up your environment variables
+   </br>
+   ```sh
+   npm install
+   ```
+4. Run the Application  
+   </br>
+   ```js
+   npm start
+   ```
+
+## Contributing
+Contributions to VStream are welcome! If you encounter any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request.
+
